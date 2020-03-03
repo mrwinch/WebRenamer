@@ -1,0 +1,35 @@
+object CandidateListFrame: TCandidateListFrame
+  Size.Width = 500.000000000000000000
+  Size.Height = 400.000000000000000000
+  Size.PlatformDefault = False
+  object Panel1: TPanel
+    Align = Bottom
+    Position.Y = 360.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'pushpanel'
+    TabOrder = 0
+  end
+  object RefuseButton: TButton
+    Position.X = 8.000000000000000000
+    Position.Y = 368.000000000000000000
+    TabOrder = 1
+    Text = 'RefuseButton'
+    OnClick = RefuseButtonClick
+  end
+  object CandidateListBox: TListBox
+    Align = Client
+    Size.Width = 500.000000000000000000
+    Size.Height = 360.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    OnDblClick = CandidateListBoxDblClick
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 496.000000000000000000
+    Viewport.Height = 356.000000000000000000
+  end
+end

@@ -1,0 +1,82 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "OperationFrameInfo.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TOperationFrame *OperationFrame;
+//---------------------------------------------------------------------------
+__fastcall TOperationFrame::TOperationFrame(TComponent* Owner)
+	: TFrame(Owner)
+{
+	OperationNameLabel = "Name:";
+	UrlLabelValue = "Url:";
+	DataLabelValue = "Data:";
+	OperationAnswerLabelValue = "Exp. answer:";
+	OperationMethodLabelValue = "Method:";
+	OperationMethodComboItems = "GET,POST";
+	OperationAnswerManagerLabelValue = "Answer\nmanager:";
+}
+//---------------------------------------------------------------------------
+void __fastcall TOperationFrame::ResizeComponent(){
+	UrlLabel->Text = UrlLabelValue;
+	UrlLabel->Width = UrlLabel->Canvas->TextWidth(UrlLabel->Text);
+	DataLabel->Text = DataLabelValue;
+	DataLabel->Width = DataLabel->Canvas->TextWidth(DataLabel->Text);
+	OperationMethodLabel->Text = OperationMethodLabelValue;
+	OperationMethodLabel->Width = OperationMethodLabel->Canvas->TextWidth(OperationMethodLabel->Text);
+	OperationMethodComboBox->Items->StrictDelimiter = true;
+	OperationMethodComboBox->Items->DelimitedText = OperationMethodComboItems;
+	OperationAnswerLabel->Text = OperationAnswerLabelValue;
+	OperationAnswerLabel->Width = OperationAnswerLabel->Canvas->TextWidth(OperationAnswerLabel->Text);
+	AnswerManagerLabel->Text = OperationAnswerManagerLabelValue;
+	AnswerManagerLabel->Width = AnswerManagerLabel->Canvas->TextWidth(AnswerManagerLabel->Text);
+}
+//---------------------------------------------------------------------------
+void __fastcall TOperationFrame::ApplyOperation(Net_Operation Op){
+	CopyNet_Operation(&Op,&Operation);
+	UrlMemo->Text = Op.Url;
+	DataMemo->Text = Op.Data;
+	OperationAnswerBox->Value = Op.ExpectedAnswer;
+	OperationMethodComboBox->ItemIndex = Op.MethodType == METHOD_POST?1:(Op.MethodType == METHOD_GET?0:-1);
+	AnswerManagerMemo->Text = Op.AnswerManager;
+}
+//---------------------------------------------------------------------------
+void __fastcall TOperationFrame::GenericChange(TObject *Sender){
+	Net_Operation Tmp;
+	CopyNet_Operation(&Operation, &Tmp);
+	TComponent *C = (TComponent*)Sender;
+	if(C->Name == "UrlMemo"){
+		Tmp.Url = UrlMemo->Text;
+	}
+	else{
+		if(C->Name == "DataMemo"){
+			Tmp.Data = DataMemo->Text;
+		}
+		else{
+			if(C->Name == "OperationAnswerBox"){
+				Tmp.ExpectedAnswer = OperationAnswerBox->Value;
+			}
+			else{
+				if(C->Name == "OperationMethodComboBox"){
+					Tmp.MethodType = OperationMethodComboBox->ItemIndex == 0 ? METHOD_GET :(OperationMethodComboBox->ItemIndex == 1?METHOD_POST:METHOD_UNK);
+				}
+				else{
+					if(C->Name == "AnswerManagerMemo"){
+						Tmp.AnswerManager = AnswerManagerMemo->Text;
+					}
+                }
+            }
+        }
+    }
+	CommandList *Cmd = (CommandList*)TagObject;
+	if(Cmd){
+		Cmd->ChangeOperation(Operation, Tmp);
+		Operation = Tmp;
+	}
+}
+//---------------------------------------------------------------------------
+

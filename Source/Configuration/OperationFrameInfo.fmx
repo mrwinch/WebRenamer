@@ -1,0 +1,170 @@
+object OperationFrame: TOperationFrame
+  Size.Width = 310.000000000000000000
+  Size.Height = 195.000000000000000000
+  Size.PlatformDefault = False
+  object LayoutBottom1: TLayout
+    Align = Top
+    Size.Width = 310.000000000000000000
+    Size.Height = 52.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object UrlLabel: TLabel
+      Align = Left
+      AutoSize = True
+      StyledSettings = [Family, Size, FontColor]
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'UrlLabel'
+      TabOrder = 0
+    end
+    object UrlMemo: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      OnChange = GenericChange
+      Align = Client
+      Margins.Left = 3.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 3.000000000000000000
+      Margins.Bottom = 2.000000000000000000
+      Size.Width = 255.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Viewport.Width = 255.000000000000000000
+      Viewport.Height = 46.000000000000000000
+    end
+  end
+  object LayoutBottom2: TLayout
+    Align = Top
+    Position.Y = 52.000000000000000000
+    Size.Width = 310.000000000000000000
+    Size.Height = 52.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object DataLabel: TLabel
+      Align = Left
+      AutoSize = True
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'UrlLabel'
+      TabOrder = 0
+    end
+    object DataMemo: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      OnChange = GenericChange
+      Align = Client
+      Margins.Left = 3.000000000000000000
+      Margins.Top = 3.000000000000000000
+      Margins.Right = 3.000000000000000000
+      Margins.Bottom = 3.000000000000000000
+      Size.Width = 255.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Viewport.Width = 255.000000000000000000
+      Viewport.Height = 46.000000000000000000
+    end
+  end
+  object LayoutMiddle: TLayout
+    Align = Client
+    Size.Width = 310.000000000000000000
+    Size.Height = 39.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object OperationAnswerLabel: TLabel
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 39.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'OperationAnswerLabel'
+      TabOrder = 1
+    end
+    object OperationAnswerBox: TNumberBox
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Left
+      TabOrder = 2
+      Cursor = crIBeam
+      Max = 65535.000000000000000000
+      Position.X = 50.000000000000000000
+      Position.Y = 9.000000000000000000
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 9.000000000000000000
+      Margins.Bottom = 9.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      OnChange = GenericChange
+    end
+    object OperationMethodLabel: TLabel
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Position.X = 135.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 39.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'OperationAnswerLabel'
+      TabOrder = 0
+    end
+    object OperationMethodComboBox: TComboBox
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 9.000000000000000000
+      Margins.Bottom = 9.000000000000000000
+      Position.X = 180.000000000000000000
+      Position.Y = 9.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      OnChange = GenericChange
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Position.Y = 104.000000000000000000
+    Size.Width = 310.000000000000000000
+    Size.Height = 52.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object AnswerManagerLabel: TLabel
+      Align = Left
+      AutoSize = True
+      Margins.Left = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 52.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'UrlLabel'
+      TabOrder = 0
+    end
+    object AnswerManagerMemo: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      OnChange = GenericChange
+      Align = Client
+      Margins.Left = 3.000000000000000000
+      Margins.Top = 3.000000000000000000
+      Margins.Right = 3.000000000000000000
+      Margins.Bottom = 3.000000000000000000
+      Size.Width = 255.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Viewport.Width = 255.000000000000000000
+      Viewport.Height = 46.000000000000000000
+    end
+  end
+end

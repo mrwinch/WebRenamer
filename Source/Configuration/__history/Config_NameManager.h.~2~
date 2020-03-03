@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef Config_NameManagerH
+#define Config_NameManagerH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include "Config_Frame.h"
+//---------------------------------------------------------------------------
+class TNameManagerFrame : public TConfig_Frame
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TNameManagerFrame(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TNameManagerFrame *NameManagerFrame;
+//---------------------------------------------------------------------------
+#endif

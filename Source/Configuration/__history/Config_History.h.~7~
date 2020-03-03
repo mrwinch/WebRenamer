@@ -1,0 +1,103 @@
+//---------------------------------------------------------------------------
+
+#ifndef Config_HistoryH
+#define Config_HistoryH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include "Config_Frame.h"
+#include <FMX.Controls.Presentation.hpp>
+#include <FMX.Grid.hpp>
+#include <FMX.Grid.Style.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.ScrollBox.hpp>
+#include <FMX.StdCtrls.hpp>
+#include <FMX.TreeView.hpp>
+#include <FMX.Types.hpp>
+#include <System.Rtti.hpp>
+#include <FMX.Edit.hpp>
+#include <FMX.EditBox.hpp>
+#include <FMX.SpinBox.hpp>
+//---------------------------------------------------------------------------
+typedef struct{
+	TDateTime Moment;
+	TStringList *Operation;
+}History_Record;
+//---------------------------------------------------------------------------
+class THistoryManager{
+	private:
+		TList *History;
+		TComponent *Owner;
+		String SafeEncode(String Src);
+		String SafeDecode(String Src);
+
+	public:
+		THistoryManager(TComponent *AOwner);
+		~THistoryManager();
+		void AddRecord(TDateTime Moment, TStringList *Operation);
+		int GetNumRecord();
+		History_Record *GetRecord(int Index);
+		void CreateRecord();
+        void AddOperation(int Index, String Src, String Dest);
+		int GetNumOperation(int RecordIndex);
+		String GetOperationSource(int RecordIndex, int OperationIndex);
+		String GetOperationDest(int RecordIndex, int OperationIndex);
+
+		void DeleteRecord(int Index);
+		void Reset();
+
+		void SaveToXML(String File);
+		void LoadFromXML(String File);
+};
+//---------------------------------------------------------------------------
+class THistoryFrame : public TConfig_Frame
+{
+__published:	// IDE-managed Components
+	TGroupBox *HistoryBox;
+	TPanel *Panel1;
+	TTreeView *HistoryTreeView;
+	TGrid *HistoryGrid;
+	TCheckColumn *SelectColumn;
+	TStringColumn *SourceColumn;
+	TStringColumn *DestColumn;
+	TButton *RestoreButton;
+	TButton *RemoveButton;
+	TGroupBox *OptionBox;
+	TCheckBox *RemoveRecordCheck;
+	TSpinBox *DayDelete;
+	TLabel *DayLabel;
+	void __fastcall HistoryTreeViewChange(TObject *Sender);
+	void __fastcall HistoryGridGetValue(TObject *Sender, const int ACol, const int ARow, TValue &Value);
+	void __fastcall HistoryGridSetValue(TObject *Sender, const int ACol, const int ARow,
+          const TValue &Value);
+	void __fastcall HistoryGridHeaderClick(TColumn *Column);
+	void __fastcall RestoreButtonClick(TObject *Sender);
+	void __fastcall RemoveButtonClick(TObject *Sender);
+	void __fastcall RemoveRecordCheckChange(TObject *Sender);
+
+private:	// User declarations
+	String Op_TreeItem_Text;
+	TList *GridDataList;
+public:		// User declarations
+	typedef struct{
+		bool Checked;
+		String Src;
+		String Dest;
+	}GridData;
+	__fastcall THistoryFrame(TComponent* Owner);
+	void CreateGUITxt(TNameValue *GUITxt);
+	void ApplyLanguage(TNameValue *Src);
+	void ResizeComponents();
+	void LoadConfiguration(TNameValue *Conf);
+	void SaveConfiguration(TNameValue *Conf);
+    void CreateConfiguration(TNameValue *Conf);
+	void PopulateTree(TTreeView *Tree);
+	void SetGrid(int RecordIndex);
+
+	THistoryManager *History;
+};
+//---------------------------------------------------------------------------
+extern PACKAGE THistoryFrame *HistoryFrame;
+//---------------------------------------------------------------------------
+#endif

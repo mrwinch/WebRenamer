@@ -1,0 +1,102 @@
+inherited HistoryFrame: THistoryFrame
+  object HistoryBox: TGroupBox
+    Align = Client
+    Size.Width = 475.000000000000000000
+    Size.Height = 400.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'HistoryBox'
+    TabOrder = 0
+    object Panel1: TPanel
+      Align = Bottom
+      Position.Y = 350.000000000000000000
+      Size.Width = 475.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'pushpanel'
+      TabOrder = 0
+      object RestoreButton: TButton
+        Enabled = False
+        Position.X = 24.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Restore Button'
+        TextSettings.WordWrap = True
+        OnClick = RestoreButtonClick
+      end
+      object RemoveButton: TButton
+        Enabled = False
+        Position.X = 120.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 38.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'RemoveButton'
+        TextSettings.WordWrap = True
+        OnClick = RemoveButtonClick
+      end
+      object GroupBox1: TGroupBox
+        Position.X = 216.000000000000000000
+        Size.Width = 249.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'GroupBox1'
+        TabOrder = 2
+        object RemoveRecordCheck: TCheckBox
+          Position.X = 8.000000000000000000
+          Position.Y = 16.000000000000000000
+          TabOrder = 0
+          Text = 'RemoveRecordCheck'
+        end
+      end
+    end
+    object HistoryTreeView: TTreeView
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 20.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 20.000000000000000000
+      Size.Width = 465.000000000000000000
+      Size.Height = 185.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnChange = HistoryTreeViewChange
+      Viewport.Width = 461.000000000000000000
+      Viewport.Height = 181.000000000000000000
+    end
+    object HistoryGrid: TGrid
+      Align = Client
+      CanFocus = True
+      ClipChildren = True
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 3.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Size.Width = 465.000000000000000000
+      Size.Height = 142.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      RowCount = 0
+      Options = [AlternatingRowBackground, Editing, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+      OnHeaderClick = HistoryGridHeaderClick
+      OnGetValue = HistoryGridGetValue
+      OnSetValue = HistoryGridSetValue
+      Viewport.Width = 461.000000000000000000
+      Viewport.Height = 117.000000000000000000
+      object SelectColumn: TCheckColumn
+        Size.Width = 30.000000000000000000
+      end
+      object SourceColumn: TStringColumn
+        ReadOnly = True
+        Size.Width = 199.000000000000000000
+      end
+      object DestColumn: TStringColumn
+        ReadOnly = True
+        Size.Width = 207.000000000000000000
+      end
+    end
+  end
+end

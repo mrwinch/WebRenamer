@@ -1,0 +1,512 @@
+inherited OutputNameFrame: TOutputNameFrame
+  object TVShowGroupBox: TGroupBox
+    Align = Top
+    Size.Width = 475.000000000000000000
+    Size.Height = 200.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'TVShowGroupBox'
+    TabOrder = 1
+    object TopLayout: TLayout
+      Align = Top
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 20.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 20.000000000000000000
+      Size.Width = 455.000000000000000000
+      Size.Height = 35.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object ShowInputTextLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 107.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'ShowInputTextLabel'
+        TabOrder = 0
+      end
+      object ShowFormatEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Left = 3.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        PopupMenu = ShowEditPopup
+        Size.Width = 240.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Layout1: TLayout
+        Align = Right
+        Position.X = 355.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object ShowFormatEditButton: TButton
+          Align = Client
+          Margins.Left = 2.000000000000000000
+          Margins.Top = 6.000000000000000000
+          Margins.Bottom = 6.000000000000000000
+          Size.Width = 98.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'ShowFormatEditButton'
+          OnClick = ShowFormatEditButtonClick
+        end
+      end
+    end
+    object MiddleLayout: TLayout
+      Align = Top
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 55.000000000000000000
+      Size.Width = 455.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object FormatComboBox: TComboBox
+        Align = Client
+        Margins.Top = 6.000000000000000000
+        Margins.Bottom = 6.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnChange = FormatComboBoxChange
+      end
+      object ShowFormatComboButton: TButton
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 355.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'ShowFormatComboButton'
+        OnClick = ShowFormatComboButtonClick
+      end
+    end
+    object ShowExampleGroupBox: TGroupBox
+      Align = Top
+      Position.Y = 95.000000000000000000
+      Size.Width = 475.000000000000000000
+      Size.Height = 98.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'ShowExampleGroupBox'
+      TabOrder = 2
+      object Layout2: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object ExampleShowLabel: TLabel
+          Align = Left
+          AutoSize = True
+          Size.Width = 102.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowLabel'
+          TabOrder = 0
+        end
+        object ExampleShowSeasonLabel: TLabel
+          Align = Left
+          AutoSize = True
+          Margins.Left = 10.000000000000000000
+          Position.X = 112.000000000000000000
+          Size.Width = 139.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowSeasonLabel'
+          TabOrder = 1
+        end
+        object ExampleShowEpisodeLabel: TLabel
+          Align = Left
+          AutoSize = True
+          Margins.Left = 10.000000000000000000
+          Position.X = 261.000000000000000000
+          Size.Width = 143.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowEpisodeLabel'
+          TabOrder = 2
+        end
+      end
+      object Layout3: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 45.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object ExampleShowTitle: TLabel
+          Align = Left
+          AutoSize = True
+          Size.Width = 96.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowTitle'
+          TabOrder = 0
+        end
+      end
+      object Layout4: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 70.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object ExampleShowResult: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Size.Width = 114.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowResult'
+          TabOrder = 0
+        end
+        object ExampleShowValue: TLabel
+          Align = Client
+          Margins.Left = 10.000000000000000000
+          Size.Width = 331.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object FilmGroupBox: TGroupBox
+    Align = Top
+    Position.Y = 200.000000000000000000
+    Size.Width = 475.000000000000000000
+    Size.Height = 200.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'GroupBox1'
+    TabOrder = 0
+    object Layout5: TLayout
+      Align = Top
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 20.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 20.000000000000000000
+      Size.Width = 455.000000000000000000
+      Size.Height = 35.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object MovieInputLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 107.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'ShowInputTextLabel'
+        TabOrder = 0
+      end
+      object MovieFormatEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Left = 3.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        PopupMenu = MoviePopup
+        Size.Width = 240.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object Layout6: TLayout
+        Align = Right
+        Position.X = 355.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object MovieFormatEditButton: TButton
+          Align = Client
+          Margins.Left = 2.000000000000000000
+          Margins.Top = 6.000000000000000000
+          Margins.Bottom = 6.000000000000000000
+          Size.Width = 98.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'ShowFormatEditButton'
+          OnClick = MovieFormatEditButtonClick
+        end
+      end
+    end
+    object Layout7: TLayout
+      Align = Top
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 55.000000000000000000
+      Size.Width = 455.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object MovieFormatComboButton: TButton
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Position.X = 355.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'MovieFormatComboButton'
+        OnClick = MovieFormatComboButtonClick
+      end
+      object MovieFormatComboBox: TComboBox
+        Align = Client
+        Margins.Top = 6.000000000000000000
+        Margins.Bottom = 6.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnChange = MovieFormatComboBoxChange
+      end
+    end
+    object MovieExampleGroupBox: TGroupBox
+      Align = Top
+      Position.Y = 95.000000000000000000
+      Size.Width = 475.000000000000000000
+      Size.Height = 98.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'ShowExampleGroupBox'
+      TabOrder = 2
+      object Layout8: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object ExampleMovieLabel: TLabel
+          Align = Left
+          AutoSize = True
+          Size.Width = 102.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowLabel'
+          TabOrder = 0
+        end
+      end
+      object Layout9: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 45.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object ExampleMovieYear: TLabel
+          Align = Left
+          AutoSize = True
+          Size.Width = 96.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowTitle'
+          TabOrder = 0
+        end
+      end
+      object Layout10: TLayout
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 70.000000000000000000
+        Size.Width = 455.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object ExampleMovieResult: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Size.Width = 114.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'ExampleShowResult'
+          TabOrder = 0
+        end
+        object ExampleMovieValue: TLabel
+          Align = Client
+          Margins.Left = 10.000000000000000000
+          Size.Width = 331.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object ShowEditPopup: TPopupMenu
+    Left = 296
+    Top = 24
+    object ShowNamePopup: TMenuItem
+      Text = 'ShowNamePopup'
+      object ShowNameUpper: TMenuItem
+        Locked = True
+        Text = 'ShowNameUpper'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowNameLower: TMenuItem
+        Locked = True
+        Text = 'ShowNameLower'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowNameFirst: TMenuItem
+        Locked = True
+        Text = 'ShowNameFirst'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowNameWord: TMenuItem
+        Locked = True
+        Text = 'ShowNameWord'
+        OnClick = GenericShowEditPopupItem
+      end
+    end
+    object SeasonPopup: TMenuItem
+      Text = 'SeasonPopup'
+      object SeasonNumber: TMenuItem
+        Locked = True
+        Text = 'SeasonNumber'
+        OnClick = GenericShowEditPopupItem
+      end
+      object Season2Digits: TMenuItem
+        Locked = True
+        Text = 'Season2Digits'
+        OnClick = GenericShowEditPopupItem
+      end
+      object Season3Digits: TMenuItem
+        Locked = True
+        Text = 'Season3Digits'
+        OnClick = GenericShowEditPopupItem
+      end
+    end
+    object EpisodePopup: TMenuItem
+      Text = 'EpisodePopup'
+      object EpisodeNumber: TMenuItem
+        Locked = True
+        Text = 'EpisodeNumber'
+        OnClick = GenericShowEditPopupItem
+      end
+      object Episode2Digits: TMenuItem
+        Locked = True
+        Text = 'Episode2Digits'
+        OnClick = GenericShowEditPopupItem
+      end
+      object Episode3Digits: TMenuItem
+        Locked = True
+        Text = 'Episode3Digits'
+        OnClick = GenericShowEditPopupItem
+      end
+    end
+    object ShowTitlePopup: TMenuItem
+      Text = 'ShowTitlePopup'
+      object ShowTitleUpper: TMenuItem
+        Locked = True
+        Text = 'ShowTitleUpper'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowTitleLower: TMenuItem
+        Locked = True
+        Text = 'ShowTitleLower'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowTitleFirst: TMenuItem
+        Locked = True
+        Text = 'ShowTitleFirst'
+        OnClick = GenericShowEditPopupItem
+      end
+      object ShowTitleWord: TMenuItem
+        Locked = True
+        Text = 'ShowTitleWord'
+        OnClick = GenericShowEditPopupItem
+      end
+    end
+  end
+  object MoviePopup: TPopupMenu
+    Left = 402
+    Top = 287
+    object MovieNamePopup: TMenuItem
+      Text = 'MovieNamePopup'
+      object MovieNameUpper: TMenuItem
+        Locked = True
+        Text = 'MovieNameUpper'
+        OnClick = GenericMovieEditPopupItem
+      end
+      object MovieNameLower: TMenuItem
+        Locked = True
+        Text = 'MovieNameLower'
+        OnClick = GenericMovieEditPopupItem
+      end
+      object MovieNameFirst: TMenuItem
+        Locked = True
+        Text = 'MovieNameFirst'
+        OnClick = GenericMovieEditPopupItem
+      end
+      object MovieNameWord: TMenuItem
+        Locked = True
+        Text = 'MovieNameWord'
+        OnClick = GenericMovieEditPopupItem
+      end
+    end
+    object MovieYear: TMenuItem
+      Text = 'MovieYear'
+      OnClick = GenericMovieEditPopupItem
+    end
+    object DiscNumber: TMenuItem
+      Text = 'DiscNumber'
+      OnClick = GenericMovieEditPopupItem
+    end
+  end
+end

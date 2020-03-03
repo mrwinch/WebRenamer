@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef Config_OutputNameH
+#define Config_OutputNameH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include "Config_Frame.h"
+//---------------------------------------------------------------------------
+class TOutputNameFrame : public TConfig_Frame
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TOutputNameFrame(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TOutputNameFrame *OutputNameFrame;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "Config_History.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma link "Config_Frame"
+#pragma resource "*.fmx"
+THistoryFrame *HistoryFrame;
+//---------------------------------------------------------------------------
+__fastcall THistoryFrame::THistoryFrame(TComponent* Owner)
+	: TConfig_Frame(Owner)
+{
+}
+//---------------------------------------------------------------------------

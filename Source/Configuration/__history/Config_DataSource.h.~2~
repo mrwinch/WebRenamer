@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef Config_DataSourceH
+#define Config_DataSourceH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include "Config_Frame.h"
+//---------------------------------------------------------------------------
+class TDataSource_Frame : public TConfig_Frame
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TDataSource_Frame(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TDataSource_Frame *DataSource_Frame;
+//---------------------------------------------------------------------------
+#endif

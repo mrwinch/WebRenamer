@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef Config_HistoryH
+#define Config_HistoryH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include "Config_Frame.h"
+//---------------------------------------------------------------------------
+class THistoryFrame : public TConfig_Frame
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall THistoryFrame(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE THistoryFrame *HistoryFrame;
+//---------------------------------------------------------------------------
+#endif

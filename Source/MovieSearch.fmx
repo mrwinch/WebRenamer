@@ -1,0 +1,242 @@
+object MovieSearchForm: TMovieSearchForm
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 200
+  ClientWidth = 500
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Align = Bottom
+    Position.Y = 168.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'pushpanel'
+    TabOrder = 0
+    object SearchButton: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 4.000000000000000000
+      TabOrder = 0
+      Text = 'SearchButton'
+      OnClick = SearchButtonClick
+    end
+    object ApplyButton: TButton
+      Enabled = False
+      ModalResult = 1
+      Position.X = 104.000000000000000000
+      Position.Y = 4.000000000000000000
+      TabOrder = 1
+      Text = 'ApplyButton'
+    end
+  end
+  object DataGroupBox: TGroupBox
+    Align = Client
+    Size.Width = 500.000000000000000000
+    Size.Height = 168.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'DataGroupBox'
+    TabOrder = 1
+    object Layout1: TLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 20.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 20.000000000000000000
+      Size.Width = 490.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object MovieLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 61.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'MovieLabel'
+        TabOrder = 0
+      end
+      object TitleEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Top = 4.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Size.Width = 429.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Layout2: TLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 50.000000000000000000
+      Size.Width = 490.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object YearLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 52.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'YearLabel'
+        TabOrder = 2
+      end
+      object YearSpin: TSpinBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 3
+        Cursor = crIBeam
+        Min = 1800.000000000000000000
+        Max = 2050.000000000000000000
+        Value = 1800.000000000000000000
+        Position.X = 57.000000000000000000
+        Position.Y = 3.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 3.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object DiscLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Margins.Left = 10.000000000000000000
+        Position.X = 167.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'YearLabel'
+        TabOrder = 0
+      end
+      object DiscSpin: TSpinBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 1
+        Cursor = crIBeam
+        Position.X = 224.000000000000000000
+        Position.Y = 3.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 3.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Layout3: TLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 80.000000000000000000
+      Size.Width = 490.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object SourceLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 65.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'SourceLabel'
+        TabOrder = 0
+      end
+      object SourceCombo: TComboBox
+        Align = Client
+        Margins.Top = 3.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Size.Width = 425.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+    object Layout4: TLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 110.000000000000000000
+      Size.Width = 490.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object FormatLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Size.Width = 66.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'FormatLabel'
+        TabOrder = 0
+      end
+      object FormatCombo: TComboBox
+        Align = Client
+        Margins.Top = 3.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Size.Width = 424.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+    object Layout5: TLayout
+      Align = Top
+      Margins.Left = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 140.000000000000000000
+      Size.Width = 490.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      object ResultLabel: TLabel
+        Align = Left
+        AutoSize = True
+        StyledSettings = [Family, Size, FontColor]
+        Size.Width = 65.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.WordWrap = False
+        Text = 'ResultLabel'
+        TabOrder = 0
+      end
+      object ResultValue: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Top = 4.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Size.Width = 425.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = ResultValueChange
+      end
+    end
+  end
+  object FramePanel: TPanel
+    Align = Bottom
+    Position.Y = 198.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 2.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'pushpanel'
+    TabOrder = 2
+  end
+end

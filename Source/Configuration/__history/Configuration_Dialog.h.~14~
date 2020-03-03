@@ -1,0 +1,88 @@
+//---------------------------------------------------------------------------
+
+#ifndef Configuration_DialogH
+#define Configuration_DialogH
+//---------------------------------------------------------------------------
+
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Controls.Presentation.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.Objects.hpp>
+#include <FMX.StdCtrls.hpp>
+#include <FMX.TreeView.hpp>
+#include <FMX.Types.hpp>
+#include "..\\Class\\Project_Const.h"
+#include "Config_General.h"
+#include "Config_History.h"
+#include "Config_NameManager.h"
+#include "Config_OutputName.h"
+#include "Config_DataSource.h"
+#include "Config_DataSourceInfo.h"
+//---------------------------------------------------------------------------
+#define GENERAL_TREE_ITEM                                   1
+#define MANAGEFILE_TREE_ITEM                                2
+#define MAINDATASOURCE_TREE_ITEM                            3
+#define DATASOURCEINFO_TREE_ITEM                            4
+#define OUTPUTNAME_TREE_ITEM                                5
+#define HISTORY_TREE_ITEM                                   6
+//---------------------------------------------------------------------------
+class TConf_Dialog : public TForm
+{
+__published:	// IDE-managed Components
+	TTreeView *ConfigurationTree;
+	TTreeViewItem *GeneralTreeItem;
+	TTreeViewItem *ManageNameTreeItem;
+	TTreeViewItem *MainDataSourceItem;
+	TTreeViewItem *OutputNameTreeItem;
+	TTreeViewItem *HistoryTreeItem;
+	TPanel *Panel1;
+	TButton *CancelButton;
+	TButton *OkButton;
+	TPanel *Panel2;
+	TRectangle *Rectangle1;
+	TLabel *FrameTitleLabel;
+	void __fastcall ConfigurationTreeChange(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+private:	// User declarations
+	TStringList *ComponentToRename;
+	TNameValue *FGUITxt, *FConfig;
+	TInfoGrabber *FGrabber;
+    int SafetyCount;
+
+	TComponent *SearchComponent(String Name);
+	TNameValue *GetGUITxt();
+	void SetGUITxt(TNameValue *Val);
+	TNameValue *GetConf();
+	void SetConf(TNameValue *Val);
+	TInfoGrabber *GetGrabber();
+	void SetGrabber(TInfoGrabber *Val);
+public:		// User declarations
+    //Frames
+	TGeneralFrame *GeneralFrame;
+	THistoryFrame *HistoryFrame;
+	TNameManagerFrame *NameManagerFrame;
+	TOutputNameFrame *OutputNameFrame;
+    TDataSourceFrame *DataSourceFrame;
+
+	__fastcall TConf_Dialog(TComponent* Owner);
+	//Language/GUI function...
+	void CreateGUITxt(TNameValue *GUITxt);
+	void ApplyLanguage(TNameValue *Src);
+	void ResizeComponents();
+	//Configuration function...
+	void CreateConfiguration(TNameValue *Conf);
+	void LoadConfiguration(TNameValue *Conf);
+	void SaveConfiguration(TNameValue *Conf);
+	//Grabber-WebSource...
+    void __fastcall CreateWebSource(TWebSource *Src);
+
+	__property TNameValue *GUITxt = {read = GetGUITxt, write = GetGUITxt};
+	__property TNameValue *Config = {read = GetConf, write = SetConf};
+	__property TInfoGrabber *Grabber = {read = GetGrabber, write = SetGrabber};
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TConf_Dialog *Conf_Dialog;
+//---------------------------------------------------------------------------
+#endif

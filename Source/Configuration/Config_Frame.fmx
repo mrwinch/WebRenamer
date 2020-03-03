@@ -1,0 +1,5 @@
+object Config_Frame: TConfig_Frame
+  Size.Width = 475.000000000000000000
+  Size.Height = 400.000000000000000000
+  Size.PlatformDefault = False
+end

@@ -1,0 +1,92 @@
+//---------------------------------------------------------------------------
+#pragma hdrstop
+#include "MyHTMLParser.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+//---------------------------------------------------------------------------
+TStringList *MySplitString(String Source,String StartData, String EndData, bool WithLimits){
+	TStringList *Out = new TStringList();
+	String Pattern;
+	String Tmp;
+	TMatchCollection Items;
+	TRegEx *RegEx;
+	Pattern = Format("%s(.*?)%s",ARRAYOFCONST((StartData,EndData)));
+	RegEx = new TRegEx(Pattern,TRegExOptions());
+	Items = RegEx->Matches(Source);
+	for(int a=0;a<Items.Count;a++){
+		Tmp = Items[a].Value;
+		if(WithLimits == false){
+			Tmp = System::Strutils::AnsiReplaceStr(Tmp,StartData,"");
+			Tmp = System::Strutils::AnsiReplaceStr(Tmp,EndData,"");
+		}
+		Out->Add(Tmp);
+	}
+	return Out;	
+}
+//---------------------------------------------------------------------------
+HTMLNode::HTMLNode(){
+	Setup();
+}
+//---------------------------------------------------------------------------
+HTMLNode::HTMLNode(String Start){
+	Setup();
+	LoadFromString(Start);
+}
+//---------------------------------------------------------------------------
+HTMLNode::~HTMLNode(){
+	
+}
+//---------------------------------------------------------------------------
+String HTMLNode::GetTag(){
+	return FTag;
+}
+//---------------------------------------------------------------------------
+void HTMLNode::Setup(){
+	FTag = "";
+	Child = new TList();
+}
+//---------------------------------------------------------------------------
+void HTMLNode::LoadFromString(String Src){
+	//TStringList *List = MySplitString(Src," "," ",false);
+	int a;
+	String Tmp;
+	
+	a = Src.Pos(" ");
+	if(a > 0)
+		FTag = Src.SubString(1, a);
+	Tmp = Src.SubString(a, Src.Length());
+	if(Tmp.Length()){
+		TStringList *Attribute = new TStringList();
+		Attribute->StrictDelimiter = true;
+		Attribute->Delimiter = " ";
+		Attribute->QuoteChar = '"';
+		Attribute->DelimitedText = Tmp;
+		
+	}
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+MyHTMLParser::MyHTMLParser(){
+	Node = new TList();
+}
+//---------------------------------------------------------------------------
+MyHTMLParser::~MyHTMLParser(){
+	
+}
+//---------------------------------------------------------------------------
+TStringList *MyHTMLParser::SplitString(String Source, bool WithLimits){
+	return MySplitString(Source,"<",">",WithLimits);
+}
+//---------------------------------------------------------------------------
+int MyHTMLParser::LoadFromString(String Src){
+	int a;
+	TStringList *Temp = SplitString(Src, false);		//Split tag without '<' and '>'
+	Node->Clear();
+	for(a = 0; a< Temp->Count;a++){
+
+	}
+	return 0;
+}
+//---------------------------------------------------------------------------
+#pragma package(smart_init)

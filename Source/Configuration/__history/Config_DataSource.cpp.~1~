@@ -1,0 +1,17 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "Config_DataSource.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma link "Config_Frame"
+#pragma resource "*.fmx"
+TConfig_Frame2 *Config_Frame2;
+//---------------------------------------------------------------------------
+__fastcall TConfig_Frame2::TConfig_Frame2(TComponent* Owner)
+	: TConfig_Frame(Owner)
+{
+}
+//---------------------------------------------------------------------------

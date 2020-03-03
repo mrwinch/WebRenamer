@@ -1,0 +1,48 @@
+//---------------------------------------------------------------------------
+#ifndef MyHTMLParserH
+#define MyHTMLParserH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <System.StrUtils.hpp>
+#include <System.RegularExpressions.hpp>
+#include <System.SysUtils.hpp>
+#include "Project_Const.h"
+//---------------------------------------------------------------------------
+class HTMLNode{
+	private:
+		String FTag;
+		TList *Child;
+		TStringList *Attribute;
+		
+		void Setup();
+	protected:
+		String GetTag();
+		String GetClass();
+        String GetID();
+	public:
+		HTMLNode();
+		HTMLNode(String Start);
+		~HTMLNode();
+		void LoadFromString(String Src);
+
+		__property String Tag =  {read = GetTag};
+		__property String Class = {read = GetClass};
+		__property String ID = {read = GetID};
+};
+//---------------------------------------------------------------------------
+class MyHTMLParser{
+	private:
+		TList *NodeList;
+		TStringList *SingleTag;
+	protected:
+		TStringList *SplitString(String Source, bool WithLimit = false);
+		String MultipleBack(int Num);
+	public:
+		MyHTMLParser();
+		~MyHTMLParser();
+		int LoadFromString(String Src);
+		int LoadFromFile(String FileName);
+};
+//---------------------------------------------------------------------------
+#endif
+//---------------------------------------------------------------------------

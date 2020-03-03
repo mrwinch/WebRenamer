@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------
+#include "SysLogger.h"
+#include "NameValue.h"
+#include "NameTranslator.h"
+#include "ConnectionManager.h"
+#ifndef PROJECT_CONSTH
+#define PROJECT_CONSTH
+//---------------------------------------------------------------------------
+#define START_PARAMETER             				"<<"
+#define END_PARAMETER                               ">>"
+
+#define CONFIGURATION_FILE                          "WebRenamer.cfg"
+#define DEBUG_FILE                                  "Debug.log"
+
+#define APP_VERSION                                 0x02
+#define APP_SUBVERSION                              0x02
+#define APP_BUILD                                   0x01
+//---------------------------------------------------------------------------
+#define NO_DEBUG                                    0x00
+#define WARN_DEBUG                                  0x01
+#define ERR_DEBUG                                   0x02
+#define INFO_DEBUG                                  0x03
+#define TOTAL_DEBUG                                 0x04
+//---------------------------------------------------------------------------
+//#define CONFIGURATION_FRAME                         0x00
+//---------------------------------------------------------------------------
+#endif

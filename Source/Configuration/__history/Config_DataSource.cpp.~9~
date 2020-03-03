@@ -1,0 +1,171 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "Config_DataSource.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma link "Config_Frame"
+#pragma resource "*.fmx"
+TDataSourceFrame *DataSourceFrame;
+//---------------------------------------------------------------------------
+#define UNIT_ID                                     "CFG_DS"
+#define BUILD_ID(Name)                              UNIT_ID+(String)"_"+Name
+//---------------------------------------------------------------------------
+extern TSysLog *Logger;
+//---------------------------------------------------------------------------
+void DEBUG_CFGDS(int Level, String Msg){
+#ifdef WEB_RENAMER_DEBUG
+	Logger->Report(UNIT_ID,NAME_LEVEL(Level),Msg);
+#endif
+}
+//---------------------------------------------------------------------------
+__fastcall TDataSourceFrame::TDataSourceFrame(TComponent* Owner)
+	: TConfig_Frame(Owner)
+{
+	FGrabber = NULL;
+	TVShowList = new TStringList();
+	MovieList = new TStringList();
+}
+//---------------------------------------------------------------------------
+void __fastcall TDataSourceFrame::GenericUpDownClick(TObject *Sender){
+	DEBUG_CFGDS(INFO_DEBUG,"GenericUpDownClick");
+	TButton *Btn = (TButton*)Sender;
+	int Direction = Btn->Tag & 1;
+	int Type = Btn->Tag/0x10;
+	TWebSource *Src;
+	if(Type == 0){   //TVShowGrid button
+		if(TVShowGrid->Selected>-1){
+			if(Grabber){
+				Src = (TWebSource*)TVShowList->Objects[TVShowGrid->Selected];
+				int Index = Grabber->GetSourceOrderInSearchIndex(Src);
+				if(Direction)
+					Grabber->ChangeSourceSearchOurder(Src,Index + 1);
+				else
+					Grabber->ChangeSourceSearchOurder(Src,Index-1);
+				TVShowGrid->SetFocus();
+				TVShowGrid->Selected = Grabber->GetSourceOrderInSearchIndex(Src);
+			}
+		}
+	}
+	else{       //MovieGrid button
+		if(MovieGrid->Selected>-1){
+			if(Grabber){
+				Src = (TWebSource*)MovieList->Objects[MovieGrid->Selected];
+				int Index = Grabber->GetSourceOrderInSearchIndex(Src);
+				if(Direction)
+					Grabber->ChangeSourceSearchOurder(Src,Index + 1);
+				else
+					Grabber->ChangeSourceSearchOurder(Src,Index-1);
+				MovieGrid->SetFocus();
+				MovieGrid->Selected = Grabber->GetSourceOrderInSearchIndex(Src);
+			}
+		}
+	}
+    UpdateGrids();
+}
+//---------------------------------------------------------------------------
+void __fastcall TDataSourceFrame::RemoveSourceButtonClick(TObject *Sender)
+{
+	DEBUG_CFGDS(INFO_DEBUG,"RemoveSourceButtonClick()");
+	TWebSource *Src = NULL;
+	if(TVShowGrid->Selected != -1){
+		Src = (TWebSource*)TVShowList->Objects[TVShowGrid->Selected];
+	}
+	else{
+		if(MovieGrid->Selected != -1){
+			Src = (TWebSource*)MovieList->Objects[MovieGrid->Selected];
+		}
+	}
+	if(Src != NULL){
+		int Res = TDialogServiceSync::MessageDialog("Remove "+Src->Name+
+						(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		if(Res == mrYes){
+			if(Grabber){
+				Grabber->RemoveInfoSource(Src);
+			}
+		}
+	}
+}
+//---------------------------------------------------------------------------
+TInfoGrabber *TDataSourceFrame::GetGrabber(){
+	return FGrabber;
+}
+//---------------------------------------------------------------------------
+void TDataSourceFrame::SetGrabber(TInfoGrabber *Grab){
+	DEBUG_CFGDS(INFO_DEBUG,"SetGrabber()");
+	FGrabber = Grab;
+	UpdateGrids();
+}
+//---------------------------------------------------------------------------
+void TDataSourceFrame::UpdateGrids(){
+	DEBUG_CFGDS(INFO_DEBUG,"UpdateGrids()");
+	if(Grabber){
+		TWebSource *Src;
+		MovieGrid->RowCount = 0;
+		TVShowGrid->RowCount = 0;
+		TVShowList->Clear();
+		MovieList->Clear();
+		for(int a=0;a<Grabber->GetNumInfoSource();a++){
+			Src = Grabber->GetSourceByIndex(a);
+			switch(Src->Type){
+				case SHOW_SOURCE_INFO:{
+					TVShowGrid->RowCount++;
+					TVShowGrid->Cells[0][TVShowGrid->RowCount-1] = Src->Name;
+					TVShowList->AddObject(Src->Name,(TObject*)Src);
+				}break;
+				case MOVIE_SOURCE_INFO:{
+					MovieGrid->RowCount++;
+					MovieGrid->Cells[0][MovieGrid->RowCount-1] = Src->Name;
+					MovieList->AddObject(Src->Name,(TObject*)Src);
+				}break;
+			}
+		}
+	}
+	else
+		DEBUG_CFGDS(ERR_DEBUG,"No valid Grabber");
+}
+//---------------------------------------------------------------------------
+void TDataSourceFrame::CreateGUITxt(TNameValue *GUITxt){
+	DEBUG_CFGDS(INFO_DEBUG,"CreateGUITxt()");
+	GUITxt->AddString(BUILD_ID("AddSourceButton"),"Add source","Text show in add source button");
+	GUITxt->AddString(BUILD_ID("RemoveSourceButton"),"Remove source","Text show in remove source button");
+	GUITxt->AddString(BUILD_ID("MovieGroupBox"),"Movie source search order","Text show in data source Movie show group box");
+	GUITxt->AddString(BUILD_ID("MovieDownBtn"),"Move down","Text show in move down button");
+	GUITxt->AddString(BUILD_ID("MovieUpBtn"),"Move up","Text show in move up button");
+	GUITxt->AddString(BUILD_ID("TVShowGroupBox"),"TV Show source search order","Text show in data source TV show group box");
+	GUITxt->AddString(BUILD_ID("TVShowDownBtn"),"Move down","Text show in move down button");
+	GUITxt->AddString(BUILD_ID("TVShowUpBtn"),"Move up","Text show in move up button");
+	GUITxt->AddString(BUILD_ID("MovieStringColumn"),"Search source","Text show in data source grid column");
+	GUITxt->AddString(BUILD_ID("TVShowStringColumn"),"Search source","Text show in data source grid column");
+	GUITxt->AddString(BUILD_ID("TreeNode"),"Data source","Text show in data source tree item");
+}
+//---------------------------------------------------------------------------
+void TDataSourceFrame::ApplyLanguage(TNameValue *Src){
+	DEBUG_CFGDS(INFO_DEBUG,"ApplyLanguage()");
+	TStringList *Cmp = new TStringList();
+	Cmp->Add("AddSourceButton");
+	Cmp->Add("RemoveSourceButton");
+	Cmp->Add("MovieGroupBox");
+	Cmp->Add("MovieDownBtn");
+	Cmp->Add("MovieUpBtn");
+	Cmp->Add("TVShowGroupBox");
+	Cmp->Add("TVShowDownBtn");
+	Cmp->Add("TVShowUpBtn");
+	Cmp->Add("MovieStringColumn");
+	Cmp->Add("TVShowStringColumn");
+	TConfig_Frame::ApplyLanguage(Src, UNIT_ID, Cmp);
+	if(TreeNode)
+		TreeNode->Text = Src->GetString(BUILD_ID("TreeNode"));
+}
+//---------------------------------------------------------------------------
+void __fastcall TDataSourceFrame::AddSourceButtonClick(TObject *Sender)
+{
+	DEBUG_CFGDS(INFO_DEBUG,"AddSourceButtonClick()");
+	Grabber->CreateInfoSource("WebSource "+IntToStr(Grabber->GetNumInfoSource()));
+    UpdateGrids();
+}
+//---------------------------------------------------------------------------
+
+

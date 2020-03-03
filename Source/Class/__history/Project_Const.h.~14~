@@ -1,0 +1,230 @@
+﻿//---------------------------------------------------------------------------
+#include "SysLogger.h"
+#include "NameValue.h"
+#include "NameTranslator.h"
+#include "ConnectionManager.h"
+#ifndef PROJECT_CONSTH
+#define PROJECT_CONSTH
+#define WEB_RENAMER_DEBUG                           1
+//---------------------------------------------------------------------------
+#define START_PARAMETER             				"<<"
+#define END_PARAMETER                               ">>"
+#define START_CLIENT_PARAMETER                      "%#"
+#define END_CLIENT_PARAMETER                        "#%"
+#define CLIENT_PARAMETER_SEPARATOR                  "|"
+#define LANGUAGE_IDENTIFIER_PARAMETER               "Preflanguage"
+
+#define CONFIGURATION_FILE                          "WebRenamer.cfg"
+#define DEBUG_FILE                                  "Debug.log"
+
+#define APP_VERSION                                 0x02
+#define APP_SUBVERSION                              0x02
+#define APP_BUILD                                   0x01
+#define APP_NAME                                    "WebRenamer"
+//---------------------------------------------------------------------------
+#define NO_DEBUG                                    0x00
+#define WARN_DEBUG                                  0x01
+#define ERR_DEBUG                                   0x02
+#define INFO_DEBUG                                  0x03
+#define TOTAL_DEBUG                                 0x04
+//---------------------------------------------------------------------------
+//#define CONFIGURATION_FRAME                         0x00
+#define ISO_639_LEN                                 185
+//---------------------------------------------------------------------------
+//TSysLog *Logger;
+//---------------------------------------------------------------------------
+typedef struct{
+	int ID;
+	String Abbreviation;
+	String Name;
+	String EnglishName;
+}PreferedLanguage;
+const PreferedLanguage Language639[] = {
+	{101, "aa", "Afaraf", "Afar"},
+	{102, "ab", "аҧсуа бызшәа", "Abkhaz"},
+	{103, "af", "Afrikaans", "Afrikaans"},
+	{104, "ak", "Akan", "Akan"},
+	{105, "am", "አማርኛ", "Amharic"},
+	{106, "ar", "العربية", "Arabic"},
+	{107, "an", "aragonés", "Aragonese"},
+	{108, "as", "অসমীয়া", "Assamese"},
+	{109, "av", "авар мацӀ", "Avaric"},
+	{110, "ae", "avesta", "Avestan"},
+	{111, "ay", "aymar aru", "Aymara"},
+	{112, "az", "azərbaycan dili", "Azerbaijani"},
+	{113, "ba", "башҡорт теле", "Bashkir"},
+	{114, "bm", "bamanankan", "Bambara"},
+	{115, "be", "беларуская мова", "Belarusian"},
+	{116, "bn", "বাংলা", "Bengali"},
+	{117, "bh", "भोजपुरी", "Bihari"},
+	{118, "bi", "Bislama", "Bislama"},
+	{119, "bo", "བོད་ཡིག", "Tibetan Standard"},
+	{120, "bs", "bosanski jezik", "Bosnian"},
+	{121, "br", "brezhoneg", "Breton"},
+	{122, "bg", "български език", "Bulgarian"},
+	{123, "ca", "català", "Catalan"},
+	{28, "cs", "čeština", "Czech"},
+	{124, "ch", "Chamoru", "Chamorro"},
+	{125, "ce", "нохчийн мотт", "Chechen"},
+	{126, "cu", "ѩзыкъ словѣньскъ", "Old Church Slavonic"},
+	{127, "cv", "чӑваш чӗлхи", "Chuvash"},
+	{128, "kw", "Kernewek", "Cornish"},
+	{129, "co", "corsu", "Corsican"},
+	{130, "cr", "ᓀᐦᐃᔭᐍᐏᐣ", "Cree"},
+	{131, "cy", "Cymraeg", "Welsh"},
+	{10, "da", "dansk", "Danish"},
+	{14, "de", "Deutsch", "German"},
+	{132, "dv", "ދިވެހި", "Divehi"},
+	{133, "dz", "རྫོང་ཁ", "Dzongkha"},
+	{20, "el", "ελληνική γλώσσα", "Greek"},
+	{7, "en", "English", "English"},
+	{134, "eo", "Esperanto", "Esperanto"},
+	{135, "et", "eesti", "Estonian"},
+	{136, "eu", "euskara", "Basque"},
+	{137, "ee", "Eʋegbe", "Ewe"},
+	{138, "fo", "føroyskt", "Faroese"},
+	{139, "fa", "فارسی", "Persian"},
+	{140, "fj", "vosa Vakaviti", "Fijian"},
+	{11, "fi", "suomi", "Finnish"},
+	{17, "fr", "français", "French"},
+	{141, "fy", "Frysk", "Western Frisian"},
+	{142, "ff", "Fulfulde", "Fula"},
+	{143, "gd", "Gàidhlig", "Scottish Gaelic"},
+	{144, "ga", "Gaeilge", "Irish"},
+	{145, "gl", "galego", "Galician"},
+	{146, "gv", "Gaelg", "Manx"},
+	{147, "gn", "Avañe'ẽ", "Guaraní"},
+	{148, "gu", "ગુજરાતી", "Gujarati"},
+	{149, "ht", "Kreyòl ayisyen", "Haitian"},
+	{150, "ha", "هَوُسَ", "Hausa"},
+	{24, "he", "עברית", "Hebrew"},
+	{151, "hz", "Otjiherero", "Herero"},
+	{152, "hi", "हिन्दी", "Hindi"},
+	{153, "ho", "Hiri Motu", "Hiri Motu"},
+	{31, "hr", "hrvatski jezik", "Croatian"},
+	{19, "hu", "Magyar", "Hungarian"},
+	{154, "hy", "Հայերեն", "Armenian"},
+	{155, "ig", "Asụsụ Igbo", "Igbo"},
+	{156, "io", "Ido", "Ido"},
+	{157, "ii", "Nuosuhxop", "Nuosu"},
+	{158, "iu", "ᐃᓄᒃᑎᑐᑦ", "Inuktitut"},
+	{159, "ie", "Interlingue", "Interlingue"},
+	{160, "ia", "Interlingua", "Interlingua"},
+	{161, "id", "Bahasa Indonesia", "Indonesian"},
+	{162, "ik", "Iñupiaq", "Inupiaq"},
+	{163, "is", "Íslenska", "Icelandic"},
+	{15, "it", "italiano", "Italian"},
+	{164, "jv", "basa Jawa", "Javanese"},
+	{25, "ja", "日本語", "Japanese"},
+	{165, "kl", "kalaallisut", "Kalaallisut"},
+	{166, "kn", "ಕನ್ನಡ", "Kannada"},
+	{167, "ks", "कश्मीरी", "Kashmiri"},
+	{168, "ka", "ქართული", "Georgian"},
+	{169, "kr", "Kanuri", "Kanuri"},
+	{170, "kk", "қазақ тілі", "Kazakh"},
+	{171, "km", "ខ្មែរ", "Khmer"},
+	{172, "ki", "Gĩkũyũ", "Kikuyu"},
+	{173, "rw", "Ikinyarwanda", "Kinyarwanda"},
+	{174, "ky", "кыргыз тили", "Kirghiz"},
+	{175, "kv", "коми кыв", "Komi"},
+	{176, "kg", "KiKongo", "Kongo"},
+	{32, "ko", "한국어", "Korean"},
+	{177, "kj", "Kuanyama", "Kwanyama"},
+	{178, "ku", "Kurdî", "Kurdish"},
+	{179, "lo", "ພາສາລາວ", "Lao"},
+	{180, "la", "latine", "Latin"},
+	{181, "lv", "latviešu valoda", "Latvian"},
+	{182, "li", "Limburgs", "Limburgish"},
+	{183, "ln", "Lingála", "Lingala"},
+	{184, "lt", "lietuvių kalba", "Lithuanian"},
+	{185, "lb", "Lëtzebuergesch", "Luxembourgish"},
+	{186, "lu", "Luba-Katanga", "Luba-Katanga"},
+	{187, "lg", "Luganda", "Luganda"},
+	{188, "mh", "Kajin M̧ajeļ", "Marshallese"},
+	{189, "ml", "മലയാളം", "Malayalam"},
+	{190, "mr", "मराठी", "Marathi"},
+	{191, "mk", "македонски јазик", "Macedonian"},
+	{192, "mg", "Malagasy fiteny", "Malagasy"},
+	{193, "mt", "Malti", "Maltese"},
+	{194, "mn", "монгол", "Mongolian"},
+	{195, "mi", "te reo Māori", "Māori"},
+	{196, "ms", "bahasa Melayu", "Malay"},
+	{197, "my", "Burmese", "Burmese"},
+	{198, "na", "Ekakairũ Naoero", "Nauru"},
+	{199, "nv", "Diné bizaad", "Navajo"},
+	{200, "nr", "isiNdebele", "South Ndebele"},
+	{201, "nd", "isiNdebele", "North Ndebele"},
+	{202, "ng", "Owambo", "Ndonga"},
+	{203, "ne", "नेपाली", "Nepali"},
+	{13, "nl", "Nederlands", "Dutch"},
+	{204, "nn", "Norsk nynorsk", "Norwegian Nynorsk"},
+	{205, "nb", "Norsk bokmål", "Norwegian Bokmål"},
+	{9, "no", "Norsk", "Norwegian"},
+	{206, "ny", "chiCheŵa", "Chichewa"},
+	{207, "oc", "occitan", "Occitan"},
+	{208, "oj", "ᐊᓂᔑᓈᐯᒧᐎᓐ", "Ojibwe"},
+	{209, "or", "ଓଡ଼ିଆ", "Oriya"},
+	{210, "om", "Afaan Oromoo", "Oromo"},
+	{211, "os", "ирон æвзаг", "Ossetian"},
+	{212, "pa", "ਪੰਜਾਬੀ", "Panjabi"},
+	{213, "pi", "पाऴि", "Pāli"},
+	{18, "pl", "język polski", "Polish"},
+	{214, "pt", "português", "Portuguese"},
+	{26, "pt", "português - Brazil", "Portuguese - Brazil"},
+	{215, "ps", "پښتو", "Pashto"},
+	{216, "qu", "Runa Simi", "Quechua"},
+	{217, "rm", "rumantsch grischun", "Romansh"},
+	{218, "ro", "limba română", "Romanian"},
+	{219, "rn", "Ikirundi", "Kirundi"},
+	{22, "ru", "русский язык", "Russian"},
+	{220, "sg", "yângâ tî sängö", "Sango"},
+	{221, "sa", "संस्कृतम्", "Sanskrit"},
+	{222, "si", "සිංහල", "Sinhala"},
+	{30, "sk", "slovenčina", "Slovak"},
+	{223, "sl", "slovenski jezik", "Slovene"},
+	{224, "se", "Davvisámegiella", "Northern Sami"},
+	{225, "sm", "gagana fa'a Samoa", "Samoan"},
+	{226, "sn", "chiShona", "Shona"},
+	{227, "sd", "सिन्धी", "Sindhi"},
+	{228, "so", "Soomaaliga", "Somali"},
+	{229, "st", "Sesotho", "Southern Sotho"},
+	{16, "es", "español", "Spanish"},
+	{230, "sq", "gjuha shqipe", "Albanian"},
+	{231, "sc", "sardu", "Sardinian"},
+	{232, "sr", "српски језик", "Serbian"},
+	{233, "ss", "SiSwati", "Swati"},
+	{234, "su", "Basa Sunda", "Sundanese"},
+	{235, "sw", "Kiswahili", "Swahili"},
+	{8, "sv", "svenska", "Swedish"},
+	{236, "ty", "Reo Tahiti", "Tahitian"},
+	{237, "ta", "தமிழ்", "Tamil"},
+	{238, "tt", "татар теле", "Tatar"},
+	{239, "te", "తెలుగు", "Telugu"},
+	{240, "tg", "тоҷикӣ", "Tajik"},
+	{241, "tl", "Wikang Tagalog", "Tagalog"},
+	{242, "th", "ไทย", "Thai"},
+	{243, "ti", "ትግርኛ", "Tigrinya"},
+	{244, "to", "faka Tonga", "Tonga"},
+	{245, "tn", "Setswana", "Tswana"},
+	{246, "ts", "Xitsonga", "Tsonga"},
+	{247, "tk", "Türkmen", "Turkmen"},
+	{21, "tr", "Türkçe", "Turkish"},
+	{248, "tw", "Twi", "Twi"},
+	{249, "ug", "Uyƣurqə", "Uighur"},
+	{250, "uk", "українська мова", "Ukrainian"},
+	{251, "ur", "اردو", "Urdu"},
+	{252, "uz", "Ozbek", "Uzbek"},
+	{253, "ve", "Tshivenḓa", "Venda"},
+	{254, "vi", "Tiếng Việt", "Vietnamese"},
+	{255, "vo", "Volapük", "Volapük"},
+	{256, "wa", "walon", "Walloon"},
+	{257, "wo", "Wollof", "Wolof"},
+	{258, "xh", "isiXhosa", "Xhosa"},
+	{259, "yi", "ייִדיש", "Yiddish"},
+	{260, "yo", "Yorùbá", "Yoruba"},
+	{261, "za", "Saɯ cueŋƅ", "Zhuang"},
+	{27, "zh", "中文", "Chinese"},
+	{262, "zu", "isiZulu", "Zulu"}
+};
+//---------------------------------------------------------------------------
+#endif

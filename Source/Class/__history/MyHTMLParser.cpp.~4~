@@ -1,0 +1,153 @@
+//---------------------------------------------------------------------------
+#pragma hdrstop
+#include "MyHTMLParser.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+//---------------------------------------------------------------------------
+#ifdef WEB_RENAMER_DEBUG
+extern TSysLog *Logger;
+#endif
+//---------------------------------------------------------------------------
+void DEBUG_PRS(int Level, String Msg){
+#ifdef WEB_RENAMER_DEBUG
+	if(Logger)
+		Logger->Report("HTMLPR",NAME_LEVEL(Level),Msg);
+#endif
+}
+//---------------------------------------------------------------------------
+TStringList *MySplitString(String Source,String StartData, String EndData, bool WithLimits){
+	TStringList *Out = new TStringList();
+	String Pattern;
+	String Tmp;
+	TMatchCollection Items;
+	TRegEx *RegEx;
+	Pattern = Format("%s(.*?)%s",ARRAYOFCONST((StartData,EndData)));
+	RegEx = new TRegEx(Pattern,TRegExOptions());
+	Items = RegEx->Matches(Source);
+	for(int a=0;a<Items.Count;a++){
+		Tmp = Items[a].Value;
+		if(WithLimits == false){
+			Tmp = System::Strutils::AnsiReplaceStr(Tmp,StartData,"");
+			Tmp = System::Strutils::AnsiReplaceStr(Tmp,EndData,"");
+		}
+		Out->Add(Tmp);
+	}
+	return Out;	
+}
+//---------------------------------------------------------------------------
+HTMLNode::HTMLNode(){
+	Setup();
+}
+//---------------------------------------------------------------------------
+HTMLNode::HTMLNode(String Start){
+	Setup();
+	LoadFromString(Start);
+}
+//---------------------------------------------------------------------------
+HTMLNode::~HTMLNode(){
+	
+}
+//---------------------------------------------------------------------------
+String HTMLNode::GetTag(){
+	return FTag;
+}
+//---------------------------------------------------------------------------
+void HTMLNode::Setup(){
+	FTag = "";
+	Child = new TList();
+}
+//---------------------------------------------------------------------------
+void HTMLNode::LoadFromString(String Src){
+	//TStringList *List = MySplitString(Src," "," ",false);
+	int a;
+	String Tmp;
+	
+	a = Src.Pos(" ");
+	if(a > 0)
+		FTag = Src.SubString(1, a);
+	Tmp = Src.SubString(a, Src.Length());
+	if(Tmp.Length()){
+		TStringList *Attribute = new TStringList();
+		Attribute->StrictDelimiter = true;
+		Attribute->Delimiter = ' ';
+		Attribute->QuoteChar = '"';
+		Attribute->DelimitedText = Tmp;
+		
+	}
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+MyHTMLParser::MyHTMLParser(){
+	NodeList = new TList();
+	SingleTag = new TStringList();
+	
+	SingleTag->Add("meta");
+	SingleTag->Add("link");
+	SingleTag->Add("area");
+	SingleTag->Add("base");
+	SingleTag->Add("basefont");
+	SingleTag->Add("br");
+	SingleTag->Add("embed");
+	SingleTag->Add("frame");
+	SingleTag->Add("hr");	
+	SingleTag->Add("img");	
+	SingleTag->Add("input");	
+	SingleTag->Add("param");
+	SingleTag->Add("source");
+	SingleTag->Add("track");
+	SingleTag->Add("wbr");
+}
+//---------------------------------------------------------------------------
+MyHTMLParser::~MyHTMLParser(){
+	
+}
+//---------------------------------------------------------------------------
+TStringList *MyHTMLParser::SplitString(String Source, bool WithLimits){
+	return MySplitString(Source,"<",">",WithLimits);
+}
+//---------------------------------------------------------------------------
+int MyHTMLParser::LoadFromString(String Src){
+	int a;
+	int b;
+	bool HasComplete;
+	HTMLNode *Node;
+	String TxtNode;
+	String Tag;
+	TList *Internal = new TList();
+	TStringList *Temp = SplitString(Src, false);		//Split tag without '<' and '>'
+	NodeList->Clear();
+	for(a = 0; a< Temp->Count;a++){
+		TxtNode = Temp->Strings[a].Trim();
+		if(TxtNode.Pos("/") != 1){
+			Node = new HTMLNode(Temp->Strings[a]);			
+			NodeList->Add(Node);					
+			if(SingleTag->IndexOf(Node->Tag.LowerCase()) == -1){	//No </...>
+				if(TxtNode.Pos("!") != 1)
+					Internal->Add(Node);
+			}
+		}
+		else{
+			b = TxtNode.Pos(" ");
+			Tag = TxtNode.SubString(2, b);
+			Node = (HTMLNode*)Internal->Last();
+			if(Node){
+				if(Node->Tag == Tag)
+					Internal->Delete(Internal->Count - 1);
+				else{		//ERROR!!!!
+					
+				}
+			}
+		}
+	}
+	return 0;
+}
+//---------------------------------------------------------------------------
+int MyHTMLParser::LoadFromFile(String FileName){
+//	TStringStream *Stream = new TStringStream("");
+//	Stream->LoadFromFile(FileName);
+//	return LoadFromString(Stream->DataString);
+	return 0;
+}
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
