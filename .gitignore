@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Directory with compiled exe
+Win32/Debug/
+Win32/Release/
+
+#Directory used by Rad Studio
+__astcache/
+__history/
+__recovery/
