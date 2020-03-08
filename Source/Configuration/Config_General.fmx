@@ -53,9 +53,9 @@ inherited GeneralFrame: TGeneralFrame
     end
     object Layout4: TLayout
       Align = Top
-      Position.Y = 45.000000000000000000
+      Position.Y = 75.000000000000000000
       Size.Width = 475.000000000000000000
-      Size.Height = 30.000000000000000000
+      Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object AutoRenameFile: TCheckBox
@@ -63,10 +63,42 @@ inherited GeneralFrame: TGeneralFrame
         Margins.Left = 10.000000000000000000
         Position.X = 10.000000000000000000
         Size.Width = 120.000000000000000000
-        Size.Height = 30.000000000000000000
+        Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         Text = 'AutoRenameFile'
+      end
+    end
+    object Layout5: TLayout
+      Align = Top
+      Position.Y = 45.000000000000000000
+      Size.Width = 475.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object AvailableLanguageLabel: TLabel
+        Align = Left
+        AutoSize = True
+        Margins.Left = 10.000000000000000000
+        Position.X = 10.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'AvailableLanguageLabel'
+        TabOrder = 0
+      end
+      object AvailableCombo: TComboBox
+        Align = Left
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Position.X = 143.000000000000000000
+        Position.Y = 4.000000000000000000
+        Size.Width = 139.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
       end
     end
   end

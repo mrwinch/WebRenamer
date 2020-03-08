@@ -1,6 +1,7 @@
 object RenameMovieForm: TRenameMovieForm
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Form4'
   ClientHeight = 227
   ClientWidth = 340

@@ -28,11 +28,14 @@ __fastcall TNameManagerFrame::TNameManagerFrame(TComponent* Owner)
 	IgnoreGrid->RowCount = 0;
 	IgnoreTextCaseColumn->Width = 100;
     IgnoreGrid->ReadOnly = false;
+	
+	IgnoreTextEnableColumn->Tag = IgnoreTextEnableColumn->Width;
+	IgnoreTextCaseColumn->Tag = IgnoreTextCaseColumn->Width;
 }
 //---------------------------------------------------------------------------
 void TNameManagerFrame::CreateGUITxt(TNameValue *GUITxt){
 	DEBUG_CFGNM(INFO_DEBUG,"CreateGUITxt()");
-	GUITxt->AddString(BUILD_ID("ParenthesysGroupBox"),"Parenthesys/brackets","Text for parenthesys group box");
+	GUITxt->AddString(BUILD_ID("ParenthesysGroupBox"),"Text to remove","Text for parenthesys group box");
 	GUITxt->AddString(BUILD_ID("IgnoreParenthesys"),"Ignore parenthesys","Text for parenthesys group box");
 	GUITxt->AddString(BUILD_ID("IgnoreSquare"),"Ignore square brackets","Text for parenthesys group box");
 	GUITxt->AddString(BUILD_ID("IgnoreCurly"),"Ignore curly brackets","Text for parenthesys group box");
@@ -45,9 +48,9 @@ void TNameManagerFrame::CreateGUITxt(TNameValue *GUITxt){
 	GUITxt->AddString(BUILD_ID("IgnoreTextCaseColumn"),"Ignore case","Text to ignore case column header");
 	GUITxt->AddString(BUILD_ID("IgnoreTextRemoveDlg"),"Remove line ","Text show in remove line dialog");
 	GUITxt->AddString(BUILD_ID("IgnoreTextRemoveMsg"),"Remove ","Text show in remove line dialog");
+	GUITxt->AddString(BUILD_ID("RemoveAfterSeparator"),"Remove text after separator","Text show in remove separtor box");
 	GUITxt->AddString(BUILD_ID("OkButton"),"Add row","Text show in add row button");
 	GUITxt->AddString(BUILD_ID("RemoveButton"),"Remove row","Text show in add row button");
-
 	GUITxt->AddString(BUILD_ID("TreeNode"),"File name settings","Text for file name settings item");
 }
 //---------------------------------------------------------------------------
@@ -68,6 +71,7 @@ void TNameManagerFrame::ApplyLanguage(TNameValue *Src){
 	Cmp->Add("IgnoreTextRemoveDlg");
 	Cmp->Add("OkButton");
 	Cmp->Add("RemoveButton");
+	Cmp->Add("RemoveAfterSeparator");
 
 	TConfig_Frame::ApplyLanguage(Src, UNIT_ID, Cmp);
 	if(TreeNode)
@@ -81,6 +85,7 @@ void TNameManagerFrame::ResizeComponents(){
 	IgnoreSquare->Width = IgnoreSquare->Canvas->TextWidth(IgnoreSquare->Text)+25;
 	IgnoreCurly->Width = IgnoreCurly->Canvas->TextWidth(IgnoreCurly->Text)+25;
 	IgnoreAfterParenthesys->Width = IgnoreAfterParenthesys->Canvas->TextWidth(IgnoreAfterParenthesys->Text)+25;
+	RemoveAfterSeparator->Width = RemoveAfterSeparator->Canvas->TextWidth(RemoveAfterSeparator->Text)+25;
 }
 //---------------------------------------------------------------------------
 void TNameManagerFrame::LoadConfiguration(TNameValue *Conf){
@@ -94,6 +99,7 @@ void TNameManagerFrame::LoadConfiguration(TNameValue *Conf){
 	AcceptedExtensionCheckBox->IsChecked = Conf->GetBool("AcceptOnlyExtension");
 	AcceptedExtensionEdit->Text = Conf->GetString("AcceptedExtension");
 	AcceptedExtensionEdit->Enabled = AcceptedExtensionCheckBox->IsChecked;
+	RemoveAfterSeparator->IsChecked = Conf->GetBool("RemoveAfterSeparator");
 	if(Translator){
 		int Count;
 		int a;
@@ -133,6 +139,7 @@ void TNameManagerFrame::CreateConfiguration(TNameValue *Conf){
 	Conf->AddBool("IgnoreSquareBrackets",true,"Ignore text beetween square brackets");
 	Conf->AddBool("IgnoreCurlyBrackets",true,"Ignore text beetween curly brackets");
 	Conf->AddBool("IgnoreTextAfterParenthesys",false,"Ignore text after parenthesys/brackets");
+	Conf->AddBool("RemoveAfterSeparator",true,"Remove text after separator");
 	Conf->AddBool("AcceptOnlyExtension",false,"Accept only files with correct extension");
 	Conf->AddString("AcceptedExtension","mkv,mov,mp4","Accepted extension");
 	Conf->AddString("IgnoreList",Txt,"Word to ignore in file analysis");
@@ -235,6 +242,7 @@ void TNameManagerFrame::SaveConfiguration(TNameValue *Conf){
 	Conf->SetBool("IgnoreSquareBrackets",IgnoreSquare->IsChecked);
 	Conf->SetBool("IgnoreCurlyBrackets",IgnoreCurly->IsChecked);
 	Conf->SetBool("IgnoreTextAfterParenthesys",IgnoreAfterParenthesys->IsChecked);
+	Conf->SetBool("RemoveAfterSeparator",RemoveAfterSeparator->IsChecked);
 	Conf->SetBool("AcceptOnlyExtension",AcceptedExtensionCheckBox->IsChecked);
 	Conf->SetString("AcceptedExtension",AcceptedExtensionEdit->Text);
 	Txt = ExportIgnoreText();
@@ -290,9 +298,11 @@ void __fastcall TNameManagerFrame::IgnoreGridSetValue(TObject *Sender, const int
 	}
 }
 //---------------------------------------------------------------------------
-void __fastcall TNameManagerFrame::IgnoreTextEnableColumnResize(TObject *Sender)
+void __fastcall TNameManagerFrame::GenericColumnResize(TObject *Sender)
 {
-    IgnoreTextEnableColumn->Width = 55;
+	TColumn *Column = (TColumn*)Sender;
+	if(Column)
+		Column->Width = Column->Tag;
 }
 //---------------------------------------------------------------------------
 

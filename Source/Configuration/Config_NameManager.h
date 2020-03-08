@@ -40,6 +40,8 @@ __published:	// IDE-managed Components
 	TStringColumn *IgnoreTextColumn;
 	TCheckColumn *IgnoreTextEnableColumn;
 	TCheckColumn *IgnoreTextCaseColumn;
+	TLayout *Layout5;
+	TCheckBox *RemoveAfterSeparator;
 
 	void __fastcall AcceptedExtensionCheckBoxChange(TObject *Sender);
 	void __fastcall IgnoreGridGetValue(TObject *Sender, const int ACol, const int ARow,
@@ -48,9 +50,7 @@ __published:	// IDE-managed Components
 	void __fastcall RemoveButtonClick(TObject *Sender);
 	void __fastcall IgnoreGridSetValue(TObject *Sender, const int ACol, const int ARow,
           const TValue &Value);
-	void __fastcall IgnoreTextEnableColumnResize(TObject *Sender);
-
-
+	void __fastcall GenericColumnResize(TObject *Sender);
 private:	// User declarations
 	TNameTranslator *FTranslator;
     String RemoveLineMsg;

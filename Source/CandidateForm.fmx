@@ -2,6 +2,7 @@ object CandidateListForm: TCandidateListForm
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
+  BorderStyle = Single
   Caption = 'Form4'
   ClientHeight = 400
   ClientWidth = 517

@@ -1,0 +1,6 @@
+NoPoster_Film RCDATA "Resource\\Film-NoPoster.png"
+FilmIcon RCDATA "Resource\\Movie_128.png"
+MovieDB RCDATA "Resource\\TheMovieDB logo.png"
+TVDB RCDATA "Resource\\TheTVDB logo.png"
+NoPoster_TV RCDATA "Resource\\TVShow-NoPoster.png"
+TVIcon RCDATA "Resource\\TvShow_128.png"

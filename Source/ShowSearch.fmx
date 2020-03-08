@@ -2,6 +2,7 @@ object ShowSearchForm: TShowSearchForm
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
+  BorderStyle = Single
   Caption = 'Form4'
   ClientHeight = 200
   ClientWidth = 500

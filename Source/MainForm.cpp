@@ -49,6 +49,12 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	StatusColumn = new TGlyphColumn(MainGrid);
 	FileNameColumn = new TStringColumn(MainGrid);
 	FinalNameColumn = new TStringColumn(MainGrid);
+	CandidateForm = new TCandidateListForm(this);
+	RenameForm = new TRenameShowForm(this);
+	RenameForm2 = new TRenameMovieForm(this);
+	SearchForm2 = new TMovieSearchForm(this);
+	SearchForm = new TShowSearchForm(this); 
+	
 	FileNameColumn->Parent = MainGrid;
 	FileNameColumn->Width = 300;
 	FileNameColumn->ReadOnly = true;
@@ -81,6 +87,11 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	MainRectangleLabel->Width = 400;
 	MainGrid->Visible = false;
 	MainGrid->Align = TAlignLayout::Client;
+	Grabber->OnFindCandidate = ManageCandidateFound;
+	Grabber->OnFindShowData = ShowFoundData;
+	Grabber->OnConnectionError = ConnectionError;
+	Grabber->OnCompleteAvailableSource = CompleteSource;
+	
 
 	LoadConfiguration();
 	if(Config->GetInt("DebugLevel") > NO_DEBUG){
@@ -98,10 +109,6 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 		SetMainRectangle(Config->GetInt("LastMode"));
 	Caption = APP_NAME + (String)" - "+IntToStr(APP_VERSION)+(String)"."+IntToStr(APP_SUBVERSION)+" Build "+IntToStr(APP_BUILD);
 	FoundCandidate = new TStringList();
-	Grabber->OnFindCandidate = ManageCandidateFound;
-	Grabber->OnFindShowData = ShowFoundData;
-	Grabber->OnConnectionError = ConnectionError;
-	Grabber->OnCompleteAvailableSource = CompleteSource;
 	ExecutedSearch = 0;
 	Conf_Dialog->HistoryFrame->History->LoadFromXML(AppDirectory+"\\History.xml");
 	Conf_Dialog->HistoryFrame->PopulateTree(NULL);
@@ -330,15 +337,16 @@ void __fastcall TForm1::MainRectangleDragDrop(TObject *Sender, const TDragObject
 //---------------------------------------------------------------------------
 void TForm1::CreateGUITxt(){
 //	DEBUG_APP(TOTAL_DEBUG,"Executing CreateGUITxt()");
+	GUITxt->AddString("Short_Language","en","ISO639 short identificatin for language");
 	GUITxt->AddString("MainRectangleLabel","Drop your files here...","Text showed in gradient main rectangle");
 	GUITxt->AddString("NewScanBtn_Hint","Start a new scan...","Hint for new scan button");
 	GUITxt->AddString("LoadFileBtn_Hint","Load some file...","Hint for load file button");
-	GUITxt->AddString("LoadDirBtn_Hint","Load file from directory","Hint for load file button");
+	GUITxt->AddString("LoadDirBtn_Hint","Load file from directory","Hint for load dir button");
 	GUITxt->AddString("CreditsBtn_Hint","Credits","Hint for credits button");
 	GUITxt->AddString("ConfigBtn_Hint","Configuration","Hint for configuration button");
 	GUITxt->AddString("ExitBtn_Hint","Close application","Hint for exit button");
-	GUITxt->AddString("ModeLabel_Film","Film mode","Text for mode label");
-	GUITxt->AddString("ModeLabel_Show","TV Show mode","Text for mode label");
+	GUITxt->AddString("ModeLabel_Film","Film mode","Text for mode label (Film)");
+	GUITxt->AddString("ModeLabel_Show","TV Show mode","Text for mode label (TV Show)");
 	GUITxt->AddString("SourceFileColumnHeader","Source file","Header of the column in main grid with file name");
 	GUITxt->AddString("DestFileColumnHeader","Renamed file","Header of the column in main grid with output name");
 	GUITxt->AddString("SelectedColumnHeader","Selected","Header of the column in main grid with selection");	
@@ -353,17 +361,30 @@ void TForm1::CreateGUITxt(){
 	GUITxt->AddString("Undo_File","Undo this file","Undo single file popup item");
 	GUITxt->AddString("Undo_Selected","Undo selected files","Undo selected file popup item");
 	GUITxt->AddString("Undo_All","Undo all files","Undo all file popup item");
-	GUITxt->AddString("ManualRename","Manual rename","Undo all file popup item");
-	GUITxt->AddString("ManualSearch","Manual search","Undo all file popup item");
+	GUITxt->AddString("ManualRename","Manual rename","Manual rename popup item");
+	GUITxt->AddString("ManualSearch","Manual search","Manual search popup item");
 	GUITxt->AddString("NoSourceMess","Sorry, no other source for search ","Message for no more source error");
+	GUITxt->AddString("StopScan","Search in progress: stop it?","Message for no more source error");
 
 	//Dialogs CreateGUITxt...
 	CreditsForm->CreateGUITxt(GUITxt);
 	Conf_Dialog->CreateGUITxt(GUITxt);
+	CandidateForm->CreateGUITxt(GUITxt);
+	RenameForm->CreateGUITxt(GUITxt);
+	RenameForm2->CreateGUITxt(GUITxt);
+	SearchForm->CreateGUITxt(GUITxt);	
+	SearchForm2->CreateGUITxt(GUITxt);
+	//Default language backup...
+	String Path = AppDirectory+"\\Language";
+	if(TDirectory::Exists(Path) == false)
+		TDirectory::CreateDirectory(Path);
+	GUITxt->SaveToXML(Path+"\\Default.lng");
 }
 //---------------------------------------------------------------------------
 void TForm1::ApplyLanguage(){
 //	DEBUG_APP(TOTAL_DEBUG,"Executing ApplyLanguage()");
+//	LoadLanguage();
+	Conf_Dialog->GeneralFrame->UpdateGUILanguage(GUITxt,Config);
 	MainRectangleLabel->Text = GUITxt->GetString("MainRectangleLabel");
 	NewScanBtn->Hint = GUITxt->GetString("NewScanBtn_Hint");
 	LoadFileBtn->Hint = GUITxt->GetString("LoadFileBtn_Hint");
@@ -389,6 +410,11 @@ void TForm1::ApplyLanguage(){
 	//Dialogs apply...
 	CreditsForm->ApplyLanguage(GUITxt);
 	Conf_Dialog->ApplyLanguage(GUITxt);
+	CandidateForm->ApplyLanguage(GUITxt);
+	RenameForm->ApplyLanguage(GUITxt);
+	RenameForm2->ApplyLanguage(GUITxt);
+	SearchForm->ApplyLanguage(GUITxt);
+	SearchForm2->ApplyLanguage(GUITxt);
 }
 //---------------------------------------------------------------------------
 void TForm1::LoadConfiguration(){
@@ -443,6 +469,8 @@ void TForm1::LoadConfiguration(){
 	Txt = Config->GetString("IgnoreList");
 	Translator->ImportIgnoreList(Txt);
 	CFile = AppDirectory+"\\Grabber.xml";
+	if(Config->ValueExist("UserAgent"))
+		Grabber->UserAgent = Config->GetString("UserAgent");
 	Grabber->PreferedLanguage = Config->GetString("PreferedLanguage");
 	Grabber->LoadFromXML(CFile);
 	Conf_Dialog->LoadConfiguration(Config);
@@ -451,6 +479,7 @@ void TForm1::LoadConfiguration(){
 void TForm1::CreateConfiguration(){
 	Config->AddString("StartSearchDir",AppDirectory,"Initial search directory");
 	Config->AddInt("LastMode",FILM_MODE,"Last mode of the software...");
+	Config->AddString("SoftwareDir",AppDirectory,"Directory with software");
 
 	Conf_Dialog->NameManagerFrame->Translator = Translator;
 	Conf_Dialog->CreateConfiguration(Config);
@@ -640,11 +669,14 @@ void __fastcall TForm1::ConfigBtnClick(TObject *Sender)
 	DEBUG_APP(INFO_DEBUG,"ConfigBtnClick(): entering configuration.... ***************************");
 	String CFile = AppDirectory+"\\"+CONFIGURATION_FILE;
 	Conf_Dialog->LoadConfiguration(Config);
+//    Conf_Dialog->ResizeComponents();
 	if(Conf_Dialog->ShowModal() == mrOk){
 		Conf_Dialog->SaveConfiguration(Config);
+//        Conf_Dialog->ResizeComponents();
 		Config->SaveToXML(CFile);
 		CFile = AppDirectory+"\\Grabber.xml";
 		Grabber->SaveToXML(CFile);
+		ApplyLanguage();
 	}
 	else{
 		Grabber = Grab;
@@ -688,7 +720,6 @@ void __fastcall TForm1::ManageCandidateFound(String Searched, int SearchID, TLis
 	Candidate_Information *Info;
 	MainGridRowInfo *Data;
 	bool FoundMovie = false;
-	TCandidateListForm *CandidateForm;
 	if(ModeIcon->Tag == FILM_MODE){
 		TDate DateTmp;
 		int Year = 0;
@@ -715,10 +746,13 @@ void __fastcall TForm1::ManageCandidateFound(String Searched, int SearchID, TLis
 	}
 	if(FoundMovie == false){
 		if(Candidate->Count > 1){
-			CandidateForm = new TCandidateListForm(this);
-			CandidateForm->NoPhotoImage = new TResourceStream((int)HInstance,"NoPhoto",RT_RCDATA);
+			CandidateForm->Frame->Source = Grabber->LastSourceUsed;
+			if(ModeIcon->Tag == FILM_MODE)
+				CandidateForm->Frame->NoPhotoImage = new TResourceStream((int)HInstance,"NoPoster_Film",RT_RCDATA);
+			else
+				CandidateForm->Frame->NoPhotoImage = new TResourceStream((int)HInstance,"NoPoster_TV",RT_RCDATA);
 			DEBUG_APP(TOTAL_DEBUG,"WorkMode: "+IntToStr(ModeIcon->Tag));
-            CandidateForm->Frame->OnRefuseCandidate = UserRefuseCandidate;
+			CandidateForm->Frame->OnRefuseCandidate = UserRefuseCandidate;
 			if(ModeIcon->Tag == TV_MODE){
 				CandidateForm->Frame->OnSelectCandidate = ShowSelectCandidate;
 				CandidateForm->TVShowInfo = true;
@@ -727,8 +761,6 @@ void __fastcall TForm1::ManageCandidateFound(String Searched, int SearchID, TLis
 				CandidateForm->Frame->OnSelectMovie = MovieSelectCandidate;
 				CandidateForm->TVShowInfo = false;
 			}
-			CandidateForm->CreateGUITxt(GUITxt);
-			CandidateForm->ApplyLanguage(GUITxt);
 			CandidateForm->ManageCandidateInfo(Searched, SearchID,Candidate);
 			//
 			if(CandidateForm->ModalResult == mrOk){
@@ -995,7 +1027,7 @@ void __fastcall TForm1::MainGridSetValue(TObject* Sender, const int ACol, const 
 	}
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::ConnectionError(TNetHTTPClient *Client,TNetHTTPRequest *Request, 
+void __fastcall TForm1::ConnectionError(TNetHTTPClient *Client,TNetHTTPRequest *Request,
 						CommandList *Cmd, int CommandIndex, int ErrCode, String ErrDesc){
 	DEBUG_APP(INFO_DEBUG,"ConnectionError()");
 	DEBUG_APP(TOTAL_DEBUG,"CommandList: "+QUOTED(Cmd)+(String)" - CmdIndex: "+IntToStr(CommandIndex)+
@@ -1018,11 +1050,11 @@ void __fastcall TForm1::ManualRenameClick(TObject *Sender)
 	if(ModeIcon->Tag == TV_MODE){
 		if(MainGrid->Selected > -1){
 			Info = (MainGridRowInfo*)MainGridRows->Items[MainGrid->Selected];
-			TRenameShowForm *RenameForm = new TRenameShowForm(this);
+			//TRenameShowForm *RenameForm = new TRenameShowForm(this);
 			Episode_Info Episode;
 			Episode = Translator->TranslateEpisode(ExtractFileName(Info->SourceFile));
-			RenameForm->CreateGUITxt(GUITxt);
-			RenameForm->ApplyLanguage(GUITxt);
+			//RenameForm->CreateGUITxt(GUITxt);
+			//RenameForm->ApplyLanguage(GUITxt);
 			RenameForm->ShowEdit->Text = Info->FindName;
 			RenameForm->TitleEdit->Text = Info->FindTitle;
 			RenameForm->SeasonSpin->Value = Episode.Order.Season;
@@ -1043,17 +1075,17 @@ void __fastcall TForm1::ManualRenameClick(TObject *Sender)
 	else{
 		if(MainGrid->Selected > -1){
 			Info = (MainGridRowInfo*)MainGridRows->Items[MainGrid->Selected];
-			TRenameMovieForm *RenameForm = new TRenameMovieForm(this);
+			//TRenameMovieForm *RenameForm = new TRenameMovieForm(this);
 			Movie_Info MovieInfo;
 			MovieInfo = Translator->TranslateMovie(ExtractFileName(Info->SourceFile));
-			RenameForm->CreateGUITxt(GUITxt);
-			RenameForm->ApplyLanguage(GUITxt);
-			RenameForm->MovieEdit->Text = Info->SearchName;
-			RenameForm->YearBox->Value = MovieInfo.Year;
-            RenameForm->DiscBox->Value = MovieInfo.Disc;
-			RenameForm->FormatComboBox->Items =Conf_Dialog->OutputNameFrame->MovieFormatComboBox->Items;
-			RenameForm->FormatComboBox->ItemIndex =Conf_Dialog->OutputNameFrame->MovieFormatComboBox->ItemIndex;
-			if(RenameForm->ShowModal() == mrOk){
+			//RenameForm->CreateGUITxt(GUITxt);
+			//RenameForm->ApplyLanguage(GUITxt);
+			RenameForm2->MovieEdit->Text = Info->SearchName;
+			RenameForm2->YearBox->Value = MovieInfo.Year;
+            RenameForm2->DiscBox->Value = MovieInfo.Disc;
+			RenameForm2->FormatComboBox->Items =Conf_Dialog->OutputNameFrame->MovieFormatComboBox->Items;
+			RenameForm2->FormatComboBox->ItemIndex =Conf_Dialog->OutputNameFrame->MovieFormatComboBox->ItemIndex;
+			if(RenameForm2->ShowModal() == mrOk){
 			}
 		}
 	}
@@ -1071,8 +1103,15 @@ void __fastcall TForm1::UserRefuseCandidate(TObject *Sender, String Candidate, i
 //---------------------------------------------------------------------------
 void __fastcall TForm1::CompleteSource(String Searched,int ID){
 	String Mess = GUITxt->GetString("NoSourceMess")+QUOTE_STRING(Searched);
-	TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),THelpContext());
 	int a;
+	int b;
+	b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),THelpContext());
+	if(b == mrCancel){
+		Mess = GUITxt->GetString("StopScan");
+		b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		if(b != mrYes)
+			b = mrOk;
+	}
 	int ImageIndex;
 	MainGridRowInfo *Info;
 	for(a=0;a<MainGridRows->Count;a++){
@@ -1080,16 +1119,42 @@ void __fastcall TForm1::CompleteSource(String Searched,int ID){
 		if(Info->SearchID == ID){
 			Info->ImageIndex = QUESTION_ICON;
 			StatusColumn->UpdateCell(a);
-			if(ModeIcon->Tag == FILM_MODE){
-				if(a+1<MainGridRows->Count){
-					Info->ID = "123";
+			if(a+1<MainGridRows->Count){
+				Info->ID = "123";
+				if(b == mrOk){
 					if(a + 1 <MainGridRows->Count){
 						Info = (MainGridRowInfo*)MainGridRows->Items[a+1];
-						Grabber->QueryMovieCandidate(Info->SearchName, Info->SearchID);
+						if(ModeIcon->Tag == FILM_MODE)
+							Grabber->QueryMovieCandidate(Info->SearchName, Info->SearchID);
+						else
+							Grabber->QueryShowCandidate(Info->SearchName, Info->SearchID);
 					}
 				}
 			}
-			break;
+/*			if(ModeIcon->Tag == FILM_MODE){
+				if(a+1<MainGridRows->Count){
+					Info->ID = "123";
+					if(b == mrOk){
+						if(a + 1 <MainGridRows->Count){
+							Info = (MainGridRowInfo*)MainGridRows->Items[a+1];
+							Grabber->QueryMovieCandidate(Info->SearchName, Info->SearchID);
+						}
+					}
+				}
+				break;
+			}
+			else{
+				if(a+1<MainGridRows->Count){
+					Info->ID = "123";
+					if(b == mrOk){
+						if(a + 1 <MainGridRows->Count){
+							Info = (MainGridRowInfo*)MainGridRows->Items[a+1];
+							Grabber->QueryShowCandidate(Info->SearchName, Info->SearchID);
+						}
+					}
+				}
+				break;
+			} */
 		}
 	}
 }
@@ -1101,36 +1166,36 @@ void __fastcall TForm1::ManualSearchClick(TObject *Sender)
 	if(MainGrid->Selected > -1)
 		Info = (MainGridRowInfo*)MainGridRows->Items[MainGrid->Selected];
 	if(ModeIcon->Tag == FILM_MODE){//Movie...
-		TMovieSearchForm *SearchForm = new TMovieSearchForm(this);
-		SearchForm->CreateGUITxt(GUITxt);
-		SearchForm->ApplyLanguage(GUITxt);
+		//TMovieSearchForm *SearchForm = new TMovieSearchForm(this);
+		//SearchForm2->CreateGUITxt(GUITxt);
+		//SearchForm2->ApplyLanguage(GUITxt);
 		if(Info){
-			SearchForm->TitleEdit->Text = Info->SearchName;
-			SearchForm->YearSpin->Value = Info->SuggestedYear;
-			SearchForm->DiscSpin->Value = Info->DiscNumber;
-			SearchForm->SourceCombo->Items->Clear();
+			SearchForm2->TitleEdit->Text = Info->SearchName;
+			SearchForm2->YearSpin->Value = Info->SuggestedYear;
+			SearchForm2->DiscSpin->Value = Info->DiscNumber;
+			SearchForm2->SourceCombo->Items->Clear();
 			for(int a=0;a<Grabber->GetNumInfoSource();a++){
 				Source = Grabber->GetSourceByIndex(a);
 				if(Source->Type == MOVIE_SOURCE_INFO){
-					SearchForm->SourceCombo->Items->Add(Source->Name);
-					SearchForm->SourceCombo->ListItems[SearchForm->SourceCombo->Count-1]->Tag =	Source->RememberPreferences;
+					SearchForm2->SourceCombo->Items->Add(Source->Name);
+					SearchForm2->SourceCombo->ListItems[SearchForm2->SourceCombo->Count-1]->Tag = Source->RememberPreferences;
 				}
 			}
-			SearchForm->SourceCombo->ItemIndex = 0;
-			SearchForm->FormatCombo->Items->Clear();
-			SearchForm->FormatCombo->Items->Text = Conf_Dialog->OutputNameFrame->MovieFormatComboBox->Items->Text;
-			SearchForm->FormatCombo->ItemIndex = Conf_Dialog->OutputNameFrame->MovieFormatComboBox->ItemIndex;
-			SearchForm->Grabber = Grabber;
+			SearchForm2->SourceCombo->ItemIndex = 0;
+			SearchForm2->FormatCombo->Items->Clear();
+			SearchForm2->FormatCombo->Items->Text = Conf_Dialog->OutputNameFrame->MovieFormatComboBox->Items->Text;
+			SearchForm2->FormatCombo->ItemIndex = Conf_Dialog->OutputNameFrame->MovieFormatComboBox->ItemIndex;
+			SearchForm2->Grabber = Grabber;
 		}
-		if(SearchForm->ShowModal() == mrOk){
-			Info->FinalValue = SearchForm->ResultValue->Text + ExtractFileExt(Info->SourceFile);
+		if(SearchForm2->ShowModal() == mrOk){
+			Info->FinalValue = SearchForm2->ResultValue->Text + ExtractFileExt(Info->SourceFile);
 			RenameRow(MainGrid->Selected);
 		}
 	}
 	else{// TV SHOW...
-		TShowSearchForm *SearchForm = new TShowSearchForm(this);
-		SearchForm->CreateGUITxt(GUITxt);
-		SearchForm->ApplyLanguage(GUITxt);
+		//TShowSearchForm *SearchForm = new TShowSearchForm(this);
+		//SearchForm->CreateGUITxt(GUITxt);
+		//SearchForm->ApplyLanguage(GUITxt);
 		if(Info){
 			SearchForm->TitleEdit->Text = Info->SuggestedShow;
 			SearchForm->SeasonSpin->Value = Info->SuggestSeason;
@@ -1165,12 +1230,6 @@ void TForm1::ShowCopyrightPanel(int Type){
 	if(CopyrightAnimation->Running == false){
 		bool StartMe = false;
 		TResourceStream *Res;
-/*
-	FilmIcon = new TResourceStream((int)HInstance,"FilmIcon",RT_RCDATA);
-	TVIcon = new TResourceStream((int)HInstance,"TVIcon",RT_RCDATA);
-	ModeIcon->Bitmap->LoadFromStream(FilmIcon);
-
-*/
 		switch(Type){
 			case THE_TVDB_SOURCE:{
 				StartMe = true;
@@ -1209,4 +1268,43 @@ void __fastcall TForm1::CopyrightAnimationFinish(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
-
+void TForm1::LoadLanguage(){
+//	Conf_Dialog->GeneralFrame->UpdateGUILanguage(GUITxt,Config);
+/*	String Path = AppDirectory+"\\Language";
+	String ShortLang = "";
+	String Lang = Config->GetString("PreferedLanguage");
+	for(int a=0;a<ISO_639_LEN;a++){
+		if(Lang == Language639[a].EnglishName){
+			ShortLang = Language639[a].Abbreviation;
+			break;
+		}
+	}
+	if(ShortLang != ""){
+		if(TDirectory::Exists(Path)){
+			TSearchRec sr;
+			TNameValue *Tmp = new TNameValue(this);
+			String FileName;
+			int iAttributes = 0;
+			iAttributes |= faReadOnly, iAttributes |= faHidden, iAttributes |= faSysFile, iAttributes |= faArchive;
+			iAttributes |= faAnyFile;
+			FileName = Path + (String)"\\*.lng";
+			if(FindFirst(FileName,iAttributes, sr) == 0){
+				do
+				{
+					if (sr.Attr & iAttributes){
+						if(sr.Name != "Default.lng"){
+							FileName = Path + (String)"\\"+sr.Name;
+							Tmp->LoadFromXML(FileName);
+							if(Tmp->GetString("Short_Language") == ShortLang){
+								GUITxt = Tmp->Clone(this);
+								break;
+							}
+						}
+					}
+				}while (FindNext(sr) == 0);
+				FindClose(sr);
+			}
+		}
+	} */
+}
+//---------------------------------------------------------------------------

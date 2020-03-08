@@ -29,6 +29,8 @@ __fastcall TGeneralFrame::TGeneralFrame(TComponent* Owner)
 		ID = (int*)AllocMem(sizeof(int));
 		*ID = Language639[a].ID;
 		PreferedLanguageComboBox->Items->AddObject(Language639[a].EnglishName,(TObject*)ID);
+		if(Language639[a].Abbreviation == "en")
+			AvailableCombo->Items->AddObject(Language639[a].EnglishName,(TObject*)ID);
 	}
 	PreferedLanguageComboBox->ItemIndex = PreferedLanguageComboBox->Items->IndexOf("English");
 	FGrabber = NULL;
@@ -45,7 +47,8 @@ void TGeneralFrame::CreateGUITxt(TNameValue *GUITxt){
 		GUITxt->AddString(BUILD_ID("SingleDebugFile"),"Debug in single files","Debug single file label");
 		GUITxt->AddString(BUILD_ID("IncrementalDebug"),"Incremental debug","Incremental debug label");
 		GUITxt->AddString(BUILD_ID("RemeberLastModeCheckBox"),"Remember last mode","Last mode label");
-		GUITxt->AddString(BUILD_ID("PreferedLanguageLabel"),"Prefered language:","Prefered language label");
+		GUITxt->AddString(BUILD_ID("PreferedLanguageLabel"),"Search language:","Prefered language label");
+		GUITxt->AddString(BUILD_ID("AvailableLanguageLabel"),"Window language:","Available language label");
 		GUITxt->AddString(BUILD_ID("AutoRenameFile"),"Automatic rename","Automatic rename files");
 		GUITxt->AddString(BUILD_ID("TreeNode"),"General settings","Title for TreeItem and node");
 	}
@@ -63,8 +66,8 @@ void TGeneralFrame::ApplyLanguage(TNameValue *Src){
 	Cmp->Add("IncrementalDebug");
 	Cmp->Add("RemeberLastModeCheckBox");
 	Cmp->Add("PreferedLanguageLabel");
+	Cmp->Add("AvailableLanguageLabel");
 	Cmp->Add("AutoRenameFile");
-
 	TConfig_Frame::ApplyLanguage(Src, UNIT_ID, Cmp);
 	if(TreeNode)
 		TreeNode->Text = Src->GetString(BUILD_ID("TreeNode"));
@@ -99,6 +102,46 @@ void TGeneralFrame::LoadConfiguration(TNameValue *Conf){
 	int a;
 	bool b;
 	String Tmp;
+//
+	String AppDirectory = Conf->GetString("SoftwareDir");
+	String Path = AppDirectory+"\\Language";
+	String ShortLang = "";
+	String ConfLang = Conf->GetString("WindowLanguage");
+	if(TDirectory::Exists(Path)){
+		TSearchRec sr;
+		TNameValue *Tmp = new TNameValue(this);
+		String FileName;
+		int *ID;
+		int iAttributes = 0;
+		iAttributes |= faReadOnly, iAttributes |= faHidden, iAttributes |= faSysFile, iAttributes |= faArchive;
+		iAttributes |= faAnyFile;
+		FileName = Path + (String)"\\*.lng";
+		AvailableCombo->Clear();
+		if(FindFirst(FileName,iAttributes, sr) == 0){
+			do
+			{
+				if (sr.Attr & iAttributes){
+					FileName = Path + (String)"\\"+sr.Name;
+					Tmp->LoadFromXML(FileName);
+					ShortLang = Tmp->GetString("Short_Language");
+					for(a=0;a<ISO_639_LEN;a++){
+						if(ShortLang == Language639[a].Abbreviation){
+							ID = (int*)AllocMem(sizeof(int));
+							*ID = Language639[a].ID;
+							AvailableCombo->Items->AddObject(Language639[a].EnglishName,(TObject*)ID);
+							if(Tmp->GetString("Short_Language") == ConfLang){
+								//GUITxt = Tmp->Clone(this);
+								AvailableCombo->ItemIndex = AvailableCombo->Items->Count-1;
+							}
+							break;
+						}
+					}
+				}
+			}while (FindNext(sr) == 0);
+			FindClose(sr);
+		}
+	}
+//
 	if(Conf){
 		a = Conf->GetInt("DebugLevel");
 		if(a == STRING_INVALID_NAME)
@@ -129,6 +172,14 @@ void TGeneralFrame::SaveConfiguration(TNameValue *Conf){
 	Conf->SetBool("RememeberLastMode",RemeberLastModeCheckBox->IsChecked);
 	Conf->SetBool("AutoRenameFile",AutoRenameFile->IsChecked);
 	Conf->SetString("PreferedLanguage",PreferedLanguageComboBox->Items->Strings[PreferedLanguageComboBox->ItemIndex]);
+	if(AvailableCombo->Selected){
+		for(int a=0;a<ISO_639_LEN;a++){
+			if(Language639[a].EnglishName == AvailableCombo->Selected->Text){
+				Conf->SetString("WindowLanguage",Language639[a].Abbreviation);
+                break;
+			}
+		}
+	}
 }
 //---------------------------------------------------------------------------
 void TGeneralFrame::CreateConfiguration(TNameValue *Conf){
@@ -139,7 +190,8 @@ void TGeneralFrame::CreateConfiguration(TNameValue *Conf){
 	Conf->AddBool("MultiDebugFile",false,"Create a file for every debug session");
 	Conf->AddBool("RememeberLastMode",false,"Remember last mode (TV or FILM mode)");
 	Conf->AddBool("AutoRenameFile",false,"Rename files after found title");
-	Conf->AddString("PreferedLanguage","English","Favorite language for GUI and title");
+	Conf->AddString("PreferedLanguage","English","Favorite language for search");
+	Conf->AddString("WindowLanguage","en","Favorite language for GUI and title");
 }
 //---------------------------------------------------------------------------
 void __fastcall TGeneralFrame::SingleDebugFileClick(TObject *Sender)
@@ -161,4 +213,37 @@ void __fastcall TGeneralFrame::PreferedLanguageComboBoxChange(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
+void TGeneralFrame::UpdateGUILanguage(TNameValue *Src,TNameValue *Conf){
+	String AppDirectory = Conf->GetString("SoftwareDir");
+	String Path = AppDirectory+"\\Language";
+	String ShortLang = "";
+	String ConfLang = Conf->GetString("WindowLanguage");
+	if(TDirectory::Exists(Path)){
+		TSearchRec sr;
+		TNameValue *Tmp = new TNameValue(this);
+		String FileName;
+		int *ID;
+		int iAttributes = 0;
+		iAttributes |= faReadOnly, iAttributes |= faHidden, iAttributes |= faSysFile, iAttributes |= faArchive;
+		iAttributes |= faAnyFile;
+		FileName = Path + (String)"\\*.lng";
+		if(FindFirst(FileName,iAttributes, sr) == 0){
+			do
+			{
+				if (sr.Attr & iAttributes){
+					FileName = Path + (String)"\\"+sr.Name;
+					Tmp->LoadFromXML(FileName);
+					ShortLang = Tmp->GetString("Short_Language");
+					if(ShortLang == ConfLang){
+						//Src->LoadFromXML(FileName);
+                        Src->UpdateFromSource(Tmp);
+						break;
+					}
+				}
+			}while (FindNext(sr) == 0);
+			FindClose(sr);
+		}
+	}
 
+}
+//---------------------------------------------------------------------------

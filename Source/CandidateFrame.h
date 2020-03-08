@@ -39,6 +39,8 @@ class TCandidateFrameBox : public TListBoxItem{
 		void SetSum(String ID);
 		String GetSum();
 		void __fastcall PosterClientRequestCompleted(TObject * const Sender, _di_IHTTPResponse AResponse);
+		void __fastcall ImageLeave(TObject *Sender);
+		void __fastcall ImageEnter(TObject *Sender);
 		void SetInfo(Candidate_Information *Info);
 		Candidate_Information *GetInfo();
         void __fastcall ImgDblClick(TObject *Sender);
@@ -86,6 +88,7 @@ public:		// User declarations
 	String IDLabelValue;
 	String SummaryLabelValue,SearchTitle;
 	TForm *Form;
+	TWebSource *Source;
 	TResourceStream *NoPhotoImage;
 	TOnSelectCandidate OnSelectCandidate;
     TOnSelectMovie OnSelectMovie;

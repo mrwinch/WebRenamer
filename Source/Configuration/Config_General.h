@@ -30,6 +30,9 @@ __published:	// IDE-managed Components
 	TRadioButton *SingleDebugFile;
 	TLayout *Layout4;
 	TCheckBox *AutoRenameFile;
+	TLayout *Layout5;
+	TLabel *AvailableLanguageLabel;
+	TComboBox *AvailableCombo;
 	void __fastcall SingleDebugFileClick(TObject *Sender);
 	void __fastcall PreferedLanguageComboBoxChange(TObject *Sender);
 private:	// User declarations
@@ -44,7 +47,8 @@ public:		// User declarations
 	void ResizeComponents();
 	void LoadConfiguration(TNameValue *Conf);
 	void SaveConfiguration(TNameValue *Conf);
-    void CreateConfiguration(TNameValue *Conf);
+	void CreateConfiguration(TNameValue *Conf);
+    void UpdateGUILanguage(TNameValue *Src, TNameValue *Conf);
 	__property TInfoGrabber *Grabber = {read = GetGrabber, write = SetGrabber};
 };
 //---------------------------------------------------------------------------

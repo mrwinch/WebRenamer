@@ -11,6 +11,17 @@ TCandidateListFrame *CandidateListFrame;
 //---------------------------------------------------------------------------
 #define UNIT_ID                                     "CDD_FR"
 #define BUILD_ID(Name)                              UNIT_ID+(String)"_"+Name
+#define DEFAULT_HEIGHT                              100
+//---------------------------------------------------------------------------
+bool IsEmpty(String Value){
+	String Tmp;
+	if(Value == "")
+		return true;
+	Tmp = Value.LowerCase();
+	if(Tmp == "null")
+		return true;
+	return false;
+}
 //---------------------------------------------------------------------------
 int __fastcall CompareCandidate(void *Item2, void *Item1){
 	Candidate_Information *Info1, *Info2;
@@ -18,6 +29,7 @@ int __fastcall CompareCandidate(void *Item2, void *Item1){
 	Info2 = (Candidate_Information*)Item2;
 	if(Info1->Poster != ""){
 		if(Info2->Poster == "")
+		//if(IsEmpty(Info2->Poster))
 			return 1;
 		else{
 			if(Info1->Summary != ""){
@@ -68,6 +80,8 @@ __fastcall TCandidateFrameBox::TCandidateFrameBox(TComponent *Owner):TListBoxIte
 	Poster->Margins->Top = 3;
 	Poster->Margins->Bottom = 3;
 	Poster->OnDblClick = ImgDblClick;
+	Poster->OnMouseEnter = ImageEnter;
+	Poster->OnMouseLeave = ImageLeave;
 	MainLayout = new TLayout(this);
 	MainLayout->Parent = this;
 	MainLayout->Align = TAlignLayout::Client;
@@ -99,12 +113,12 @@ __fastcall TCandidateFrameBox::TCandidateFrameBox(TComponent *Owner):TListBoxIte
 	SummaryLabel->TextSettings->Trimming = TTextTrimming::Word;
 
 	OnResize = BoxResized;
-	Height = 100;
+	Height = DEFAULT_HEIGHT;
 	PosterData = new TMemoryStream();
 	Client = new TNetHTTPClient(Owner);
 	Client->Asynchronous = true;
 	Client->OnRequestCompleted =  PosterClientRequestCompleted;
-    FInfo = NULL;
+	FInfo = NULL;
 }
 //---------------------------------------------------------------------------
 __fastcall TCandidateFrameBox::~TCandidateFrameBox(){
@@ -161,6 +175,8 @@ void __fastcall TCandidateFrameBox::PosterClientRequestCompleted(TObject * const
 //---------------------------------------------------------------------------
 void TCandidateFrameBox::DefaultPhoto(TStream *Stream){
 	Poster->Bitmap->LoadFromStream(Stream);
+	Poster->OnMouseEnter = NULL;
+	Poster->OnMouseLeave = NULL;
 }
 //---------------------------------------------------------------------------
 void TCandidateFrameBox::SetInfo(Candidate_Information *Info){
@@ -172,23 +188,34 @@ Candidate_Information *TCandidateFrameBox::GetInfo(){
 }
 //---------------------------------------------------------------------------
 void __fastcall TCandidateFrameBox::ImgDblClick(TObject *Sender){
-	((TListBox*)Owner)->OnDblClick((TObject*)Sender);
+	//((TListBox*)Owner)->OnDblClick(Sender);
+	(((TCandidateListFrame*)Owner->Owner))->CandidateListBoxDblClick(this);
+}
+//---------------------------------------------------------------------------
+void __fastcall TCandidateFrameBox::ImageLeave(TObject *Sender){
+	Height = DEFAULT_HEIGHT;
+	ImageLayout->Width = 66;
+}
+//---------------------------------------------------------------------------
+void __fastcall TCandidateFrameBox::ImageEnter(TObject *Sender){
+	Height = DEFAULT_HEIGHT * 2;
+	ImageLayout->Width = 132;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 __fastcall TCandidateListFrame::TCandidateListFrame(TComponent* Owner)
 	: TFrame(Owner)
 {
-	IDLabelValue = "ID: ";
+/*	IDLabelValue = "ID: ";
 	AerialLabelValue = "Aired: ";
 	SummaryLabelValue = "Summary:";
+	SearchTitle = "Search for: ";*/
 	NoPhotoImage = NULL;
-	SearchTitle = "Search for: ";
 	OnSelectCandidate = NULL;
     OnSelectMovie = NULL;
 	OnRefuseCandidate = NULL;
 	S_ID = -1;
-	
+	Source = NULL;
 	FInfo = true;	
 }
 //---------------------------------------------------------------------------
@@ -199,6 +226,7 @@ void __fastcall TCandidateListFrame::ManageCandidateInfo(String Candidate, int S
 	TCandidateFrameBox *BoxItem;
 	TDate Aerial;
 	CandidateList->Sort(CompareCandidate);
+	CandidateListBox->Clear();
 	for(a=0;a<CandidateList->Count;a++){
 		Info = (Candidate_Information*)CandidateList->Items[a];
 		//Txt = Info->Poster;
@@ -228,14 +256,24 @@ void __fastcall TCandidateListFrame::ManageCandidateInfo(String Candidate, int S
 				BoxItem->PosterURL = Info->Poster;
 				BoxItem->Client->Get(Info->Poster,BoxItem->PosterData);
 			}else{
-				if(NoPhotoImage)
+				if(NoPhotoImage){
 					BoxItem->DefaultPhoto(NoPhotoImage);
+				}
 			}
 		}
+		else{
+			if(NoPhotoImage){
+				BoxItem->DefaultPhoto(NoPhotoImage);
+			}
+        }
 		BoxItem->DataInfo = Info;
 	}
-	if(Form)
-		Form->Caption = SearchTitle+Candidate;
+	if(Form){
+		Txt = SearchTitle+Candidate;
+		if(Source)
+			Txt +=" - Source: "+Source->Name;
+		Form->Caption = Txt;
+	}
 	S_ID = SearchID;
 	FCandidate = Candidate;
 	/*if(Form)
@@ -244,8 +282,17 @@ void __fastcall TCandidateListFrame::ManageCandidateInfo(String Candidate, int S
 //---------------------------------------------------------------------------
 void __fastcall TCandidateListFrame::CandidateListBoxDblClick(TObject *Sender)
 {
-	if(CandidateListBox->Selected){
-		TCandidateFrameBox *Box = (TCandidateFrameBox*)CandidateListBox->Selected;
+	TCandidateFrameBox *Box = NULL;;
+	if(CandidateListBox->Selected)
+		Box = (TCandidateFrameBox*)CandidateListBox->Selected;
+	else{
+		Box = (TCandidateFrameBox*)Sender;
+		if(Box){
+			if(Box->ClassName() != "TCandidateFrameBox")
+				Box = NULL;
+		}
+	}
+	if(Box){
 		String ID = Box->ID.SubString(IDLabelValue.Length() + 1,Box->ID.Length());
 		if(FInfo){
 			if(OnSelectCandidate)
@@ -270,7 +317,7 @@ void TCandidateListFrame::CreateGUITxt(TNameValue *Txt){
 	if(Txt->ValueExist(BUILD_ID("SummaryLabelValue")) == false)
 		Txt->AddString(BUILD_ID("SummaryLabelValue"),"Summary: ","Text for summary label");
 	if(Txt->ValueExist(BUILD_ID("SearchTitle")) == false)
-		Txt->AddString(BUILD_ID("SearchTitle"),"Search for:","Text for search label");
+		Txt->AddString(BUILD_ID("SearchTitle"),"Search for: ","Text for search label");
 	if(Txt->ValueExist(BUILD_ID("RefuseButton")) == false)
 		Txt->AddString(BUILD_ID("RefuseButton"),"Refuse","Text for refuse label");
 }
@@ -313,4 +360,6 @@ void __fastcall TCandidateListFrame::FormClose(TObject *Sender, TCloseAction &Ac
 	}
 }
 //---------------------------------------------------------------------------
+
+
 

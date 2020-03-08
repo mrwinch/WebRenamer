@@ -132,7 +132,6 @@ void TConf_Dialog::ApplyLanguage(TNameValue *Src){
 		NameManagerFrame->ApplyLanguage(Src);
 		OutputNameFrame->ApplyLanguage(Src);
 		DataSourceFrame->ApplyLanguage(Src);
-		//ResizeComponents();
 	}
 }
 //---------------------------------------------------------------------------
@@ -195,6 +194,7 @@ void TConf_Dialog::LoadConfiguration(TNameValue *Conf){
 	HistoryFrame->LoadConfiguration(Conf);
 	NameManagerFrame->LoadConfiguration(Conf);
 	OutputNameFrame->LoadConfiguration(Conf);
+//	ResizeComponents();
 }
 //---------------------------------------------------------------------------
 void TConf_Dialog::SaveConfiguration(TNameValue *Conf){
@@ -221,11 +221,6 @@ void __fastcall TConf_Dialog::ConfigurationTreeChange(TObject *Sender)
 			Panel2->TagObject = Frame;
 			FrameTitleLabel->Text = ConfigurationTree->Selected->Text;
 			Frame->ResizeComponents();
-			/*switch(ConfigurationTree->Selected->Tag){
-				case GENERAL_TREE_ITEM:{
-					Frame->ResizeComponents();
-				}break;
-			}*/
 		}
 	}
 }

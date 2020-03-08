@@ -1,6 +1,7 @@
 object MovieSearchForm: TMovieSearchForm
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'Form4'
   ClientHeight = 200
   ClientWidth = 500

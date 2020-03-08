@@ -4,6 +4,9 @@
 #define MainFormH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
+#include <System.IOUtils.hpp>
+#include <System.Math.Vectors.hpp>
+#include <System.ImageList.hpp>
 #include <FMX.Controls.hpp>
 #include <FMX.Forms.hpp>
 #include <FMX.Objects.hpp>
@@ -15,27 +18,26 @@
 #include <FMX.Controls.Presentation.hpp>
 #include <FMX.StdCtrls.hpp>
 #include <FMX.Controls3D.hpp>
-#include <System.Math.Vectors.hpp>
-#include "Class\\Project_Const.h"
 #include <FMX.Grid.hpp>
 #include <FMX.Grid.Style.hpp>
 #include <FMX.ScrollBox.hpp>
 #include <System.Rtti.hpp>
 #include <FMX.ImgList.hpp>
-#include <System.ImageList.hpp>
 #include <FMX.Dialogs.hpp>
-#include "Credits.h"
+#include <FMX.Menus.hpp>
+#include <FMX.DialogService.hpp>
 #include <Xml.adomxmldom.hpp>
 #include <Xml.XMLDoc.hpp>
 #include <Xml.xmldom.hpp>
 #include <Xml.XMLIntf.hpp>
 #include "Configuration_Dialog.h"
 #include "CandidateForm.h"
-#include <FMX.Menus.hpp>
+#include "Class\\Project_Const.h"
 #include "RenameShow.h"
 #include "RenameMovie.h"
 #include "ShowSearch.h"
 #include "MovieSearch.h"
+#include "Credits.h"
 //---------------------------------------------------------------------------
 #define THE_TVDB_SOURCE                                         0
 #define THE_MOVIEDB_SOURCE                                      1
@@ -176,6 +178,7 @@ private:	// User declarations
 	void ShowCopyrightPanel(int Type);
 	void UndoRenameRow(int Row);
 	void RenameRow(int Row);
+	void LoadLanguage();
     String GetIncrementalLogFile();
 	TStringColumn *FileNameColumn;
 	TCheckColumn *CheckColumn;
@@ -185,6 +188,12 @@ private:	// User declarations
     String ConfigFileName;
 	TGradient *FilmGradient,*ShowGradient;
 	TStringList *FoundCandidate;
+	TCandidateListForm *CandidateForm;
+	TRenameShowForm *RenameForm;
+	TRenameMovieForm *RenameForm2;
+	TShowSearchForm *SearchForm;
+	TMovieSearchForm *SearchForm2;
+	
 	int ExecutedSearch;
 	//int FinalNameColumnIndex;
 public:		// User declarations

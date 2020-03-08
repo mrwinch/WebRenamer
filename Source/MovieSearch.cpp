@@ -19,7 +19,7 @@ __fastcall TMovieSearchForm::TMovieSearchForm(TComponent* Owner)
 	Frame = new TCandidateListFrame(FramePanel);
 	Frame->Parent = FramePanel;
 	Frame->Align = TAlignLayout::Client;
-	Frame->NoPhotoImage = new TResourceStream((int)HInstance,"NoPhoto",RT_RCDATA);
+	Frame->NoPhotoImage = new TResourceStream((int)HInstance,"NoPoster_Film",RT_RCDATA);
 //	Frame->OnRefuseCandidate = RefuseCandidate;
 	Frame->OnSelectMovie = SelectCandidate;
 	Frame->Panel1->Visible = false;
