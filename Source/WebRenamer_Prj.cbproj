@@ -378,21 +378,21 @@
         <FormResources Include="MovieSearch.fmx"/>
         <FormResources Include="RenameMovie.fmx"/>
         <FormResources Include="RenameShow.fmx"/>
-        <FormResources Include="Credits.fmx"/>
-        <FormResources Include="Configuration\Config_OutputName.fmx"/>
         <FormResources Include="Configuration\Config_ShowSrcPref.fmx"/>
         <FormResources Include="Configuration\OperationFrameInfo.fmx"/>
         <FormResources Include="Configuration\TestForm.fmx"/>
+        <FormResources Include="Credits.fmx"/>
         <FormResources Include="ShowSearch.fmx"/>
+        <FormResources Include="Configuration\Config_OutputName.fmx"/>
         <FormResources Include="CandidateForm.fmx"/>
         <FormResources Include="CandidateFrame.fmx"/>
         <FormResources Include="Configuration\Config_Frame.fmx"/>
         <FormResources Include="Configuration\Config_General.fmx"/>
         <FormResources Include="Configuration\Config_History.fmx"/>
         <FormResources Include="Configuration\Config_NameManager.fmx"/>
-        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
         <FormResources Include="Configuration\Configuration_Dialog.fmx"/>
         <FormResources Include="Configuration\Config_DataSource.fmx"/>
+        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -439,6 +439,12 @@
                 <DeployFile LocalName="Resource\TVShow-NoPoster.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\WebRenamer_Prj.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>WebRenamer_Prj.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -514,12 +520,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\WebRenamer_Prj.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>WebRenamer_Prj.tds</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
