@@ -11,21 +11,22 @@ USEFORM("MainForm.cpp", Form1);
 USEFORM("MovieSearch.cpp", MovieSearchForm);
 USEFORM("RenameMovie.cpp", RenameMovieForm);
 USEFORM("RenameShow.cpp", RenameShowForm);
-USEFORM("Credits.cpp", Form2);
-USEFORM("Configuration\Config_OutputName.cpp", OutputNameFrame); /* TFrame: File Type */
 USEFORM("Configuration\Config_ShowSrcPref.cpp", ShowPrefFrame); /* TFrame: File Type */
 USEFORM("Configuration\OperationFrameInfo.cpp", OperationFrame); /* TFrame: File Type */
 USEFORM("Configuration\TestForm.cpp", Form3);
+USEFORM("Credits.cpp", Form2);
 USEFORM("ShowSearch.cpp", ShowSearchForm);
+USEFORM("Configuration\Config_OutputName.cpp", OutputNameFrame); /* TFrame: File Type */
 USEFORM("CandidateForm.cpp", CandidateListForm);
 USEFORM("CandidateFrame.cpp", CandidateListFrame); /* TFrame: File Type */
 USEFORM("Configuration\Config_Frame.cpp", Config_Frame); /* TFrame: File Type */
 USEFORM("Configuration\Config_General.cpp", Config_Frame1); /* TFrame: File Type */
 USEFORM("Configuration\Config_History.cpp", HistoryFrame); /* TFrame: File Type */
 USEFORM("Configuration\Config_NameManager.cpp", NameManagerFrame); /* TFrame: File Type */
-USEFORM("Configuration\Config_DataSourceInfo.cpp", DataSourceInfoFrame); /* TFrame: File Type */
 USEFORM("Configuration\Configuration_Dialog.cpp", Conf_Dialog);
 USEFORM("Configuration\Config_DataSource.cpp", DataSourceFrame); /* TFrame: File Type */
+USEFORM("Configuration\Config_DataSourceInfo.cpp", DataSourceInfoFrame); /* TFrame: File Type */
+USEFORM("SysDialog.cpp", MyDialog);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {
@@ -41,6 +42,7 @@ extern "C" int FMXmain()
 		Application->CreateForm(__classid(TRenameMovieForm), &RenameMovieForm);
 		Application->CreateForm(__classid(TShowSearchForm), &ShowSearchForm);
 		Application->CreateForm(__classid(TMovieSearchForm), &MovieSearchForm);
+		Application->CreateForm(__classid(TMyDialog), &MyDialog);
 		Application->Run();
 	}
 	catch (Exception &exception)

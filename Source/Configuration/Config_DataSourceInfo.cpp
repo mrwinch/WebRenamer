@@ -301,7 +301,7 @@ void __fastcall TDataSourceInfoFrame::AddOpButtonClick(TObject *Sender)
 {
 	CommandList *Cmd = (CommandList*)OperationTabControl->TagObject;
 	if(Cmd){
-		Net_Operation *Op = Cmd->CreateOperation("URL");
+		Net_Operation *Op = Cmd->CreateOperation("");
 		UpdateOperationInfo();
 	}
 }

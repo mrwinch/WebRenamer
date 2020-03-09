@@ -7,6 +7,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
+#pragma resource ("*.Macintosh.fmx", _PLAT_MACOS)
+
 TForm2 *Form2;
 //---------------------------------------------------------------------------
 #define UNIT_ID                                     "CRTDLG"
@@ -25,7 +27,10 @@ void TForm2::CreateGUITxt(TNameValue *Src){
 		Src->AddString(BUILD_ID("Contact"),"Contact: ","Text for ok button");
 		Src->AddString(BUILD_ID("ProjectURL"),"Web: ","Text for ok button");
 		Src->AddString(BUILD_ID("WikiLabel"),"Wiki: ","Text for ok button");
-		Src->AddString(BUILD_ID("DescLabel"),"WebRenamer","Text for ok button");
+		Src->AddString(BUILD_ID("DescLabel"),"WebRenamer is an open source software\
+			distributed under GNU GPL v.3 license. \
+			For more information, refer to github information page:\
+			https://github.com/mrwinch/WebRenamer/blob/master/LICENSE","Text for ok button");
 	}
 }
 //---------------------------------------------------------------------------
@@ -48,7 +53,35 @@ void TForm2::ApplyLanguage(TNameValue *Src){
 	}
 }
 //---------------------------------------------------------------------------
-
-
-
+void __fastcall TForm2::ProjectUrlClick(TObject *Sender)
+{
+#ifdef _Windows
+	ShellExecuteA(0, "OPEN", "https://github.com/mrwinch/WebRenamer", NULL, NULL, SW_SHOWNORMAL);
+#endif
+#ifdef TARGET_OS_MAC
+	system(String("open " + String(_sCommand)).c_str());
+#endif // Mac
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm2::ContactLabelClick(TObject *Sender)
+{
+#ifdef _Windows
+	ShellExecuteA(0, "OPEN", "mailto:webrenamer@gmail.com", NULL, NULL, SW_SHOWNORMAL);
+#endif
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm2::WikiLabelClick(TObject *Sender)
+{
+#ifdef _Windows
+	ShellExecuteA(0, "OPEN", "https://github.com/mrwinch/WebRenamer/wiki", NULL, NULL, SW_SHOWNORMAL);
+#endif
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm2::DescLabelClick(TObject *Sender)
+{
+#ifdef _Windows
+	ShellExecuteA(0, "OPEN", "https://github.com/mrwinch/WebRenamer/blob/master/LICENSE", NULL, NULL, SW_SHOWNORMAL);
+#endif
+}
+//---------------------------------------------------------------------------
 

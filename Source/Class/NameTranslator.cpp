@@ -114,9 +114,10 @@ Episode_Info TNameTranslator::TranslateEpisode(String OriginalName){
 	//Search for episode order...
 	Data = ScanForEpisodeOrder(Tmp);
 	if(FRemoveSep){
-		a = Tmp.Pos("-");
+		Tmp = RemoveSeparator(Tmp);
+/*		a = Tmp.Pos("-");
 		if(a>0)
-			Tmp = Tmp.SubString(1,a-1);
+			Tmp = Tmp.SubString(1,a-1);  */
 	}
 	Out.Order = *Data;
 	//Ok: let's see for name tv serie name and possible episode title...
@@ -474,9 +475,10 @@ Movie_Info TNameTranslator::TranslateMovie(String Movie){
 	Tmp = FilterFile(Tmp);
 	a = FindDisc(Movie);
 	if(FRemoveSep){
-		a = Tmp.Pos("-");
+        Tmp = RemoveSeparator(Tmp);
+/*		a = Tmp.Pos("-");
 		if(a>0)
-			Tmp = Tmp.SubString(1,a-1);
+			Tmp = Tmp.SubString(1,a-1);*/
 	}
 	if(a > 0)
 		Out.Disc = a;
@@ -719,7 +721,17 @@ void TNameTranslator::SetRemoveSep(bool Value){
     FRemoveSep = Value;
 }
 //---------------------------------------------------------------------------
-
+String TNameTranslator::RemoveSeparator(String Src){
+	String Out = Src;
+	int a;
+	a = Out.Pos("-");
+	if(a>0)
+		Out = Out.SubString(1,a-1);
+	a = Out.Pos("~");
+	if(a>0)
+		Out = Out.SubString(1,a-1);
+	return Out;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

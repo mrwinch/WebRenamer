@@ -1,0 +1,19 @@
+inherited MyDialog_Surface: TMyDialog_Surface
+  ClientHeight = 1920
+  ClientWidth = 1080
+  DesignerMasterStyle = 0
+  inherited Panel1: TPanel
+    Position.Y = 1880.000000000000000000
+    Size.Width = 1080.000000000000000000
+  end
+  inherited Layout1: TLayout
+    Size.Height = 1880.000000000000000000
+    inherited Glyph1: TGlyph
+      Position.Y = 908.000000000000000000
+    end
+  end
+  inherited MessageLabel: TLabel
+    Size.Width = 980.000000000000000000
+    Size.Height = 1860.000000000000000000
+  end
+end

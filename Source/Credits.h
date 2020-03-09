@@ -28,6 +28,10 @@ __published:	// IDE-managed Components
 	TLabel *ProjectUrl;
 	TLabel *WikiLabel;
 	TLabel *DescLabel;
+	void __fastcall ProjectUrlClick(TObject *Sender);
+	void __fastcall ContactLabelClick(TObject *Sender);
+	void __fastcall WikiLabelClick(TObject *Sender);
+	void __fastcall DescLabelClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);

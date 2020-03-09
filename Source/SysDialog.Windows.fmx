@@ -1,0 +1,3 @@
+inherited MyDialog_Windows: TMyDialog_Windows
+  DesignerMasterStyle = 0
+end

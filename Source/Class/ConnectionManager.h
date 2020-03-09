@@ -231,6 +231,7 @@ class TWebSource:public Base_Info{
 		bool GetRemPref();
 		void SetRemPref(bool Value);
 		void __fastcall ManageCertificate(System::TObject* const Sender, TURLRequest* const ARequest, const TCertificate &Certificate, bool &Accepted);
+//		void __fastcall ValidateServerCertificate(TObject * const Sender, TURLRequest * const ARequest, const TCertificate &Certificate, bool &Accepted);
 
 	public:
 		TWebSource();

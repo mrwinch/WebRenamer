@@ -111,6 +111,7 @@ __fastcall TCandidateFrameBox::TCandidateFrameBox(TComponent *Owner):TListBoxIte
 	SummaryLabel->Parent = BottomLayout;
 	SummaryLabel->Align = TAlignLayout::Client;
 	SummaryLabel->TextSettings->Trimming = TTextTrimming::Word;
+    SummaryLabel->Margins->Bottom = 5;
 
 	OnResize = BoxResized;
 	Height = DEFAULT_HEIGHT;
