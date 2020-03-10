@@ -366,6 +366,19 @@ void TForm1::CreateGUITxt(){
 	GUITxt->AddString("NoSourceMess","Sorry, no other source for search ","Message for no more source error");
 	GUITxt->AddString("StopScan","Search in progress: stop it?","Message for no more source error");
 
+	GUITxt->AddString("Dialog_Button_Yes","Yes","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_No","No","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Ok","Ok","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Cancel","Cancel","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Abort","Abort","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Retry","Retry","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Ignore","Ignore","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_All","All","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_NoToAll","No to all","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_YesToAll","Yes to all","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Help","Help","Message for no more source error");
+	GUITxt->AddString("Dialog_Button_Close","Close","Message for no more source error");
+
 	//Dialogs CreateGUITxt...
 	CreditsForm->CreateGUITxt(GUITxt);
 	Conf_Dialog->CreateGUITxt(GUITxt);
@@ -466,6 +479,7 @@ void TForm1::LoadConfiguration(){
             }
 		}
 	}
+	Config->SetString("SoftwareDir",AppDirectory);
 	Txt = Config->GetString("IgnoreList");
 	Translator->ImportIgnoreList(Txt);
 	CFile = AppDirectory+"\\Grabber.xml";
@@ -652,6 +666,7 @@ void __fastcall TForm1::CreditsBtnClick(TObject *Sender)
 	DEBUG_APP(INFO_DEBUG,"CreditsBtnClick()");
 	CreditsForm->AppVersionLabel->Text = "WebRenamer ver. "+IntToStr(APP_VERSION)+(String)"."+IntToStr(APP_SUBVERSION);
 	CreditsForm->ShowModal();
+//	MyShowDialog("Title","Message test\r\nOne line\r\nSecond line of text with information",TMsgDlgType::mtError,DIALOG_OK_ABORT,TMsgDlgBtn());
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::TestSelectCandidate(TObject *Sender, String ShowName, String ShowID){
@@ -1034,7 +1049,8 @@ void __fastcall TForm1::ConnectionError(TNetHTTPClient *Client,TNetHTTPRequest *
 					(String)" - Err: 0x"+IntToHex(ErrCode)+(String)" - Desc: "+QUOTE_STRING(ErrDesc));
 	String Msg = GUITxt->GetString("ConnErrorCode")+IntToHex(ErrCode)+(String)"\r\n";
 	Msg = Msg + ErrDesc;
-	int Res = TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),THelpContext());
+//	int Res = TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),THelpContext());
+	int Res = MyShowDialog("",Msg,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),GUITxt);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::MainGridPopupPopup(TObject *Sender)
@@ -1105,10 +1121,12 @@ void __fastcall TForm1::CompleteSource(String Searched,int ID){
 	String Mess = GUITxt->GetString("NoSourceMess")+QUOTE_STRING(Searched);
 	int a;
 	int b;
-	b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),THelpContext());
+	//b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),THelpContext());
+	b = MyShowDialog("",Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),GUITxt);
 	if(b == mrCancel){
 		Mess = GUITxt->GetString("StopScan");
-		b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		//b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		b = MyShowDialog("",Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),GUITxt);
 		if(b != mrYes)
 			b = mrOk;
 	}
@@ -1308,3 +1326,4 @@ void TForm1::LoadLanguage(){
 	} */
 }
 //---------------------------------------------------------------------------
+

@@ -379,30 +379,31 @@
         <CppCompile Include="WebRenamer_03.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <FormResources Include="MainForm.fmx"/>
-        <FormResources Include="MainForm.Surface.fmx"/>
         <FormResources Include="MovieSearch.fmx"/>
         <FormResources Include="RenameMovie.fmx"/>
         <FormResources Include="RenameShow.fmx"/>
+        <FormResources Include="MainForm.fmx"/>
+        <FormResources Include="MainForm.Surface.fmx"/>
         <FormResources Include="Configuration\Config_ShowSrcPref.fmx"/>
         <FormResources Include="Configuration\OperationFrameInfo.fmx"/>
         <FormResources Include="Configuration\TestForm.fmx"/>
         <FormResources Include="Credits.fmx"/>
+        <FormResources Include="Credits.Macintosh.fmx"/>
         <FormResources Include="ShowSearch.fmx"/>
-        <FormResources Include="Configuration\Config_OutputName.fmx"/>
-        <FormResources Include="CandidateForm.fmx"/>
-        <FormResources Include="CandidateFrame.fmx"/>
-        <FormResources Include="Configuration\Config_Frame.fmx"/>
-        <FormResources Include="Configuration\Config_General.fmx"/>
-        <FormResources Include="Configuration\Config_History.fmx"/>
-        <FormResources Include="Configuration\Config_NameManager.fmx"/>
-        <FormResources Include="Configuration\Configuration_Dialog.fmx"/>
-        <FormResources Include="Configuration\Config_DataSource.fmx"/>
-        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
         <FormResources Include="SysDialog.fmx"/>
         <FormResources Include="SysDialog.Windows.fmx"/>
         <FormResources Include="SysDialog.Macintosh.fmx"/>
         <FormResources Include="SysDialog.Surface.fmx"/>
+        <FormResources Include="CandidateForm.fmx"/>
+        <FormResources Include="CandidateFrame.fmx"/>
+        <FormResources Include="Configuration\Config_General.fmx"/>
+        <FormResources Include="Configuration\Config_History.fmx"/>
+        <FormResources Include="Configuration\Config_NameManager.fmx"/>
+        <FormResources Include="Configuration\Config_OutputName.fmx"/>
+        <FormResources Include="Configuration\Config_Frame.fmx"/>
+        <FormResources Include="Configuration\Configuration_Dialog.fmx"/>
+        <FormResources Include="Configuration\Config_DataSource.fmx"/>
+        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

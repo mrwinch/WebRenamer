@@ -41,6 +41,7 @@
 #include <System.Net.HttpClient.hpp>
 #include <System.Net.HttpClientComponent.hpp>
 #include <System.Net.URLClient.hpp>
+#include "SysDialog.h"
 //---------------------------------------------------------------------------
 #define THE_TVDB_SOURCE                                         0
 #define THE_MOVIEDB_SOURCE                                      1
@@ -130,7 +131,6 @@ __published:	// IDE-managed Components
 	TImage *CopyrightImage;
 	TFloatAnimation *CopyrightAnimation;
 	TLabel *CopyrightLabel;
-	TNetHTTPClient *NetHTTPClient1;
 	void __fastcall ModeIconClick(TObject *Sender);
 	void __fastcall MainRectangleGradientAnimationFinish(TObject *Sender);
 	void __fastcall ModeIconViewportResize(TObject *Sender);
