@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InfoGrabber Version="16" Class_creator="TInfoGrabber" Info="TInfoGrabber class backup">
+  <WebSource Name="TheMovieDB - TVShow" Desc="Source connected to TheMovieDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="false" Language="Italian" Preferences="true">
+    <Parameters>
+      <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
+    </Parameters>
+    <Preferences Value="The Walking Dead=1402|The 100=48866|Star Trek: Picard=85949|iZombie=60866|UFO Robot Goldrake=46252|The Expanse=63639|L&apos;uomo nell&apos;alto castello=62017">Preferences</Preferences>
+    <Commands>
+      <Command Name="Query candidate" Desc="" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.themoviedb.org/3/search/tv?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1" Data="%#Host|api.themoviedb.org#%%#Accept|text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8#%%#Accept-Language|it,en-US;q=0.7,en;q=0.3#%%#Accept-Encoding|gzip, deflate, br#%%#Connection|keep-alive#%%#Pragma|no-cache#%%#Cache-Control|no-cache#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_SHOW_ID=name;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_AERIAL_ID=first_air_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
+        </Operations>
+      </Command>
+      <Command Name="Query show details" Desc="" Type="2561" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.themoviedb.org/3/tv/&lt;&lt;tv_id&gt;&gt;/season/&lt;&lt;season_id&gt;&gt;/episode/&lt;&lt;episode_id&gt;&gt;?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;" Data="" ExpAnswer="200" Method="65" AnswerManager="TV_SHOW_NAME_ID=name">Operation 0</Operation>
+        </Operations>
+      </Command>
+    </Commands>
+  </WebSource>
+  <WebSource Name="TheTVDB - TVShow" Desc="Source connected to The TVDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="Italian" Preferences="true">
+    <Parameters>
+      <Parameter Name="userkey" Value="5E33E733A55A18.89843324">Parameter 1</Parameter>
+      <Parameter Name="username" Value="webrenamer">Parameter 2</Parameter>
+      <Parameter Name="apikey" Value="c4fdb6bc30cccd984a28e00404ce7d27">Parameter 3</Parameter>
+    </Parameters>
+    <Preferences Value="The Goldbergs=269653|British Airways: 100 Years in the Sky=347087|iZombie=281470|The 100=268592|Star Trek: Picard=364093|The Walking Dead=153021|The Expanse=280619|Mr. Robot=289590|Star Trek: The Next Generation=71470|L&apos;uomo nell&apos;alto castello=295829|Sampei=160801">Preferences</Preferences>
+    <Commands>
+      <Command Name="Authentication" Desc="" Type="2563" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.thetvdb.com/login" Data="%#Content-Type|application/json#%%#Accept|application/json#%{&quot;apikey&quot;: &quot;&lt;&lt;apikey&gt;&gt;&quot;, &quot;userkey&quot;: &quot;&lt;&lt;userkey&gt;&gt;&quot;,  &quot;username&quot;: &quot;&lt;&lt;username&gt;&gt;&quot;}" ExpAnswer="200" Method="64" AnswerManager="SAVE_INFORMATION=token">Operation 0</Operation>
+        </Operations>
+      </Command>
+      <Command Name="Query candidate" Desc="" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.thetvdb.com/search/series?name=&lt;&lt;candidate&gt;&gt;" Data="%#Accept|application/json#%%#Accept-Language| &lt;&lt;Preflanguage&gt;&gt;#%%#Authorization|Bearer &lt;&lt;token&gt;&gt;#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=data;ARRAY_SHOW_ID=seriesName;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_AERIAL_ID=firstAired;ARRAY_POSTER_ID=poster;ROOT_POSTER=https://thetvdb.com">Operation 0</Operation>
+        </Operations>
+      </Command>
+      <Command Name="Query show details" Desc="" Type="2561" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.thetvdb.com/series/&lt;&lt;tv_id&gt;&gt;/episodes/query?airedSeason=&lt;&lt;season_id&gt;&gt;&amp;airedEpisode=&lt;&lt;episode_id&gt;&gt;" Data="%#Accept|application/json#%%#Accept-Language| &lt;&lt;Preflanguage&gt;&gt;#%%#Authorization|Bearer &lt;&lt;token&gt;&gt;#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=data;ARRAY_SHOW_NAME_ID=episodeName">Operation 0</Operation>
+        </Operations>
+      </Command>
+    </Commands>
+  </WebSource>
+  <WebSource Name="The Movie DB - Movie" Desc="No_Description" Type="2305" ID="0" Tag="0" AuthRequest="false" Language="Italian" Preferences="true">
+    <Parameters>
+      <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
+    </Parameters>
+    <Preferences Value="">Preferences</Preferences>
+    <Commands>
+      <Command Name="Query candidate" Desc="No_Description" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://api.themoviedb.org/3/search/movie?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1&amp;include_adult=false" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_MOVIE_NAME=title;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_RELEASE_ID=release_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
+        </Operations>
+      </Command>
+    </Commands>
+  </WebSource>
+  <WebSource Name="AniDB" Desc="No_Description" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="Italian" Preferences="false">
+    <Parameters>
+      <Parameter Name="candidate" Value="yattaman">Parameter 1</Parameter>
+      <Parameter Name="aid" Value="330">Parameter 2</Parameter>
+    </Parameters>
+    <Preferences Value="">Preferences</Preferences>
+    <Commands>
+      <Command Name="Search" Desc="No_Description" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="http://anisearch.outrance.pl/?task=search&amp;query=&lt;&lt;candidate&gt;&gt;" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=animetitles;ARRAY_SHOW_ID=aid">Operation 0</Operation>
+        </Operations>
+      </Command>
+      <Command Name="Title" Desc="No_Description" Type="2561" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="http://api.anidb.net:9001/httpapi?request=anime&amp;client=webrenamer&amp;clientver=1&amp;protover=1&amp;aid=&lt;&lt;aid&gt;&gt;" Data="" ExpAnswer="200" Method="65" AnswerManager="SHOW_TITLE=titles;SHOW_EPISODE_ID=episodes">Operation 0</Operation>
+        </Operations>
+      </Command>
+      <Command Name="Test" Desc="No_Description" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://anidb.net/search/anime/?adb.search=yattaman&amp;do.search=1" Data="" ExpAnswer="200" Method="65" AnswerManager="">Operation 0</Operation>
+        </Operations>
+      </Command>
+    </Commands>
+  </WebSource>
+  <WebSource Name="TheTVDB - TestMovie" Desc="No_Description" Type="2305" ID="0" Tag="0" AuthRequest="true" Language="Italian" Preferences="true">
+    <Parameters>
+      <Parameter Name="candidate" Value="pinocchio">Parameter 1</Parameter>
+    </Parameters>
+    <Preferences Value="">Preferences</Preferences>
+    <Commands>
+      <Command Name="Search" Desc="No_Description" Type="2560" ID="0" Tag="0">
+        <Operations>
+          <Operation Url="https://tvshowtime-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%20(lite)%203.32.0%3Binstantsearch.js%20(3.5.3)%3BJS%20Helper%20(2.28.0)&amp;x-algolia-application-id=tvshowtime&amp;x-algolia-api-key=c9d5ec1316cec12f093754c69dd879d3" Data="{&quot;requests&quot;:[{&quot;indexName&quot;:&quot;TVDB&quot;,&quot;params&quot;:&quot;query=pinocchio&amp;maxValuesPerFacet=100&amp;page=0&amp;highlightPreTag=__ais-highlight__&amp;highlightPostTag=__%2Fais-highlight__&amp;facets=%5B%22type%22%2C%22type%22%5D&amp;tagFilters=&amp;facetFilters=%5B%5B%22type%3AMovie%22%5D%5D&quot;}]}" ExpAnswer="200" Method="64" AnswerManager="">Operation 0</Operation>
+        </Operations>
+      </Command>
+    </Commands>
+  </WebSource>
+</InfoGrabber>

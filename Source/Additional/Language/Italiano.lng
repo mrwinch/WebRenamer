@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration Version="16" Class_creator="TNameValue" Info="TNameValue class backup">
+  <Value Name="Short_Language" Value="it" Type="34">ISO639 short identificatin for language</Value>
+  <Value Name="MainRectangleLabel" Value="Sposta qui i tuoi files..." Type="34">Text showed in gradient main rectangle</Value>
+  <Value Name="NewScanBtn_Hint" Value="Avvia una nuova ricerca..." Type="34">Hint for new scan button</Value>
+  <Value Name="LoadFileBtn_Hint" Value="Carica alcuni files..." Type="34">Hint for load file button</Value>
+  <Value Name="LoadDirBtn_Hint" Value="Carica files di una directory" Type="34">Hint for load dir button</Value>
+  <Value Name="CreditsBtn_Hint" Value="Informazioni" Type="34">Hint for credits button</Value>
+  <Value Name="ConfigBtn_Hint" Value="Configurazione" Type="34">Hint for configuration button</Value>
+  <Value Name="ExitBtn_Hint" Value="Chiude l'applicazione" Type="34">Hint for exit button</Value>
+  <Value Name="ModeLabel_Film" Value="Modalità film" Type="34">Text for mode label (Film)</Value>
+  <Value Name="ModeLabel_Show" Value="Modalità serie TV" Type="34">Text for mode label (TV Show)</Value>
+  <Value Name="SourceFileColumnHeader" Value="Files originali" Type="34">Header of the column in main grid with file name</Value>
+  <Value Name="DestFileColumnHeader" Value="Files rinominati" Type="34">Header of the column in main grid with output name</Value>
+  <Value Name="SelectedColumnHeader" Value="Selezionato" Type="34">Header of the column in main grid with selection</Value>
+  <Value Name="SelectDirectoryDlg_Title" Value="Seleziona una directory..." Type="34">Title showed in dialog for directory choose</Value>
+  <Value Name="SelectFileDlg_Title" Value="Seleziona files da rinominare..." Type="34">Title showed in dialog for file choose</Value>
+  <Value Name="ConnErrorCode" Value="Errore: cod. 0x" Type="34">Connection error code</Value>
+  <Value Name="Rename_Popup" Value="Rinomina..." Type="34">Rename popup item</Value>
+  <Value Name="Rename_File" Value="Rinomina questo file" Type="34">Rename single file popup item</Value>
+  <Value Name="Rename_Selected" Value="Rinomina files selezionati" Type="34">Rename selected file popup item</Value>
+  <Value Name="Rename_All" Value="Rinomina tutti i files" Type="34">Rename all file popup item</Value>
+  <Value Name="Undo_Popup" Value="Annulla..." Type="34">Undo popup item</Value>
+  <Value Name="Undo_File" Value="Annulla questo file" Type="34">Undo single file popup item</Value>
+  <Value Name="Undo_Selected" Value="Annulla tutti i files" Type="34">Undo selected file popup item</Value>
+  <Value Name="Undo_All" Value="Annulla tutti i files" Type="34">Undo all file popup item</Value>
+  <Value Name="ManualRename" Value="Rinomina manualmente" Type="34">Manual rename popup item</Value>
+  <Value Name="ManualSearch" Value="Ricerca manuale" Type="34">Manual search popup item</Value>
+  <Value Name="NoSourceMess" Value="Spiacente, nessuna altra fonte per cercare " Type="34">Message for no more source error</Value>
+  <Value Name="StopScan" Value="Ricerca in esecuzione: fermare?" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Yes" Value="Si" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_No" Value="No" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Ok" Value="Ok" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Cancel" Value="Annulla" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Abort" Value="Uscire" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Retry" Value="Riprova" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Ignore" Value="Ignorare" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_All" Value="Tutti" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_NoToAll" Value="No a tutti" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_YesToAll" Value="Si a tutti" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Help" Value="Aiuto" Type="34">Message for no more source error</Value>
+  <Value Name="Dialog_Button_Close" Value="Chiudi" Type="34">Message for no more source error</Value>
+  <Value Name="CRTDLG_Title" Value="Informazioni" Type="34">Title for credits dialog</Value>
+  <Value Name="CRTDLG_OkButton" Value="Ok" Type="34">Text for ok button</Value>
+  <Value Name="CRTDLG_Author" Value="Autore: " Type="34">Text for ok button</Value>
+  <Value Name="CRTDLG_Contact" Value="Contatti: " Type="34">Text for ok button</Value>
+  <Value Name="CRTDLG_ProjectURL" Value="Web: " Type="34">Text for ok button</Value>
+  <Value Name="CRTDLG_WikiLabel" Value="Wiki: " Type="34">Text for ok button</Value>
+  <Value Name="CRTDLG_DescLabel" Value="WebRenamer is an open source software			distributed under GNU GPL v.3 license. 			For more information, refer to github information page:			https://github.com/mrwinch/WebRenamer/blob/master/LICENSE" Type="34">Text for ok button</Value>
+  <Value Name="CFG_DL_Title" Value="Configurazione" Type="34">Title for configuration dialog</Value>
+  <Value Name="CFG_DL_OkButton" Value="Ok" Type="34">Text for ok button</Value>
+  <Value Name="CFG_DL_CancelButton" Value="Annulla" Type="34">Text for cancel button</Value>
+  <Value Name="CFG_GN_DebugGroupBox" Value="Debug" Type="34">Debug group box</Value>
+  <Value Name="CFG_GN_UIGroupBox" Value="Interfaccia grafica" Type="34">User interface group box</Value>
+  <Value Name="CFG_GN_DebugLevelLabel" Value="Livello debug:" Type="34">Debug combo box label</Value>
+  <Value Name="CFG_GN_DebugLevelComboBox" Value="Nessuno,Errori,Attenzione,Informazioni,Totale" Type="34">Debug combo box value</Value>
+  <Value Name="CFG_GN_MultiDebugFile" Value="Debug in files multipli" Type="34">Debug multi files label</Value>
+  <Value Name="CFG_GN_SingleDebugFile" Value="Debug in file singolo" Type="34">Debug single file label</Value>
+  <Value Name="CFG_GN_IncrementalDebug" Value="Debug incrementale" Type="34">Incremental debug label</Value>
+  <Value Name="CFG_GN_RemeberLastModeCheckBox" Value="Ricorda l'ultimo modo" Type="34">Last mode label</Value>
+  <Value Name="CFG_GN_PreferedLanguageLabel" Value="Lingua di ricerca:" Type="34">Prefered language label</Value>
+  <Value Name="CFG_GN_AvailableLanguageLabel" Value="Lingua finestre:" Type="34">Available language label</Value>
+  <Value Name="CFG_GN_AutoRenameFile" Value="Rinomina automaticamente" Type="34">Automatic rename files</Value>
+  <Value Name="CFG_GN_TreeNode" Value="Settaggi generali" Type="34">Title for TreeItem and node</Value>
+  <Value Name="PRF_HS_HistoryBox" Value="Operazioni" Type="34">Group box of operation</Value>
+  <Value Name="PRF_HS_Op_TreeItem_Text" Value="Operazioni eseguite: " Type="34">Number of operation</Value>
+  <Value Name="PRF_HS_SourceColumn" Value="Files originali" Type="34">Source column header</Value>
+  <Value Name="PRF_HS_DestColumn" Value="Files rinominati" Type="34">Destination column header</Value>
+  <Value Name="PRF_HS_SelectDirTitle" Value="Seleziona una directory..." Type="34">Title showed in dialog for directory choose</Value>
+  <Value Name="PRF_HS_RestoreButton" Value="Ripristina selezionati" Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_RemoveDlg" Value="Rimuovi dati di " Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_RemoveButton" Value="Rimuovi selezionati" Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_RemoveRecordCheck" Value="Rimuovi dati più vecchi di " Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_DayLabel" Value="giorni" Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_OptionBox" Value="Opzioni" Type="34">Title showed in restore button</Value>
+  <Value Name="PRF_HS_TreeNode" Value="Storico operazioni" Type="34">History of renamed files</Value>
+  <Value Name="CFG_NM_ParenthesysGroupBox" Value="Testo da rimuovere" Type="34">Text for parenthesys group box</Value>
+  <Value Name="CFG_NM_IgnoreParenthesys" Value="Ignora parentesi" Type="34">Text for parenthesys group box</Value>
+  <Value Name="CFG_NM_IgnoreSquare" Value="Ignora parentesi quadre" Type="34">Text for parenthesys group box</Value>
+  <Value Name="CFG_NM_IgnoreCurly" Value="Ignora parentesi graffe" Type="34">Text for parenthesys group box</Value>
+  <Value Name="CFG_NM_IgnoreAfterParenthesys" Value="Ignora testo dopo parentesi" Type="34">Text for parenthesys group box</Value>
+  <Value Name="CFG_NM_AcceptedExtensionGroupBox" Value="Estensioni accettate" Type="34">Text for extension group box</Value>
+  <Value Name="CFG_NM_AcceptedExtensionCheckBox" Value="Accetta solo le estensioni indicate" Type="34">Text for extension group box</Value>
+  <Value Name="CFG_NM_IgnoreTextGroupBox" Value="Testo da ignorare" Type="34">Text to ignore in file name</Value>
+  <Value Name="CFG_NM_IgnoreTextColumn" Value="Testo da ignorare" Type="34">Text to ignore column header</Value>
+  <Value Name="CFG_NM_IgnoreTextEnableColumn" Value="Attivo" Type="34">Text to ignore enabled column header</Value>
+  <Value Name="CFG_NM_IgnoreTextCaseColumn" Value="Ignora maiu/minuscole" Type="34">Text to ignore case column header</Value>
+  <Value Name="CFG_NM_IgnoreTextRemoveDlg" Value="Rimuovi linea " Type="34">Text show in remove line dialog</Value>
+  <Value Name="CFG_NM_IgnoreTextRemoveMsg" Value="Rimuovi " Type="34">Text show in remove line dialog</Value>
+  <Value Name="CFG_NM_RemoveAfterSeparator" Value="Rimuovi testo dopo separatore" Type="34">Text show in remove separtor box</Value>
+  <Value Name="CFG_NM_OkButton" Value="Aggiungi riga" Type="34">Text show in add row button</Value>
+  <Value Name="CFG_NM_RemoveButton" Value="Rimuovi riga" Type="34">Text show in add row button</Value>
+  <Value Name="CFG_NM_TreeNode" Value="Settaggi nome file" Type="34">Text for file name settings item</Value>
+  <Value Name="CFG_ON_TVShowGroupBox" Value="Nomi serie TV" Type="34">Group box for TV Show</Value>
+  <Value Name="CFG_ON_ShowInputTextLabel" Value="Formato nome:" Type="34">Format of output file</Value>
+  <Value Name="CFG_ON_ShowFormatEditButton" Value="Aggiungi" Type="34">Text for add button</Value>
+  <Value Name="CFG_ON_ShowFormatComboButton" Value="Rimuovi" Type="34">Text for remove button</Value>
+  <Value Name="CFG_ON_ShowExampleGroupBox" Value="Esempio" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleShowLabel" Value="Serie: The big bang theory" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleShowSeasonLabel" Value="Stagione: 6" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleShowEpisodeLabel" Value="Episodio: 15" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleShowTitle" Value="Titolo: The Spoiler Alert Segmentation" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleShowResult" Value="Risultato:" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ShowNamePopup" Value="Nome serie TV" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowNameFirst" Value="Prima lettera maius." Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowNameLower" Value="Minuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowNameUpper" Value="Maiuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowNameWord" Value="Maiuscola prima lettera parola" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_SourceShowName" Value="Serie TV come fonte" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_SeasonPopup" Value="Stagione" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_SeasonNumber" Value="Stagione numero" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_Season2Digits" Value="Stagione in 2 cifre" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_Season3Digits" Value="Stagione in 3 cifre" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_EpisodePopup" Value="Episodio" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_EpisodeNumber" Value="Episodio numero" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_Episode2Digits" Value="Episodio in 2 cifre" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_Episode3Digits" Value="Episodio in 3 cifre" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowTitlePopup" Value="Titolo serie TV" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowTitleFirst" Value="Prima lettera maius." Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowTitleLower" Value="Minuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowTitleUpper" Value="Maiuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ShowTitleWord" Value="Maiuscola prima lettera parola" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_SourceShowTitle" Value="Titolo come sorgente" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_FilmGroupBox" Value="Nome film" Type="34">Group box for Film</Value>
+  <Value Name="CFG_ON_MovieInputLabel" Value="Formato nome:" Type="34">Format of output file</Value>
+  <Value Name="CFG_ON_MovieFormatEditButton" Value="Aggiungi" Type="34">Text for add button</Value>
+  <Value Name="CFG_ON_MovieFormatComboButton" Value="Rimuovi" Type="34">Text for remove button</Value>
+  <Value Name="CFG_ON_MovieExampleGroupBox" Value="Esempio" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_MovieNamePopup" Value="Nome film" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_MovieNameFirst" Value="Prima lettera maius." Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_MovieNameLower" Value="Minuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_MovieNameUpper" Value="Maiuscolo" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_MovieNameWord" Value="Maiuscola prima lettera parola" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_SourceMovieName" Value="Nome come fonte" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_MovieYear" Value="Anno" Type="34">Text for popup</Value>
+  <Value Name="CFG_ON_ExampleMovieLabel" Value="Film: Avengers - Infinity war" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleMovieYear" Value="Anno: 2018" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_ExampleMovieResult" Value="Risultato:" Type="34">Example group box for TV Show</Value>
+  <Value Name="CFG_ON_TreeNode" Value="Nome creato" Type="34">Preferences on output name</Value>
+  <Value Name="CFG_DS_AddSourceButton" Value="Aggiungi sorgente" Type="34">Text show in add source button</Value>
+  <Value Name="CFG_DS_RemoveSourceButton" Value="Rimuovi sorgente" Type="34">Text show in remove source button</Value>
+  <Value Name="CFG_DS_MovieGroupBox" Value="Ordine ricerca sorgenti film" Type="34">Text show in data source Movie show group box</Value>
+  <Value Name="CFG_DS_MovieDownBtn" Value="Sposta giù" Type="34">Text show in move down button</Value>
+  <Value Name="CFG_DS_MovieUpBtn" Value="Sposta su" Type="34">Text show in move up button</Value>
+  <Value Name="CFG_DS_TVShowGroupBox" Value="Ordine ricerca sorg. serie TV" Type="34">Text show in data source TV show group box</Value>
+  <Value Name="CFG_DS_TVShowDownBtn" Value="Sposta giù" Type="34">Text show in move down button</Value>
+  <Value Name="CFG_DS_TVShowUpBtn" Value="Sposta su" Type="34">Text show in move up button</Value>
+  <Value Name="CFG_DS_MovieStringColumn" Value="Sorgente di ricerca" Type="34">Text show in data source grid column</Value>
+  <Value Name="CFG_DS_TVShowStringColumn" Value="Sorgente di ricerca" Type="34">Text show in data source grid column</Value>
+  <Value Name="CFG_DS_TreeNode" Value="Sorgente dati" Type="34">Text show in data source tree item</Value>
+  <Value Name="CFG_DS_InfoDlg" Value="Selezionare una sorgente prima di cancellarla" Type="34">Text showed in information dialog</Value>
+  <Value Name="CDD_FR_IDLabelValue" Value="ID: " Type="34">Text for ID label</Value>
+  <Value Name="CDD_FR_AerialLabelValue" Value="Trasmesso: " Type="34">Text for aired label</Value>
+  <Value Name="CDD_FR_ReleaseLabelValue" Value="Rilasciato: " Type="34">Text for release label</Value>
+  <Value Name="CDD_FR_SummaryLabelValue" Value="Trama: " Type="34">Text for summary label</Value>
+  <Value Name="CDD_FR_SearchTitle" Value="Ricerca: " Type="34">Text for search label</Value>
+  <Value Name="CDD_FR_RefuseButton" Value="Rifiuta" Type="34">Text for refuse label</Value>
+  <Value Name="RNS_FR_ShowLabel" Value="Serie TV: " Type="34">Text for show label</Value>
+  <Value Name="RNS_FR_SeasonLabel" Value="Stagione: " Type="34">Text for Season label</Value>
+  <Value Name="RNS_FR_EpisodeLabel" Value="Episodio: " Type="34">Text for Episode label</Value>
+  <Value Name="RNS_FR_TitleLabel" Value="Titolo: " Type="34">Text for title label</Value>
+  <Value Name="RNS_FR_ResultLabel" Value="Risultato: " Type="34">Text for Result label</Value>
+  <Value Name="RNS_FR_RenameBox" Value="Rinomina dati" Type="34">Text for rename group</Value>
+  <Value Name="RNS_FR_ManualRename" Value="Rinomina manualmente" Type="34">Text for manual rename label</Value>
+  <Value Name="RNS_FR_OkButton" Value="Ok" Type="34">Text for ok button</Value>
+  <Value Name="RNS_FR_CancelButton" Value="Annulla" Type="34">Text for cancel button</Value>
+  <Value Name="RNS_FR_FormatLabel" Value="Uscita:" Type="34">Text for output label</Value>
+  <Value Name="RNM_FR_MovieLabel" Value="Film: " Type="34">Text for movie label</Value>
+  <Value Name="RNM_FR_ResultLabel" Value="Risultato: " Type="34">Text for Result label</Value>
+  <Value Name="RNM_FR_YearLabel" Value="Anno: " Type="34">Text for year label</Value>
+  <Value Name="RNM_FR_RenameBox" Value="Rinomina dati" Type="34">Text for rename group box</Value>
+  <Value Name="RNM_FR_ManualRename" Value="Rinomina manualmente" Type="34">Text for manual rename label</Value>
+  <Value Name="RNM_FR_OkButton" Value="Ok" Type="34">Text for ok button</Value>
+  <Value Name="RNM_FR_CancelButton" Value="Annulla" Type="34">Text for cancel button</Value>
+  <Value Name="RNM_FR_FormatLabel" Value="Uscita:" Type="34">Text for output label</Value>
+  <Value Name="RNM_FR_DiscLabel" Value="Disco:" Type="34">Text for disc label</Value>
+  <Value Name="SSR_FR_SearchTitleLabel" Value="Titolo serie TV: " Type="34">Text for title label</Value>
+  <Value Name="SSR_FR_SeasonLabel" Value="Stagione: " Type="34">Text for season label</Value>
+  <Value Name="SSR_FR_EpisodeLabel" Value="Episodio: " Type="34">Text for episode label</Value>
+  <Value Name="SSR_FR_SourceLabel" Value="Sorgente: " Type="34">Text for source label</Value>
+  <Value Name="SSR_FR_Caption" Value="Ricerca manuale..." Type="34">Text for window title</Value>
+  <Value Name="SSR_FR_SearchDataGroup" Value="Parametri ricerca" Type="34">Text for parameter group bopx</Value>
+  <Value Name="SSR_FR_SearchButton" Value="Ricerca" Type="34">Text for window title</Value>
+  <Value Name="SSR_FR_FormatLabel" Value="Formato: " Type="34">Text for format label</Value>
+  <Value Name="SSR_FR_ResultLabel" Value="Risultato: " Type="34">Text for format label</Value>
+  <Value Name="SSR_FR_ApplyButton" Value="Applica" Type="34">Text for apply button</Value>
+  <Value Name="SMV_FR_SearchDataGroup" Value="Parametri ricerca" Type="34">Text for parameter group bopx</Value>
+  <Value Name="SMV_FR_SearchButton" Value="Ricerca" Type="34">Text for window title</Value>
+  <Value Name="SMV_FR_ApplyButton" Value="Applica" Type="34">Text for apply button</Value>
+  <Value Name="SMV_FR_MovieLabel" Value="Film:" Type="34">Text for movie label</Value>
+  <Value Name="SMV_FR_YearLabel" Value="Anno:" Type="34">Text for year label</Value>
+  <Value Name="SMV_FR_DiscLabel" Value="Disco:" Type="34">Text for year label</Value>
+  <Value Name="SMV_FR_Caption" Value="Ricerca manuale..." Type="34">Text for window title</Value>
+  <Value Name="SMV_FR_SourceLabel" Value="Sorgente: " Type="34">Text for source label</Value>
+  <Value Name="SMV_FR_FormatLabel" Value="Formato: " Type="34">Text for format label</Value>
+  <Value Name="SMV_FR_ResultLabel" Value="Risultato: " Type="34">Text for format label</Value>
+</Configuration>
