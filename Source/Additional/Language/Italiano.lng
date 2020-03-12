@@ -194,4 +194,35 @@
   <Value Name="SMV_FR_SourceLabel" Value="Sorgente: " Type="34">Text for source label</Value>
   <Value Name="SMV_FR_FormatLabel" Value="Formato: " Type="34">Text for format label</Value>
   <Value Name="SMV_FR_ResultLabel" Value="Risultato: " Type="34">Text for format label</Value>
+  <Value Name="CFG_DI_TestOpMenu" Value="Prova operazione" Type="34">Test operation popup menu</Value>
+  <Value Name="CFG_DI_TestCommMenu" Value="Prova comando" Type="34">Test command popup menu</Value>
+  <Value Name="CFG_DI_InfoGroupBox" Value="Sorgente dati" Type="34">Text show in source group box</Value>
+  <Value Name="CFG_DI_SourceNameLabel" Value="Nome:" Type="34">Data source label text</Value>
+  <Value Name="CFG_DI_DescriptionLabel" Value="Descrizione" Type="34">Text show description label</Value>
+  <Value Name="CFG_DI_AuthRequiredCheckBox" Value="Aut. richiesta" Type="34">Text for auth required checkbox</Value>
+  <Value Name="CFG_DI_PreferedLanguageLabel" Value="Lingua preferita:" Type="34">Text for prefered language</Value>
+  <Value Name="CFG_DI_SourceTypeLabel" Value="Tipo sorgente:" Type="34">Text for source type</Value>
+  <Value Name="CFG_DI_SourceTypeComboBox" Value="Sorgente serie TV,Sorgente film" Type="34">Text for source type combo box</Value>
+  <Value Name="CFG_DI_UsePreferences" Value="Utilizza preferenze" Type="34">Text for preferences check box</Value>
+  <Value Name="CFG_DI_ParameterColumn" Value="Parametri" Type="34">Text for parameter column</Value>
+  <Value Name="CFG_DI_ValueColumn" Value="Valori" Type="34">Text for parameter value column</Value>
+  <Value Name="CFG_DI_AddButton" Value="Aggiungi parametro" Type="34">Text for adding button</Value>
+  <Value Name="CFG_DI_RemoveButton" Value="Rimuovi parametro" Type="34">Text for removing button</Value>
+  <Value Name="CFG_DI_CommandGroupBox" Value="Commando" Type="34">Text for commands group box</Value>
+  <Value Name="CFG_DI_AddCommButton" Value="Aggiungi comando" Type="34">Add command button text</Value>
+  <Value Name="CFG_DI_RemoveCommButton" Value="Rimuovi comando" Type="34">Remove command button text</Value>
+  <Value Name="CFG_DI_AddOpButton" Value="Aggiungi operazione" Type="34">Add operation button text</Value>
+  <Value Name="CFG_DI_RemoveOpButton" Value="Rimuovi operazione" Type="34">Remove operation button text</Value>
+  <Value Name="CFG_DI_ListNameLabel" Value="Nome:" Type="34">Data source label text</Value>
+  <Value Name="CFG_DI_CommandTypeLabel" Value="Tipo:" Type="34">Command type label text</Value>
+  <Value Name="CFG_DI_CommandTypeCombo" Value="Autenticazione,Cerca candidato,Cerca dettagli" Type="34">Command type combo value</Value>
+  <Value Name="CFG_DI_TreeNode" Value="WebSource" Type="34">Treenode text</Value>
+  <Value Name="CFG_DI_RemoveLineMsg" Value="Rimuovi " Type="34">Text show in remove dialog</Value>
+  <Value Name="PRF_FM_GroupBox1" Value="Preferenze serie TV" Type="34">Group box for TV Show</Value>
+  <Value Name="PRF_FM_NamePrefColumn" Value="Nome serie TV" Type="34">Title for show column</Value>
+  <Value Name="PRF_FM_IDPrefColumn" Value="ID nome serie TV" Type="34">Title for show column</Value>
+  <Value Name="PRF_FM_RemovePrefButton" Value="Rimuovi" Type="34">Title for show column</Value>
+  <Value Name="PRF_FM_AddPrefButton" Value="Aggiungi" Type="34">Title for show column</Value>
+  <Value Name="PRF_FM_RemoveDlg" Value="Rimuovi " Type="34">Title for remove dialog</Value>
+  <Value Name="PRF_FM_TreeNode" Value="Preferenze sorgente" Type="34">Preferences on show name</Value>
 </Configuration>
