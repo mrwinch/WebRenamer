@@ -120,6 +120,8 @@ void __fastcall TMyDialog::FormShow(TObject *Sender)
 	}
 	else
 		W = MessageLabel->Canvas->TextWidth(MessageLabel->Text) + FixW;
+	if(W > 360)
+		W = 360;
 	Width = W + Layout1->Width;
 	for(int a = 0; a<Panel1->ChildrenCount;a++){
 		Button = (TButton*)Panel1->Children->Items[a];

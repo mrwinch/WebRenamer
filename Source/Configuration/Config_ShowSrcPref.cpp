@@ -41,7 +41,6 @@ void TShowPrefFrame::CreateGUITxt(TNameValue *GUITxt){
 		GUITxt->AddString(BUILD_ID("AddPrefButton"),"Add","Title for show column");
 	if(GUITxt->ValueExist(BUILD_ID("RemoveDlg")) == false)
 		GUITxt->AddString(BUILD_ID("RemoveDlg"),InternalRemoveDlg,"Title for remove dialog");
-
 	if(GUITxt->ValueExist(BUILD_ID("TreeNode")) == false)
 		GUITxt->AddString(BUILD_ID("TreeNode"),"Source preferences","Preferences on show name");
 }

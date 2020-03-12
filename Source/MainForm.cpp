@@ -246,8 +246,6 @@ void TForm1::AddFiles(TStringList *Files){
 		else
 			DEBUG_APP(TOTAL_DEBUG,"Refuse as directory: "+Files->Strings[a]);
 	}
-	/*for(a=0;a<MainGridRows->Count;a++)
-		FileNameColumn->UpdateCell(a);*/
 	MainGrid->RowCount = MainGridRows->Count;
 	DEBUG_APP(TOTAL_DEBUG,"Accepted "+IntToStr(MainGridRows->Count)+(String)" files");
 	if(MainGridRows->Count > 0){
@@ -365,7 +363,6 @@ void TForm1::CreateGUITxt(){
 	GUITxt->AddString("ManualSearch","Manual search","Manual search popup item");
 	GUITxt->AddString("NoSourceMess","Sorry, no other source for search ","Message for no more source error");
 	GUITxt->AddString("StopScan","Search in progress: stop it?","Message for no more source error");
-
 	GUITxt->AddString("Dialog_Button_Yes","Yes","Message for no more source error");
 	GUITxt->AddString("Dialog_Button_No","No","Message for no more source error");
 	GUITxt->AddString("Dialog_Button_Ok","Ok","Message for no more source error");
@@ -378,7 +375,6 @@ void TForm1::CreateGUITxt(){
 	GUITxt->AddString("Dialog_Button_YesToAll","Yes to all","Message for no more source error");
 	GUITxt->AddString("Dialog_Button_Help","Help","Message for no more source error");
 	GUITxt->AddString("Dialog_Button_Close","Close","Message for no more source error");
-
 	//Dialogs CreateGUITxt...
 	CreditsForm->CreateGUITxt(GUITxt);
 	Conf_Dialog->CreateGUITxt(GUITxt);
@@ -387,16 +383,12 @@ void TForm1::CreateGUITxt(){
 	RenameForm2->CreateGUITxt(GUITxt);
 	SearchForm->CreateGUITxt(GUITxt);	
 	SearchForm2->CreateGUITxt(GUITxt);
-	//Default language backup...
-	String Path = AppDirectory+"\\Language";
-	if(TDirectory::Exists(Path) == false)
-		TDirectory::CreateDirectory(Path);
-	GUITxt->SaveToXML(Path+"\\Default.lng");
+    SaveLanguage();
 }
 //---------------------------------------------------------------------------
 void TForm1::ApplyLanguage(){
 //	DEBUG_APP(TOTAL_DEBUG,"Executing ApplyLanguage()");
-//	LoadLanguage();
+//	SaveLanguage();
 	Conf_Dialog->GeneralFrame->UpdateGUILanguage(GUITxt,Config);
 	MainRectangleLabel->Text = GUITxt->GetString("MainRectangleLabel");
 	NewScanBtn->Hint = GUITxt->GetString("NewScanBtn_Hint");
@@ -405,7 +397,10 @@ void TForm1::ApplyLanguage(){
 	CreditsBtn->Hint = GUITxt->GetString("CreditsBtn_Hint");
 	ConfigBtn->Hint = GUITxt->GetString("ConfigBtn_Hint");
 	ExitBtn->Hint = GUITxt->GetString("ExitBtn_Hint");
-	ModeLabel->Text = GUITxt->GetString("ModeLabel_Film");
+	if(ModeIcon->Tag == FILM_MODE)
+		ModeLabel->Text = GUITxt->GetString("ModeLabel_Film");
+	else
+        ModeLabel->Text = GUITxt->GetString("ModeLabel_Show");
 	StatusBarLabel->Text = ModeLabel->Text;
 	FileNameColumn->Header = GUITxt->GetString("SourceFileColumnHeader");
 	FinalNameColumn->Header = GUITxt->GetString("DestFileColumnHeader");
@@ -488,13 +483,13 @@ void TForm1::LoadConfiguration(){
 	Grabber->PreferedLanguage = Config->GetString("PreferedLanguage");
 	Grabber->LoadFromXML(CFile);
 	Conf_Dialog->LoadConfiguration(Config);
+//    SaveLanguage();
 }
 //---------------------------------------------------------------------------
 void TForm1::CreateConfiguration(){
 	Config->AddString("StartSearchDir",AppDirectory,"Initial search directory");
 	Config->AddInt("LastMode",FILM_MODE,"Last mode of the software...");
 	Config->AddString("SoftwareDir",AppDirectory,"Directory with software");
-
 	Conf_Dialog->NameManagerFrame->Translator = Translator;
 	Conf_Dialog->CreateConfiguration(Config);
 }
@@ -683,11 +678,12 @@ void __fastcall TForm1::ConfigBtnClick(TObject *Sender)
 	TInfoGrabber *Grab = Grabber->Clone();
 	DEBUG_APP(INFO_DEBUG,"ConfigBtnClick(): entering configuration.... ***************************");
 	String CFile = AppDirectory+"\\"+CONFIGURATION_FILE;
+	for(a=0;a<Grabber->GetNumInfoSource();a++){
+		DEBUG_APP(TOTAL_DEBUG,"Grabber: source "+IntToStr(a+1)+(String)" -> "+QUOTED(Grabber->GetSourceByIndex(a)));
+	}
 	Conf_Dialog->LoadConfiguration(Config);
-//    Conf_Dialog->ResizeComponents();
 	if(Conf_Dialog->ShowModal() == mrOk){
 		Conf_Dialog->SaveConfiguration(Config);
-//        Conf_Dialog->ResizeComponents();
 		Config->SaveToXML(CFile);
 		CFile = AppDirectory+"\\Grabber.xml";
 		Grabber->SaveToXML(CFile);
@@ -697,6 +693,9 @@ void __fastcall TForm1::ConfigBtnClick(TObject *Sender)
 		Grabber = Grab;
 		Conf_Dialog->Grabber = Grabber;
 	}
+	for(a=0;a<Grabber->GetNumInfoSource();a++){
+		DEBUG_APP(TOTAL_DEBUG,"Grabber: source "+IntToStr(a+1)+(String)" -> "+QUOTED(Grabber->GetSourceByIndex(a)));
+	}	
    	DEBUG_APP(TOTAL_DEBUG,"Exiting configuration.... ***************************");
 }
 //---------------------------------------------------------------------------
@@ -804,16 +803,6 @@ void __fastcall TForm1::ManageCandidateFound(String Searched, int SearchID, TLis
 			}
 		}
 	}
-/*	if(CandidateForm->ModalResult == mrOk){
-		for(int b=0;b<MainGridRows->Count;b++){
-			Data = (MainGridRowInfo*)MainGridRows->Items[b];
-			if(Data->SearchID == SearchID){
-				Data->ImageIndex = WAIT_ICON;
-				StatusColumn->UpdateCell(b);
-				break;
-			}
-		}
-    }*/
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::MovieSelectCandidate(TObject *Sender, String Candidate, String ID, int SearchID, String Release){
@@ -1121,17 +1110,28 @@ void __fastcall TForm1::CompleteSource(String Searched,int ID){
 	String Mess = GUITxt->GetString("NoSourceMess")+QUOTE_STRING(Searched);
 	int a;
 	int b;
-	//b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),THelpContext());
-	b = MyShowDialog("",Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),GUITxt);
-	if(b == mrCancel){
-		Mess = GUITxt->GetString("StopScan");
-		//b = TDialogServiceSync::MessageDialog(Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
-		b = MyShowDialog("",Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),GUITxt);
-		if(b != mrYes)
-			b = mrOk;
-	}
 	int ImageIndex;
 	MainGridRowInfo *Info;
+	b = 0;
+	for(a=0;a<MainGridRows->Count;a++){
+		Info = (MainGridRowInfo*)MainGridRows->Items[a];
+		if(Info->ID == "" && Info->SearchID != ID){
+			a = -1;
+			break;
+		}
+	}
+	if(a>-1)
+		b = MyShowDialog("",Mess,TMsgDlgType::mtError,mbOKCancel,TMsgDlgBtn(),GUITxt);
+	else
+		b = MyShowDialog("",Mess,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),GUITxt);
+	if(b == mrCancel){
+		Mess = GUITxt->GetString("StopScan");
+		if(a>-1){
+			b = MyShowDialog("",Mess,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),GUITxt);
+			if(b != mrYes)
+				b = mrOk;
+		}
+	}
 	for(a=0;a<MainGridRows->Count;a++){
 		Info = (MainGridRowInfo*)MainGridRows->Items[a];
 		if(Info->SearchID == ID){
@@ -1149,30 +1149,6 @@ void __fastcall TForm1::CompleteSource(String Searched,int ID){
 					}
 				}
 			}
-/*			if(ModeIcon->Tag == FILM_MODE){
-				if(a+1<MainGridRows->Count){
-					Info->ID = "123";
-					if(b == mrOk){
-						if(a + 1 <MainGridRows->Count){
-							Info = (MainGridRowInfo*)MainGridRows->Items[a+1];
-							Grabber->QueryMovieCandidate(Info->SearchName, Info->SearchID);
-						}
-					}
-				}
-				break;
-			}
-			else{
-				if(a+1<MainGridRows->Count){
-					Info->ID = "123";
-					if(b == mrOk){
-						if(a + 1 <MainGridRows->Count){
-							Info = (MainGridRowInfo*)MainGridRows->Items[a+1];
-							Grabber->QueryShowCandidate(Info->SearchName, Info->SearchID);
-						}
-					}
-				}
-				break;
-			} */
 		}
 	}
 }
@@ -1286,44 +1262,13 @@ void __fastcall TForm1::CopyrightAnimationFinish(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
-void TForm1::LoadLanguage(){
-//	Conf_Dialog->GeneralFrame->UpdateGUILanguage(GUITxt,Config);
-/*	String Path = AppDirectory+"\\Language";
-	String ShortLang = "";
-	String Lang = Config->GetString("PreferedLanguage");
-	for(int a=0;a<ISO_639_LEN;a++){
-		if(Lang == Language639[a].EnglishName){
-			ShortLang = Language639[a].Abbreviation;
-			break;
-		}
-	}
-	if(ShortLang != ""){
-		if(TDirectory::Exists(Path)){
-			TSearchRec sr;
-			TNameValue *Tmp = new TNameValue(this);
-			String FileName;
-			int iAttributes = 0;
-			iAttributes |= faReadOnly, iAttributes |= faHidden, iAttributes |= faSysFile, iAttributes |= faArchive;
-			iAttributes |= faAnyFile;
-			FileName = Path + (String)"\\*.lng";
-			if(FindFirst(FileName,iAttributes, sr) == 0){
-				do
-				{
-					if (sr.Attr & iAttributes){
-						if(sr.Name != "Default.lng"){
-							FileName = Path + (String)"\\"+sr.Name;
-							Tmp->LoadFromXML(FileName);
-							if(Tmp->GetString("Short_Language") == ShortLang){
-								GUITxt = Tmp->Clone(this);
-								break;
-							}
-						}
-					}
-				}while (FindNext(sr) == 0);
-				FindClose(sr);
-			}
-		}
-	} */
+void TForm1::SaveLanguage(){
+	String Path = AppDirectory+"\\Language";
+	String Lng = GUITxt->GetString("Short_Language");
+	if(TDirectory::Exists(Path) == false)
+		TDirectory::CreateDirectory(Path);
+	GUITxt->SetString("Short_Language","en");
+	GUITxt->SaveToXML(Path+"\\Default.lng");
+	GUITxt->SetString("Short_Language",Lng);	
 }
 //---------------------------------------------------------------------------
-

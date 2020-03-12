@@ -103,11 +103,9 @@ inherited NameManagerFrame: TNameManagerFrame
         Size.Width = 209.000000000000000000
       end
       object IgnoreTextEnableColumn: TCheckColumn
-        OnResize = GenericColumnResize
         Size.Width = 55.000000000000000000
       end
       object IgnoreTextCaseColumn: TCheckColumn
-        OnResize = GenericColumnResize
         Size.Width = 71.000000000000000000
       end
     end

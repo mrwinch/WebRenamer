@@ -28,6 +28,8 @@ __fastcall TDataSourceFrame::TDataSourceFrame(TComponent* Owner)
 	TVShowList = new TStringList();
 	MovieList = new TStringList();
 	GUI = NULL;
+	TVShowStringColumn->Width = TVShowGrid->Width - 15;
+    MovieStringColumn->Width = MovieGrid->Width - 15;
 }
 //---------------------------------------------------------------------------
 void __fastcall TDataSourceFrame::GenericUpDownClick(TObject *Sender){

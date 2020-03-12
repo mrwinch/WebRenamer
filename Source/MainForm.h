@@ -182,7 +182,7 @@ private:	// User declarations
 	void ShowCopyrightPanel(int Type);
 	void UndoRenameRow(int Row);
 	void RenameRow(int Row);
-	void LoadLanguage();
+	void SaveLanguage();
     String GetIncrementalLogFile();
 	TStringColumn *FileNameColumn;
 	TCheckColumn *CheckColumn;

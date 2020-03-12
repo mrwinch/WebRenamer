@@ -37,30 +37,32 @@ __fastcall TDataSourceInfoFrame::TDataSourceInfoFrame(TComponent* Owner)
 //---------------------------------------------------------------------------
 void TDataSourceInfoFrame::CreateGUITxt(TNameValue *GUITxt){
 	DEBUG_CFGDI(INFO_DEBUG,"CreateGUITxt()");
-	GUITxt->AddString(BUILD_ID("TestOpMenu"),"Test operation","Test operation popup menu");
-	GUITxt->AddString(BUILD_ID("TestCommMenu"),"Test command","Test command popup menu");
-	GUITxt->AddString(BUILD_ID("InfoGroupBox"),"Source data","Text show in source group box");
-	GUITxt->AddString(BUILD_ID("SourceNameLabel"),"Name:","Data source label text");
-	GUITxt->AddString(BUILD_ID("DescriptionLabel"),"Description","Text show description label");
-	GUITxt->AddString(BUILD_ID("AuthRequiredCheckBox"),"Auth. required","Text for auth required checkbox");
-	GUITxt->AddString(BUILD_ID("PreferedLanguageLabel"),"Prefered language:","Text for prefered language");
-	GUITxt->AddString(BUILD_ID("SourceTypeLabel"),"Source type:","Text for source type");
-	GUITxt->AddString(BUILD_ID("SourceTypeComboBox"),"TV show source,Movie source","Text for source type combo box");
-	GUITxt->AddString(BUILD_ID("UsePreferences"),"Use preferences","Text for preferences check box");
-	GUITxt->AddString(BUILD_ID("ParameterColumn"),"Parameters","Text for parameter column");
-	GUITxt->AddString(BUILD_ID("ValueColumn"),"Values","Text for parameter value column");
-	GUITxt->AddString(BUILD_ID("AddButton"),"Add parameter","Text for adding button");
-	GUITxt->AddString(BUILD_ID("RemoveButton"),"Remove parameter","Text for removing button");
-	GUITxt->AddString(BUILD_ID("CommandGroupBox"),"Commands","Text for commands group box");
-	GUITxt->AddString(BUILD_ID("AddCommButton"),"Add command","Add command button text");
-	GUITxt->AddString(BUILD_ID("RemoveCommButton"),"Remove command","Remove command button text");
-	GUITxt->AddString(BUILD_ID("AddOpButton"),"Add operation","Add operation button text");
-	GUITxt->AddString(BUILD_ID("RemoveOpButton"),"Remove operation","Remove operation button text");
-	GUITxt->AddString(BUILD_ID("ListNameLabel"),"Name:","Data source label text");
-	GUITxt->AddString(BUILD_ID("CommandTypeLabel"),"Type:","Command type label text");
-	GUITxt->AddString(BUILD_ID("CommandTypeCombo"),"Authentication,Query Candidate,Query info","Command type combo value");
-	GUITxt->AddString(BUILD_ID("TreeNode"),"WebSource","Treenode text");
-	GUITxt->AddString(BUILD_ID("RemoveLineMsg"),"Remove ","Text show in remove dialog");
+	if(GUITxt->ValueExist(BUILD_ID("InfoGroupBox")) == false){	//Check with a field if other fields exists
+		GUITxt->AddString(BUILD_ID("TestOpMenu"),"Test operation","Test operation popup menu");
+		GUITxt->AddString(BUILD_ID("TestCommMenu"),"Test command","Test command popup menu");
+		GUITxt->AddString(BUILD_ID("InfoGroupBox"),"Source data","Text show in source group box");
+		GUITxt->AddString(BUILD_ID("SourceNameLabel"),"Name:","Data source label text");
+		GUITxt->AddString(BUILD_ID("DescriptionLabel"),"Description","Text show description label");
+		GUITxt->AddString(BUILD_ID("AuthRequiredCheckBox"),"Auth. required","Text for auth required checkbox");
+		GUITxt->AddString(BUILD_ID("PreferedLanguageLabel"),"Prefered language:","Text for prefered language");
+		GUITxt->AddString(BUILD_ID("SourceTypeLabel"),"Source type:","Text for source type");
+		GUITxt->AddString(BUILD_ID("SourceTypeComboBox"),"TV show source,Movie source","Text for source type combo box");
+		GUITxt->AddString(BUILD_ID("UsePreferences"),"Use preferences","Text for preferences check box");
+		GUITxt->AddString(BUILD_ID("ParameterColumn"),"Parameters","Text for parameter column");
+		GUITxt->AddString(BUILD_ID("ValueColumn"),"Values","Text for parameter value column");
+		GUITxt->AddString(BUILD_ID("AddButton"),"Add parameter","Text for adding button");
+		GUITxt->AddString(BUILD_ID("RemoveButton"),"Remove parameter","Text for removing button");
+		GUITxt->AddString(BUILD_ID("CommandGroupBox"),"Commands","Text for commands group box");
+		GUITxt->AddString(BUILD_ID("AddCommButton"),"Add command","Add command button text");
+		GUITxt->AddString(BUILD_ID("RemoveCommButton"),"Remove command","Remove command button text");
+		GUITxt->AddString(BUILD_ID("AddOpButton"),"Add operation","Add operation button text");
+		GUITxt->AddString(BUILD_ID("RemoveOpButton"),"Remove operation","Remove operation button text");
+		GUITxt->AddString(BUILD_ID("ListNameLabel"),"Name:","Data source label text");
+		GUITxt->AddString(BUILD_ID("CommandTypeLabel"),"Type:","Command type label text");
+		GUITxt->AddString(BUILD_ID("CommandTypeCombo"),"Authentication,Query Candidate,Query info","Command type combo value");
+		GUITxt->AddString(BUILD_ID("TreeNode"),"WebSource","Treenode text");
+		GUITxt->AddString(BUILD_ID("RemoveLineMsg"),"Remove ","Text show in remove dialog");
+	}
 }
 //---------------------------------------------------------------------------
 void TDataSourceInfoFrame::ResizeComponents(){
@@ -93,7 +95,6 @@ void TDataSourceInfoFrame::ApplyLanguage(TNameValue *Src){
 	Cmp->Add("ListNameLabel");
 	Cmp->Add("CommandTypeLabel");
 	Cmp->Add("CommandTypeCombo");
-
 	TConfig_Frame::ApplyLanguage(Src, UNIT_ID, Cmp);
 	if(TreeNode){
 		if(FWebSource == NULL)

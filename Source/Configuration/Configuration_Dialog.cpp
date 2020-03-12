@@ -28,29 +28,24 @@ __fastcall TConf_Dialog::TConf_Dialog(TComponent* Owner)
 	ComponentToRename = new TStringList();
 	FGUITxt = NULL;
 	FConfig = NULL;
-
 	GeneralFrame = new TGeneralFrame(this);
 	GeneralTreeItem->TagObject = GeneralFrame;
-//	GeneralTreeItem->Tag = GENERAL_TREE_ITEM;
 	GeneralFrame->Parent = Panel2;
 	GeneralFrame->Align = TAlignLayout::Top;
 	GeneralFrame->TreeNode = GeneralTreeItem;
 
 	HistoryFrame = new THistoryFrame(this);
 	HistoryTreeItem->TagObject = HistoryFrame;
-//	HistoryTreeItem->Tag = HISTORY_TREE_ITEM;
 	HistoryFrame->Align = TAlignLayout::Top;
 	HistoryFrame->TreeNode = HistoryTreeItem;
 
 	NameManagerFrame = new TNameManagerFrame(this);
 	ManageNameTreeItem->TagObject = NameManagerFrame;
-//	ManageNameTreeItem->Tag = MANAGEFILE_TREE_ITEM;
 	NameManagerFrame->Align = TAlignLayout::Top;
 	NameManagerFrame->TreeNode = ManageNameTreeItem;
 
 	OutputNameFrame = new TOutputNameFrame(this);
 	OutputNameTreeItem->TagObject = OutputNameFrame;
-//	ManageNameTreeItem->Tag = MANAGEFILE_TREE_ITEM;
 	OutputNameFrame->Align = TAlignLayout::Top;
 	OutputNameFrame->TreeNode = OutputNameTreeItem;
 
@@ -62,28 +57,37 @@ __fastcall TConf_Dialog::TConf_Dialog(TComponent* Owner)
 	Panel2->TagObject = GeneralFrame;
 	FGrabber = NULL;
 	SafetyCount = 0;
-//    TestForm = new TForm3(this);
 }
 //---------------------------------------------------------------------------
 void TConf_Dialog::CreateGUITxt(TNameValue *Src){
 	DEBUG_CFGDL(INFO_DEBUG,"CreateGUITxt()");
-	TNameValue *GUITxt = Src == NULL?FGUITxt:Src;
-	if(GUITxt != NULL){
-		FGUITxt = GUITxt;
-		if(GUITxt->ValueExist(BUILD_ID("Title")) == false)
-			GUITxt->AddString(BUILD_ID("Title"),"Configuration","Title for configuration dialog");
-		if(GUITxt->ValueExist(BUILD_ID("OkButton")) == false)
-			GUITxt->AddString(BUILD_ID("OkButton"),"Ok","Text for ok button");
-		if(GUITxt->ValueExist(BUILD_ID("CancelButton")) == false)
-			GUITxt->AddString(BUILD_ID("CancelButton"),"Cancel","Text for cancel button");
+	//TNameValue *GUI = (Src == NULL?FGUITxt:Src);
+	TNameValue *GUI = Src;
+	if(GUI != NULL){
+		FGUITxt = GUI;
+		if(GUI->ValueExist(BUILD_ID("Title")) == false)
+			GUI->AddString(BUILD_ID("Title"),"Configuration","Title for configuration dialog");
+		if(GUI->ValueExist(BUILD_ID("OkButton")) == false)
+			GUI->AddString(BUILD_ID("OkButton"),"Ok","Text for ok button");
+		if(GUI->ValueExist(BUILD_ID("CancelButton")) == false)
+			GUI->AddString(BUILD_ID("CancelButton"),"Cancel","Text for cancel button");
 	}
 	ComponentToRename->Add("OkButton");
 	ComponentToRename->Add("CancelButton");
-	GeneralFrame->CreateGUITxt(GUITxt);
-	HistoryFrame->CreateGUITxt(GUITxt);
-	NameManagerFrame->CreateGUITxt(GUITxt);
-	OutputNameFrame->CreateGUITxt(GUITxt);
-	DataSourceFrame->CreateGUITxt(GUITxt);
+	GeneralFrame->CreateGUITxt(GUI);
+	HistoryFrame->CreateGUITxt(GUI);
+	NameManagerFrame->CreateGUITxt(GUI);
+	OutputNameFrame->CreateGUITxt(GUI);
+	DataSourceFrame->CreateGUITxt(GUI);
+
+	TDataSourceInfoFrame *InfoFrame = new TDataSourceInfoFrame(this);
+	InfoFrame->Name = "WebFrame_"+IntToStr(SafetyCount);
+	InfoFrame->CreateGUITxt(GUITxt);
+	TShowPrefFrame *PrefFrame = new TShowPrefFrame(this);
+	PrefFrame->Name = "Preferences_"+IntToStr(SafetyCount);
+	PrefFrame->CreateGUITxt(GUITxt);
+	PrefFrame->ApplyLanguage(GUITxt);
+	SafetyCount++;
 }
 //---------------------------------------------------------------------------
 TComponent *TConf_Dialog::SearchComponent(String Name){
@@ -194,7 +198,6 @@ void TConf_Dialog::LoadConfiguration(TNameValue *Conf){
 	HistoryFrame->LoadConfiguration(Conf);
 	NameManagerFrame->LoadConfiguration(Conf);
 	OutputNameFrame->LoadConfiguration(Conf);
-//	ResizeComponents();
 }
 //---------------------------------------------------------------------------
 void TConf_Dialog::SaveConfiguration(TNameValue *Conf){

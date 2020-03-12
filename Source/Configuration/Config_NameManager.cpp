@@ -31,6 +31,8 @@ __fastcall TNameManagerFrame::TNameManagerFrame(TComponent* Owner)
 	
 	IgnoreTextEnableColumn->Tag = IgnoreTextEnableColumn->Width;
 	IgnoreTextCaseColumn->Tag = IgnoreTextCaseColumn->Width;
+	IgnoreTextEnableColumn->OnResize = GenericColumnResize;
+	IgnoreTextEnableColumn->OnResize = GenericColumnResize;
 }
 //---------------------------------------------------------------------------
 void TNameManagerFrame::CreateGUITxt(TNameValue *GUITxt){

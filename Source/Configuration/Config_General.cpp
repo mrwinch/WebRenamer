@@ -44,7 +44,7 @@ void TGeneralFrame::CreateGUITxt(TNameValue *GUITxt){
 		GUITxt->AddString(BUILD_ID("DebugLevelLabel"),"Debug level:","Debug combo box label");
 		GUITxt->AddString(BUILD_ID("DebugLevelComboBox"),"None,Error,Warning,Information,Total","Debug combo box value");
 		GUITxt->AddString(BUILD_ID("MultiDebugFile"),"Debug in multi files","Debug multi files label");
-		GUITxt->AddString(BUILD_ID("SingleDebugFile"),"Debug in single files","Debug single file label");
+		GUITxt->AddString(BUILD_ID("SingleDebugFile"),"Debug in single file","Debug single file label");
 		GUITxt->AddString(BUILD_ID("IncrementalDebug"),"Incremental debug","Incremental debug label");
 		GUITxt->AddString(BUILD_ID("RemeberLastModeCheckBox"),"Remember last mode","Last mode label");
 		GUITxt->AddString(BUILD_ID("PreferedLanguageLabel"),"Search language:","Prefered language label");

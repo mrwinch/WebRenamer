@@ -28,6 +28,7 @@ __published:	// IDE-managed Components
 	TLabel *ProjectUrl;
 	TLabel *WikiLabel;
 	TLabel *DescLabel;
+	TLabel *ForumLabel;
 	void __fastcall ProjectUrlClick(TObject *Sender);
 	void __fastcall ContactLabelClick(TObject *Sender);
 	void __fastcall WikiLabelClick(TObject *Sender);

@@ -299,8 +299,8 @@ void __fastcall THistoryFrame::HistoryGridHeaderClick(TColumn *Column)
 //---------------------------------------------------------------------------
 void THistoryFrame::CreateGUITxt(TNameValue *GUITxt){
 	DEBUG_CFGHS(INFO_DEBUG,"CreateGUITxt()");
-	GUITxt->AddString(BUILD_ID("HistoryBox"),"Operation","Group box of operation");
-	GUITxt->AddString(BUILD_ID("Op_TreeItem_Text"),"Operation executed: ","Number of operation");
+	GUITxt->AddString(BUILD_ID("HistoryBox"),"Operations","Group box of operation");
+	GUITxt->AddString(BUILD_ID("Op_TreeItem_Text"),"Operations executed: ","Number of operation");
 	GUITxt->AddString(BUILD_ID("SourceColumn"),"Source file","Source column header");
 	GUITxt->AddString(BUILD_ID("DestColumn"),"Destination file","Destination column header");
 	GUITxt->AddString(BUILD_ID("SelectDirTitle"),"Select a directory...","Title showed in dialog for directory choose");
@@ -309,7 +309,7 @@ void THistoryFrame::CreateGUITxt(TNameValue *GUITxt){
 	GUITxt->AddString(BUILD_ID("RemoveButton"),"Remove selected","Title showed in restore button");
 	GUITxt->AddString(BUILD_ID("RemoveRecordCheck"),"Remove record older than ","Title showed in restore button");
 	GUITxt->AddString(BUILD_ID("DayLabel"),"days","Title showed in restore button");
-	GUITxt->AddString(BUILD_ID("OptionBox"),"Option","Title showed in restore button");
+	GUITxt->AddString(BUILD_ID("OptionBox"),"Options","Title showed in restore button");
 //RemoveRecordCheck
 	if(GUITxt->ValueExist(BUILD_ID("TreeNode")) == false)
 		GUITxt->AddString(BUILD_ID("TreeNode"),"Operation history","History of renamed files");

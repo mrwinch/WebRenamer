@@ -27,6 +27,7 @@ void TForm2::CreateGUITxt(TNameValue *Src){
 		Src->AddString(BUILD_ID("Contact"),"Contact: ","Text for ok button");
 		Src->AddString(BUILD_ID("ProjectURL"),"Web: ","Text for ok button");
 		Src->AddString(BUILD_ID("WikiLabel"),"Wiki: ","Text for ok button");
+		Src->AddString(BUILD_ID("ForumLabel"),"Forum: ","Text for ok button");
 		Src->AddString(BUILD_ID("DescLabel"),"WebRenamer is an open source software\
 			distributed under GNU GPL v.3 license. \
 			For more information, refer to github information page:\
@@ -50,6 +51,7 @@ void TForm2::ApplyLanguage(TNameValue *Src){
 		ProjectUrl->Text = Src->GetString(BUILD_ID("ProjectURL"))+(String)"https://github.com/mrwinch/WebRenamer";
 		WikiLabel->Text = Src->GetString(BUILD_ID("WikiLabel"))+(String)"https://github.com/mrwinch/WebRenamer/wiki";
 		DescLabel->Text = Src->GetString(BUILD_ID("DescLabel"));
+		ForumLabel->Text = Src->GetString(BUILD_ID("ForumLabel"))+(String)"https://groups.google.com/forum/#!forum/webrenamer";
 	}
 }
 //---------------------------------------------------------------------------

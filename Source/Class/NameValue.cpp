@@ -315,6 +315,7 @@ int TNameValue::UpdateFromSource(TNameValue *Src){
 			}break;
 		};
 	}
+    return NAME_VALUE_CORRECT;
 }
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
