@@ -20,7 +20,7 @@
   <Value Name="Rename_File" Value="Rinomina questo file" Type="34">Rename single file popup item</Value>
   <Value Name="Rename_Selected" Value="Rinomina files selezionati" Type="34">Rename selected file popup item</Value>
   <Value Name="Rename_All" Value="Rinomina tutti i files" Type="34">Rename all file popup item</Value>
-  <Value Name="Undo_Popup" Value="Annulla..." Type="34">Undo popup item</Value>
+  <Value Name="Undo_Popup" Value="Annulla..." Type="34">Undo popup items</Value>
   <Value Name="Undo_File" Value="Annulla questo file" Type="34">Undo single file popup item</Value>
   <Value Name="Undo_Selected" Value="Annulla tutti i files" Type="34">Undo selected file popup item</Value>
   <Value Name="Undo_All" Value="Annulla tutti i files" Type="34">Undo all file popup item</Value>
