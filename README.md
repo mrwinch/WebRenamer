@@ -3,5 +3,5 @@ WebRenamer is a software that use server to rename you video files following you
 
 Check [wiki section](https://github.com/mrwinch/WebRenamer/wiki) to find more information
 
-Check also our [group forum](https://groups.google.com/forum/#!forum/webrenamer)
+Check also our [forum](https://webrenamer.freeforums.net/)
 
