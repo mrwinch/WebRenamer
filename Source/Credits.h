@@ -33,6 +33,7 @@ __published:	// IDE-managed Components
 	void __fastcall ContactLabelClick(TObject *Sender);
 	void __fastcall WikiLabelClick(TObject *Sender);
 	void __fastcall DescLabelClick(TObject *Sender);
+	void __fastcall ForumLabelClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);

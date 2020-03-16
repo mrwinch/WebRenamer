@@ -142,8 +142,12 @@ void __fastcall TDataSourceInfoFrame::GenericChange(TObject *Sender){
 	if(Src){
 		if(FWebSource){
 			if(Src->Name == "DataSourceEditName"){
-				FWebSource->Name = DataSourceEditName->Text;
-				TreeNode->Text = FWebSource->Name;
+				if(DataSourceEditName->Text != ""){
+					FWebSource->Name = DataSourceEditName->Text;
+					TreeNode->Text = FWebSource->Name;
+				}
+				else
+					DataSourceEditName->Text = TreeNode->Text;
 			}
 			if(Src->Name == "DescriptionMemo")
 				FWebSource->Description = DescriptionMemo->Text;
@@ -403,8 +407,12 @@ void __fastcall TDataSourceInfoFrame::ListNameEditChange(TObject *Sender)
 	if(CommandTreeView->Selected){
 		CommandList *Cmd = (CommandList*)CommandTreeView->Selected->TagObject;
 		if(Cmd){
-			Cmd->Name = ListNameEdit->Text;
-			CommandTreeView->Selected->Text = Cmd->Name;
+			if(ListNameEdit->Text != ""){
+				Cmd->Name = ListNameEdit->Text;
+				CommandTreeView->Selected->Text = Cmd->Name;
+			}
+			else
+                ListNameEdit->Text = Cmd->Name;
 		}
 	}
 }

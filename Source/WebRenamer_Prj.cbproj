@@ -392,7 +392,6 @@
         <FormResources Include="Configuration\OperationFrameInfo.fmx"/>
         <FormResources Include="Configuration\TestForm.fmx"/>
         <FormResources Include="Credits.fmx"/>
-        <FormResources Include="Credits.Macintosh.fmx"/>
         <FormResources Include="ShowSearch.fmx"/>
         <FormResources Include="SysDialog.fmx"/>
         <FormResources Include="CandidateForm.fmx"/>
