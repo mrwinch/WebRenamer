@@ -51,7 +51,7 @@ void TForm2::ApplyLanguage(TNameValue *Src){
 		ProjectUrl->Text = Src->GetString(BUILD_ID("ProjectURL"))+(String)"https://github.com/mrwinch/WebRenamer";
 		WikiLabel->Text = Src->GetString(BUILD_ID("WikiLabel"))+(String)"https://github.com/mrwinch/WebRenamer/wiki";
 		DescLabel->Text = Src->GetString(BUILD_ID("DescLabel"));
-		ForumLabel->Text = Src->GetString(BUILD_ID("ForumLabel"))+(String)"https://webrenamer.freeforums.net/";
+		ForumLabel->Text = Src->GetString(BUILD_ID("ForumLabel"))+(String)"https://webrenamer.forumattivo.com/";
 	}
 }
 //---------------------------------------------------------------------------
@@ -89,7 +89,7 @@ void __fastcall TForm2::DescLabelClick(TObject *Sender)
 void __fastcall TForm2::ForumLabelClick(TObject *Sender)
 {
 #ifdef _Windows
-	ShellExecuteA(0, "OPEN", "https://webrenamer.freeforums.net", NULL, NULL, SW_SHOWNORMAL);
+	ShellExecuteA(0, "OPEN", "https://webrenamer.forumattivo.com/", NULL, NULL, SW_SHOWNORMAL);
 #endif
 }
 //---------------------------------------------------------------------------

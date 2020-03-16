@@ -380,8 +380,8 @@
             <BuildOrder>2</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="WebRenamer_03.cpp">
-            <BuildOrder>0</BuildOrder>
+        <CppCompile Include="WebRenamer_app.cpp">
+            <BuildOrder>35</BuildOrder>
         </CppCompile>
         <FormResources Include="MovieSearch.fmx"/>
         <FormResources Include="RenameMovie.fmx"/>
@@ -392,6 +392,7 @@
         <FormResources Include="Configuration\OperationFrameInfo.fmx"/>
         <FormResources Include="Configuration\TestForm.fmx"/>
         <FormResources Include="Credits.fmx"/>
+        <FormResources Include="Credits.Macintosh.fmx"/>
         <FormResources Include="ShowSearch.fmx"/>
         <FormResources Include="SysDialog.fmx"/>
         <FormResources Include="CandidateForm.fmx"/>
