@@ -199,8 +199,10 @@ void __fastcall TDataSourceInfoFrame::RemoveButtonClick(TObject *Sender)
 		a = ParameterGrid->Selected;
 		if(a>-1){
 			String Key = ParameterGrid->Cells[0][a];
-			int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+Key+(String)"?",
-					TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+			int Res = MyShowDialog("",RemoveLineMsg+Key+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
+			//int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+Key+(String)"?",
+//					TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
 			if(Res == mrYes){
 				FWebSource->RemoveParameter(Key);
 				UpdateParameterGrid();
@@ -340,8 +342,10 @@ void __fastcall TDataSourceInfoFrame::RemoveOpButtonClick(TObject *Sender)
 {
 	CommandList *Cmd = (CommandList*)OperationTabControl->TagObject;
 	if(Cmd){
-		int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+OperationTabControl->ActiveTab->Text+(String)"?",
-				TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		//int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+OperationTabControl->ActiveTab->Text+(String)"?",
+		//		TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		int Res = MyShowDialog("",RemoveLineMsg+OperationTabControl->ActiveTab->Text+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
 		if(Res == mrYes){
 			Net_Operation Op = Cmd->GetOperation(OperationTabControl->TabIndex);
 			Cmd->RemoveOperation(Op);

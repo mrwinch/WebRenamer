@@ -95,8 +95,10 @@ void __fastcall TShowPrefFrame::RemovePrefButtonClick(TObject *Sender)
 	DEBUG_CFGSP(INFO_DEBUG,"RemovePrefButtonClick()");
 	if(PreferencesGrid->Selected>-1){
 		//String
-		int Result = TDialogServiceSync::MessageDialog(InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+
-						(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		//int Result = TDialogServiceSync::MessageDialog(InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+
+		//				(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		int Result = MyShowDialog("",InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
 		if(Result == mrYes){
 			if(WebSource){
 				WebSource->RemoveShowNamePref(PreferencesGrid->Cells[0][PreferencesGrid->Selected]);

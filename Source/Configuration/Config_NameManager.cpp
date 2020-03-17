@@ -230,8 +230,10 @@ void __fastcall TNameManagerFrame::OkButtonClick(TObject *Sender)
 void __fastcall TNameManagerFrame::RemoveButtonClick(TObject *Sender)
 {
 	DEBUG_CFGNM(INFO_DEBUG,"RemoveButtonClick()");
-	int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+IgnoreText->Strings[IgnoreGrid->Selected]+
-					(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+	int Res = MyShowDialog("",RemoveLineMsg+IgnoreText->Strings[IgnoreGrid->Selected]+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
+	//int Res = TDialogServiceSync::MessageDialog(RemoveLineMsg+IgnoreText->Strings[IgnoreGrid->Selected]+
+	//				(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
 	if(Res == mrYes){
 		RemoveLineFromGrid(IgnoreGrid->Selected);
 	}

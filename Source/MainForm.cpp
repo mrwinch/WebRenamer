@@ -1042,9 +1042,13 @@ void __fastcall TForm1::ConnectionError(TNetHTTPClient *Client,TNetHTTPRequest *
 //---------------------------------------------------------------------------
 void __fastcall TForm1::MainGridPopupPopup(TObject *Sender)
 {
+	if(MainGrid->Selected > -1)
+		MainGrid->PopupMenu = MainGridPopup;
+	else
+        MainGrid->PopupMenu = NULL;
 	bool AutoRename = Config->GetBool("AutoRenameFile");
 	Rename_Popup->Enabled = !AutoRename;
-	Undo_Selected->Enabled = !AutoRename;
+	//Undo_Selected->Enabled = !AutoRename;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::ManualRenameClick(TObject *Sender)
