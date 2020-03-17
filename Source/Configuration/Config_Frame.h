@@ -8,6 +8,7 @@
 #include <FMX.Forms.hpp>
 #include <FMX.DialogService.Sync.hpp>
 #include "Project_Const.h"
+#include "..\\SysDialog.h"
 //---------------------------------------------------------------------------
 class TConfig_Frame : public TFrame
 {
@@ -37,7 +38,7 @@ public:		// User declarations
 
 	__property TTreeViewItem *TreeNode = {read = GetTreeNode, write = SetTreeNode};
 	__property TNameValue *Config = {read = GetConf, write = SetConf};
-	__property TNameValue *Language = {read = GetLang, write = SetLang};	
+	__property TNameValue *Language = {read = GetLang, write = SetLang};
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TConfig_Frame *ConfigFrame;

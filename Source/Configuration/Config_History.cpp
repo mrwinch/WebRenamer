@@ -127,7 +127,8 @@ void THistoryManager::LoadFromXML(String File){
 						Txt = Node->GetAttribute("Moment");
 						Tmp = Node->GetAttribute("Operation");
 						List->DelimitedText = Tmp;
-						AddRecord(StrToDateTime(Txt),List);
+						if(List->Count > 0)
+							AddRecord(StrToDateTime(Txt),List);
 					}
 				}
 			}
@@ -419,7 +420,8 @@ void __fastcall THistoryFrame::RemoveButtonClick(TObject *Sender)
 	if(Item){
 		History_Record *Record = History->GetRecord(Item->Tag);
 		String Msg = Language->GetString(BUILD_ID("RemoveDlg"))+Record->Moment.DateTimeString()+(String)"?";
-		int Res =  TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+//		int Res =  TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		int Res = MyShowDialog("",Msg,TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
 		if(Res == mrYes){
 			History->DeleteRecord(Item->Tag);
 			PopulateTree(NULL);

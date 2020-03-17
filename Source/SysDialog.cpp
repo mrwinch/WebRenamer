@@ -68,6 +68,11 @@ int MyShowDialog(String Title, String Msg, const System::Uitypes::TMsgDlgType AD
 			if(Title == "")
 				Dlg->Caption = "Confirmation";
 		}break;
+		case TMsgDlgType::mtInformation:{
+			Dlg->Glyph1->ImageIndex = 2;
+			if(Title == "")
+				Dlg->Caption = "Information";
+		}break;
 		default:{
 		};
 	}

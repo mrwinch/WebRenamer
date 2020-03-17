@@ -661,7 +661,6 @@ void __fastcall TForm1::CreditsBtnClick(TObject *Sender)
 	DEBUG_APP(INFO_DEBUG,"CreditsBtnClick()");
 	CreditsForm->AppVersionLabel->Text = "WebRenamer ver. "+IntToStr(APP_VERSION)+(String)"."+IntToStr(APP_SUBVERSION);
 	CreditsForm->ShowModal();
-//	MyShowDialog("Title","Message test\r\nOne line\r\nSecond line of text with information",TMsgDlgType::mtError,DIALOG_OK_ABORT,TMsgDlgBtn());
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::TestSelectCandidate(TObject *Sender, String ShowName, String ShowID){
@@ -1038,7 +1037,6 @@ void __fastcall TForm1::ConnectionError(TNetHTTPClient *Client,TNetHTTPRequest *
 					(String)" - Err: 0x"+IntToHex(ErrCode)+(String)" - Desc: "+QUOTE_STRING(ErrDesc));
 	String Msg = GUITxt->GetString("ConnErrorCode")+IntToHex(ErrCode)+(String)"\r\n";
 	Msg = Msg + ErrDesc;
-//	int Res = TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),THelpContext());
 	int Res = MyShowDialog("",Msg,TMsgDlgType::mtError,DIALOG_OK,TMsgDlgBtn(),GUITxt);
 }
 //---------------------------------------------------------------------------
@@ -1055,11 +1053,8 @@ void __fastcall TForm1::ManualRenameClick(TObject *Sender)
 	if(ModeIcon->Tag == TV_MODE){
 		if(MainGrid->Selected > -1){
 			Info = (MainGridRowInfo*)MainGridRows->Items[MainGrid->Selected];
-			//TRenameShowForm *RenameForm = new TRenameShowForm(this);
 			Episode_Info Episode;
 			Episode = Translator->TranslateEpisode(ExtractFileName(Info->SourceFile));
-			//RenameForm->CreateGUITxt(GUITxt);
-			//RenameForm->ApplyLanguage(GUITxt);
 			RenameForm->ShowEdit->Text = Info->FindName;
 			RenameForm->TitleEdit->Text = Info->FindTitle;
 			RenameForm->SeasonSpin->Value = Episode.Order.Season;
