@@ -4,7 +4,7 @@
     <Parameters>
       <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
     </Parameters>
-    <Preferences Value="The Expanse=63639|L&apos;uomo nell&apos;alto castello=62017|The Walking Dead=1402">Preferences</Preferences>
+    <Preferences Value="">Preferences</Preferences>
     <Commands>
       <Command Name="Query candidate" Desc="" Type="2560" ID="0" Tag="0">
         <Operations>
