@@ -1308,7 +1308,7 @@ int TWebSource::DecodeAnswer(String Answer, Net_Operation Operation, CommandList
 		if(Op->Names[a] == "SAVE_INFORMATION"){
 			ParameterToSave->Add(Op->ValueFromIndex[a]);
 		}
-		if(Op->Names[a] == "ARRAY_TTILE_ID"){
+		if(Op->Names[a] == "ARRAY_TITLE_ID"){
 			TitleID = Op->ValueFromIndex[a];
 			Diagnostic = Diagnostic+(" ARRAY_TTILE_ID:"+QUOTE_STRING(TitleID));
 		}
@@ -1340,11 +1340,11 @@ int TWebSource::DecodeAnswer(String Answer, Net_Operation Operation, CommandList
 			RootPoster = Op->ValueFromIndex[a];
 			Diagnostic = Diagnostic+("ROOT_POSTER:"+QUOTE_STRING(RootPoster));
 		}
-		if(Op->Names[a] == "TV_SHOW_NAME_ID"){
+/*		if(Op->Names[a] == "TV_SHOW_NAME_ID"){
 			ShowTitleID = Op->ValueFromIndex[a];
 			Diagnostic = Diagnostic+("TV_SHOW_NAME_ID:"+QUOTE_STRING(ShowTitleID));
-		}
-		if(Op->Names[a] == "ARRAY_MOVIE_NAME"){
+		}*/
+		if(Op->Names[a] == "ARRAY_MOVIE_NAME_ID"){
 			MovieName = Op->ValueFromIndex[a];
 			Diagnostic = Diagnostic+("ARRAY_MOVIE_NAME:"+QUOTE_STRING(MovieName));
 		}		
@@ -2072,7 +2072,7 @@ void __fastcall TWebSource::ManageCertificate(System::TObject* const Sender,
 	Txt = Txt+(String)" - AlgSignature: "+Certificate.AlgSignature;
 	Txt = Txt+(String)" - AlgEncryption: "+Certificate.AlgEncryption;
 	Txt = Txt+(String)" - KeySize: "+IntToStr(Certificate.KeySize);
-	DEBUG_SRC(TOTAL_DEBUG,Txt);
+//	DEBUG_SRC(TOTAL_DEBUG,Txt);
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
