@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <InfoGrabber Version="16" Class_creator="TInfoGrabber" Info="TInfoGrabber class backup">
-  <WebSource Name="TheMovieDB - TVShow" Desc="Source connected to TheMovieDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="false" Language="Italian" Preferences="true">
+  <WebSource Name="TheMovieDB - TVShow" Desc="Source connected to TheMovieDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="false" Language="English" Preferences="true">
     <Parameters>
       <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
     </Parameters>
@@ -18,7 +18,7 @@
       </Command>
     </Commands>
   </WebSource>
-  <WebSource Name="TheTVDB - TVShow" Desc="Source connected to The TVDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="Italian" Preferences="true">
+  <WebSource Name="TheTVDB - TVShow" Desc="Source connected to The TVDB server to retrieve TV Show information" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="English" Preferences="true">
     <Parameters>
       <Parameter Name="userkey" Value="5E33E733A55A18.89843324">Parameter 1</Parameter>
       <Parameter Name="username" Value="webrenamer">Parameter 2</Parameter>
@@ -43,7 +43,7 @@
       </Command>
     </Commands>
   </WebSource>
-  <WebSource Name="The Movie DB - Movie" Desc="No_Description" Type="2305" ID="0" Tag="0" AuthRequest="false" Language="Italian" Preferences="true">
+  <WebSource Name="The Movie DB - Movie" Desc="No_Description" Type="2305" ID="0" Tag="0" AuthRequest="false" Language="English" Preferences="true">
     <Parameters>
       <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
     </Parameters>
@@ -56,7 +56,7 @@
       </Command>
     </Commands>
   </WebSource>
-  <WebSource Name="AniDB" Desc="No_Description" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="Italian" Preferences="false">
+  <WebSource Name="AniDB" Desc="No_Description" Type="2304" ID="0" Tag="0" AuthRequest="true" Language="English" Preferences="false">
     <Parameters/>
     <Preferences Value="">Preferences</Preferences>
     <Commands>
