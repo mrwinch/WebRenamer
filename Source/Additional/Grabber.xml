@@ -4,16 +4,16 @@
     <Parameters>
       <Parameter Name="api_key" Value="5ed62cf009ded74e757ba95a5fe025cb">Parameter 1</Parameter>
     </Parameters>
-    <Preferences Value="The Walking Dead=1402|The 100=48866|Star Trek: Picard=85949|iZombie=60866|The Expanse=63639|L&apos;uomo nell&apos;alto castello=62017|UFO Robot Goldrake=46252|Mr. Robot=62560">Preferences</Preferences>
+    <Preferences Value="The Walking Dead=1402|The 100=48866|Star Trek: Picard=85949|iZombie=60866|The Expanse=63639|L&apos;uomo nell&apos;alto castello=62017|UFO Robot Goldrake=46252">Preferences</Preferences>
     <Commands>
       <Command Name="Query candidate" Desc="" Type="2560" ID="0" Tag="0">
         <Operations>
-          <Operation Url="https://api.themoviedb.org/3/search/tv?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1" Data="%#Host|api.themoviedb.org#%%#Accept|text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8#%%#Accept-Language|it,en-US;q=0.7,en;q=0.3#%%#Accept-Encoding|gzip, deflate, br#%%#Connection|keep-alive#%%#Pragma|no-cache#%%#Cache-Control|no-cache#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_SHOW_ID=name;ARRAY_SUMMARY_ID=overview;ARRAY_TITLE_ID=id;ARRAY_AERIAL_ID=first_air_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
+          <Operation Url="https://api.themoviedb.org/3/search/tv?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1" Data="%#Host|api.themoviedb.org#%%#Accept|text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8#%%#Accept-Language|it,en-US;q=0.7,en;q=0.3#%%#Accept-Encoding|gzip, deflate, br#%%#Connection|keep-alive#%%#Pragma|no-cache#%%#Cache-Control|no-cache#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_SHOW_ID=name;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_AERIAL_ID=first_air_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
         </Operations>
       </Command>
       <Command Name="Query show details" Desc="" Type="2561" ID="0" Tag="0">
         <Operations>
-          <Operation Url="https://api.themoviedb.org/3/tv/&lt;&lt;tv_id&gt;&gt;/season/&lt;&lt;season_id&gt;&gt;/episode/&lt;&lt;episode_id&gt;&gt;?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_SHOW_NAME_ID=name">Operation 0</Operation>
+          <Operation Url="https://api.themoviedb.org/3/tv/&lt;&lt;tv_id&gt;&gt;/season/&lt;&lt;season_id&gt;&gt;/episode/&lt;&lt;episode_id&gt;&gt;?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;" Data="" ExpAnswer="200" Method="65" AnswerManager="TV_SHOW_NAME_ID=name">Operation 0</Operation>
         </Operations>
       </Command>
     </Commands>
@@ -33,7 +33,7 @@
       </Command>
       <Command Name="Query candidate" Desc="" Type="2560" ID="0" Tag="0">
         <Operations>
-          <Operation Url="https://api.thetvdb.com/search/series?name=&lt;&lt;candidate&gt;&gt;" Data="%#Accept|application/json#%%#Accept-Language| &lt;&lt;Preflanguage&gt;&gt;#%%#Authorization|Bearer &lt;&lt;token&gt;&gt;#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=data;ARRAY_SHOW_ID=seriesName;ARRAY_SUMMARY_ID=overview;ARRAY_TITLE_ID=id;ARRAY_AERIAL_ID=firstAired;ARRAY_POSTER_ID=poster;ROOT_POSTER=https://thetvdb.com">Operation 0</Operation>
+          <Operation Url="https://api.thetvdb.com/search/series?name=&lt;&lt;candidate&gt;&gt;" Data="%#Accept|application/json#%%#Accept-Language| &lt;&lt;Preflanguage&gt;&gt;#%%#Authorization|Bearer &lt;&lt;token&gt;&gt;#%" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=data;ARRAY_SHOW_ID=seriesName;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_AERIAL_ID=firstAired;ARRAY_POSTER_ID=poster;ROOT_POSTER=https://thetvdb.com">Operation 0</Operation>
         </Operations>
       </Command>
       <Command Name="Query show details" Desc="" Type="2561" ID="0" Tag="0">
@@ -51,7 +51,7 @@
     <Commands>
       <Command Name="Query candidate" Desc="No_Description" Type="2560" ID="0" Tag="0">
         <Operations>
-          <Operation Url="https://api.themoviedb.org/3/search/movie?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1&amp;include_adult=false" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_MOVIE_NAME_ID=title;ARRAY_SUMMARY_ID=overview;ARRAY_TITLE_ID=id;ARRAY_RELEASE_ID=release_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
+          <Operation Url="https://api.themoviedb.org/3/search/movie?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1&amp;include_adult=false" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_MOVIE_NAME=title;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_RELEASE_ID=release_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
         </Operations>
       </Command>
     </Commands>

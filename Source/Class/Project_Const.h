@@ -25,9 +25,9 @@
 #define CONFIGURATION_FILE                          "WebRenamer.cfg"
 #define DEBUG_FILE                                  "Debug.log"
 
-#define APP_VERSION                                 0x00
-#define APP_SUBVERSION                              0x03
-#define APP_BUILD                                   0x12
+#define APP_VERSION                                 0x01
+#define APP_SUBVERSION                              0x00
+#define APP_BUILD                                   0x01
 #define APP_NAME                                    "WebRenamer"
 //---------------------------------------------------------------------------
 #define NO_DEBUG                                    0x00		//No debug

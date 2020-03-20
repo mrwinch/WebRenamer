@@ -28,6 +28,8 @@ __fastcall TDataSourceFrame::TDataSourceFrame(TComponent* Owner)
 	TVShowList = new TStringList();
 	MovieList = new TStringList();
 	GUI = NULL;
+	TVShowStringColumn->Width = TVShowGrid->Width - 15;
+    MovieStringColumn->Width = MovieGrid->Width - 15;
 }
 //---------------------------------------------------------------------------
 void __fastcall TDataSourceFrame::GenericUpDownClick(TObject *Sender){
@@ -82,8 +84,10 @@ void __fastcall TDataSourceFrame::RemoveSourceButtonClick(TObject *Sender)
 		}
 	}
 	if(Src != NULL){
-		int Res = TDialogServiceSync::MessageDialog("Remove "+Src->Name+
-						(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		int Res = MyShowDialog("","Remove "+Src->Name+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
+//		int Res = TDialogServiceSync::MessageDialog("Remove "+Src->Name+    //
+//						(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
 		if(Res == mrYes){
 			if(Grabber){
 				Grabber->RemoveInfoSource(Src);
@@ -93,7 +97,8 @@ void __fastcall TDataSourceFrame::RemoveSourceButtonClick(TObject *Sender)
 	}
 	else{
 		String Msg = GUI->GetString(BUILD_ID("InfoDlg"));
-		TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtInformation,DIALOG_OK,TMsgDlgBtn(),THelpContext());
+		//TDialogServiceSync::MessageDialog(Msg,TMsgDlgType::mtInformation,DIALOG_OK,TMsgDlgBtn(),THelpContext());
+		MyShowDialog("",Msg,TMsgDlgType::mtInformation,DIALOG_OK,TMsgDlgBtn(),Language);
     }
 }
 //---------------------------------------------------------------------------

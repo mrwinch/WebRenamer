@@ -41,7 +41,6 @@ void TShowPrefFrame::CreateGUITxt(TNameValue *GUITxt){
 		GUITxt->AddString(BUILD_ID("AddPrefButton"),"Add","Title for show column");
 	if(GUITxt->ValueExist(BUILD_ID("RemoveDlg")) == false)
 		GUITxt->AddString(BUILD_ID("RemoveDlg"),InternalRemoveDlg,"Title for remove dialog");
-
 	if(GUITxt->ValueExist(BUILD_ID("TreeNode")) == false)
 		GUITxt->AddString(BUILD_ID("TreeNode"),"Source preferences","Preferences on show name");
 }
@@ -96,8 +95,10 @@ void __fastcall TShowPrefFrame::RemovePrefButtonClick(TObject *Sender)
 	DEBUG_CFGSP(INFO_DEBUG,"RemovePrefButtonClick()");
 	if(PreferencesGrid->Selected>-1){
 		//String
-		int Result = TDialogServiceSync::MessageDialog(InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+
-						(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		//int Result = TDialogServiceSync::MessageDialog(InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+
+		//				(String)"?",TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),THelpContext());
+		int Result = MyShowDialog("",InternalRemoveDlg+PreferencesGrid->Cells[0][PreferencesGrid->Selected]+(String)"?",
+						TMsgDlgType::mtConfirmation,mbYesNo,TMsgDlgBtn(),Language);
 		if(Result == mrYes){
 			if(WebSource){
 				WebSource->RemoveShowNamePref(PreferencesGrid->Cells[0][PreferencesGrid->Selected]);

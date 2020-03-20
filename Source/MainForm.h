@@ -38,6 +38,10 @@
 #include "ShowSearch.h"
 #include "MovieSearch.h"
 #include "Credits.h"
+#include <System.Net.HttpClient.hpp>
+#include <System.Net.HttpClientComponent.hpp>
+#include <System.Net.URLClient.hpp>
+#include "SysDialog.h"
 //---------------------------------------------------------------------------
 #define THE_TVDB_SOURCE                                         0
 #define THE_MOVIEDB_SOURCE                                      1
@@ -178,7 +182,7 @@ private:	// User declarations
 	void ShowCopyrightPanel(int Type);
 	void UndoRenameRow(int Row);
 	void RenameRow(int Row);
-	void LoadLanguage();
+	void SaveLanguage();
     String GetIncrementalLogFile();
 	TStringColumn *FileNameColumn;
 	TCheckColumn *CheckColumn;

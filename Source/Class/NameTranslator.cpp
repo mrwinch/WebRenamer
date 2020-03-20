@@ -109,9 +109,16 @@ Episode_Info TNameTranslator::TranslateEpisode(String OriginalName){
 	Out.FileExtension = System::Ioutils::TPath::GetExtension(Tmp);
 	Tmp = System::Ioutils::TPath::GetFileNameWithoutExtension(Tmp);
 	//Now filter name...
+//	A = Tmp;
 	Tmp = FilterFile(Tmp);
 	//Search for episode order...
 	Data = ScanForEpisodeOrder(Tmp);
+	if(FRemoveSep){
+		Tmp = RemoveSeparator(Tmp);
+/*		a = Tmp.Pos("-");
+		if(a>0)
+			Tmp = Tmp.SubString(1,a-1);  */
+	}
 	Out.Order = *Data;
 	//Ok: let's see for name tv serie name and possible episode title...
 	if(Out.Order.Season != UNK_SEASON){
@@ -467,6 +474,12 @@ Movie_Info TNameTranslator::TranslateMovie(String Movie){
 		Out.Year = 0;
 	Tmp = FilterFile(Tmp);
 	a = FindDisc(Movie);
+	if(FRemoveSep){
+        Tmp = RemoveSeparator(Tmp);
+/*		a = Tmp.Pos("-");
+		if(a>0)
+			Tmp = Tmp.SubString(1,a-1);*/
+	}
 	if(a > 0)
 		Out.Disc = a;
 	else
@@ -537,11 +550,6 @@ String TNameTranslator::FilterFile(String File){
 			if(b > MINIMUM_PAR_TEXT)
 				Tmp = Tmp.SubString(1, b);
 		}
-	}
-	if(FRemoveSep){
-		a = Tmp.Pos("-");
-		if(a>0)
-			Tmp = Tmp.SubString(1,a-1);
 	}
 	A = Tmp;
 	//Now: replace strings in ReplaceList with '.'...
@@ -713,7 +721,17 @@ void TNameTranslator::SetRemoveSep(bool Value){
     FRemoveSep = Value;
 }
 //---------------------------------------------------------------------------
-
+String TNameTranslator::RemoveSeparator(String Src){
+	String Out = Src;
+	int a;
+	a = Out.Pos("-");
+	if(a>0)
+		Out = Out.SubString(1,a-1);
+	a = Out.Pos("~");
+	if(a>0)
+		Out = Out.SubString(1,a-1);
+	return Out;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

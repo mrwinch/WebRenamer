@@ -84,6 +84,7 @@ class TNameTranslator{
 		String FilterFile(String File);
 		int FindDisc(String Src);
 		String CleanString(String Src);
+        String RemoveSeparator(String Src);
 
 		Episode_Order *ScanForEpisodeOrder(String FileName);
 	protected:

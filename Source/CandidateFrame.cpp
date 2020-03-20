@@ -111,6 +111,7 @@ __fastcall TCandidateFrameBox::TCandidateFrameBox(TComponent *Owner):TListBoxIte
 	SummaryLabel->Parent = BottomLayout;
 	SummaryLabel->Align = TAlignLayout::Client;
 	SummaryLabel->TextSettings->Trimming = TTextTrimming::Word;
+    SummaryLabel->Margins->Bottom = 5;
 
 	OnResize = BoxResized;
 	Height = DEFAULT_HEIGHT;
@@ -269,15 +270,14 @@ void __fastcall TCandidateListFrame::ManageCandidateInfo(String Candidate, int S
 		BoxItem->DataInfo = Info;
 	}
 	if(Form){
-		Txt = SearchTitle+Candidate;
+		String Spc = L"\x25CF";
+		Txt = SearchTitle+Candidate+(String)" ";
 		if(Source)
-			Txt +=" - Source: "+Source->Name;
+			Txt +=Spc+(String)" Source: "+Source->Name;
 		Form->Caption = Txt;
 	}
 	S_ID = SearchID;
 	FCandidate = Candidate;
-	/*if(Form)
-		Form->ShowModal();*/
 }
 //---------------------------------------------------------------------------
 void __fastcall TCandidateListFrame::CandidateListBoxDblClick(TObject *Sender)

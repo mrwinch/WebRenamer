@@ -21,7 +21,19 @@ __published:	// IDE-managed Components
 	TVertScrollBox *VertScrollBox1;
 	TLabel *AppVersionLabel;
 	TImage *Image1;
-	TLabel *Label1;
+	TLabel *AuthorLabel;
+	TLabel *ContactLabel;
+	TLayout *Layout1;
+	TLayout *Layout2;
+	TLabel *ProjectUrl;
+	TLabel *WikiLabel;
+	TLabel *DescLabel;
+	TLabel *ForumLabel;
+	void __fastcall ProjectUrlClick(TObject *Sender);
+	void __fastcall ContactLabelClick(TObject *Sender);
+	void __fastcall WikiLabelClick(TObject *Sender);
+	void __fastcall DescLabelClick(TObject *Sender);
+	void __fastcall ForumLabelClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);

@@ -2063,6 +2063,16 @@ void TWebSource::SetRemPref(bool Value){
 void __fastcall TWebSource::ManageCertificate(System::TObject* const Sender,
 	TURLRequest* const ARequest, const TCertificate &Certificate, bool &Accepted){
 	Accepted = true;
+	DEBUG_SRC(INFO_DEBUG,"ManageCertificate()");
+	String Txt = "Expiry: "+Certificate.Expiry.DateTimeString();
+	Txt = Txt+(String)" - Start: "+Certificate.Start.DateTimeString();
+	Txt = Txt+(String)" - Subject: "+Certificate.Subject;
+	Txt = Txt+(String)" - Issuer: "+Certificate.Issuer;
+	Txt = Txt+(String)" - ProtocolName: "+Certificate.ProtocolName;
+	Txt = Txt+(String)" - AlgSignature: "+Certificate.AlgSignature;
+	Txt = Txt+(String)" - AlgEncryption: "+Certificate.AlgEncryption;
+	Txt = Txt+(String)" - KeySize: "+IntToStr(Certificate.KeySize);
+	DEBUG_SRC(TOTAL_DEBUG,Txt);
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -2075,8 +2085,8 @@ TInfoGrabber::TInfoGrabber(TComponent *AOwner){
 	InternalSetup();
 	Owner = AOwner;
 	Client = new TNetHTTPClient(Owner);
-	Client->SecureProtocols = THTTPSecureProtocols()<<THTTPSecureProtocol::TLS12<<
-				THTTPSecureProtocol::TLS11<<THTTPSecureProtocol::TLS1;
+	Client->SecureProtocols = THTTPSecureProtocols()<<THTTPSecureProtocol::TLS12
+					<<THTTPSecureProtocol::TLS11<<THTTPSecureProtocol::TLS1;
 	Client->AllowCookies = true;
 	Client->UserAgent = "Mozilla/5.0 (Windows NT 5.1; rv:52.0) Gecko/20100101 Firefox/52.0";
 	if(Owner)
@@ -2764,12 +2774,12 @@ TWebSource *TInfoGrabber::GetLastSource(){
     return FLastSource;
 }
 //---------------------------------------------------------------------------
-void __fastcall TInfoGrabber::ManageInvalidAnswer(TNetHTTPRequest *Request, Net_Operation Op, 
+void __fastcall TInfoGrabber::ManageInvalidAnswer(TNetHTTPRequest *Request, Net_Operation Op,
 										CommandList *Mgr, int Expected, int Received){
 	String Candidate = Mgr->SearchInfo;
 	WebSource_Data *Data = (WebSource_Data*)Request->Tag;
 	TWebSource *Source = (TWebSource*)Data->WebSource;
-	String Msg = "Invalid_answer manager\r\n";	
+	String Msg = "Invalid_answer manager\r\n";
 	if(Source != NULL){
 		switch(Source->Type){
 			//OnFindCandidate(Cmd->SearchInfo,Cmd->ID,Info);
@@ -2780,7 +2790,8 @@ void __fastcall TInfoGrabber::ManageInvalidAnswer(TNetHTTPRequest *Request, Net_
 						return;
 					}break;
 					case QUERY_SHOW_TITLE:{
-						QueryShowDetail(Mgr->SearchInfo,Mgr->Tag/1000,Mgr->Tag%1000,Mgr->ID);
+						//QueryShowDetail(Mgr->SearchInfo,Mgr->Tag/1000,Mgr->Tag%1000,Mgr->ID);
+						QueryShowCandidate(Mgr->SearchInfo, Mgr->ID);
 						return;
 					}break;
 					default:{

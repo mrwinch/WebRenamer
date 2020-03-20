@@ -101,6 +101,9 @@
         <VerInfo_Keys>CFBundleName=$(MSBuildProjectName);CFBundleDisplayName=$(MSBuildProjectName);CFBundleIdentifier=$(MSBuildProjectName);CFBundleVersion=1.0.0;CFBundleShortVersionString=1.0.0;CFBundlePackageType=APPL;CFBundleSignature=????;CFBundleAllowMixedLocalizations=YES;CFBundleExecutable=$(MSBuildProjectName);NSHighResolutionCapable=true;LSApplicationCategoryType=public.app-category.utilities;NSLocationUsageDescription=The reason for accessing the location information of the user;NSContactsUsageDescription=The reason for accessing the contacts</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Debugger_Launcher>/usr/X11/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
+        <Icon_MainIcon>Graphics\WebRenamer_44x44.ico</Icon_MainIcon>
+        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <PackageImports>adortl;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindengine;CloudService;CustomIPTransport;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;DBXSqliteDriver;dsnap;dsnapcon;dsnapxml;FireDAC;FireDACADSDriver;FireDACCommon;FireDACCommonDriver;FireDACCommonODBC;FireDACIBDriver;FireDACMSAccDriver;FireDACMySQLDriver;FireDACPgDriver;FireDACSqliteDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;svn;Tee;TeeDB;TeeUI;tethering;vcl;vclactnband;vcldb;vcldsnap;vclFireDAC;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -111,8 +114,8 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <UWP_CppLogo44>..\Grafica\WebRenamer_44x44.png</UWP_CppLogo44>
-        <UWP_CppLogo150>..\Grafica\WebRenamer_150x150.png</UWP_CppLogo150>
+        <UWP_CppLogo44>Graphics\WebRenamer_44x44.png</UWP_CppLogo44>
+        <UWP_CppLogo150>Graphics\WebRenamer_150x150.png</UWP_CppLogo150>
         <Icon_MainIcon>Graphics\WebRenamer_44x44.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
@@ -124,8 +127,9 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
-        <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
+        <UWP_CppLogo44>Graphics\WebRenamer_44x44.png</UWP_CppLogo44>
+        <UWP_CppLogo150>Graphics\WebRenamer_150x150.png</UWP_CppLogo150>
+        <Icon_MainIcon>Graphics\WebRenamer_44x44.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -160,8 +164,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Graphics\WebRenamer_44x44.ico</Icon_MainIcon>
-        <UWP_CppLogo44>..\Grafica\WebRenamer_44x44.png</UWP_CppLogo44>
-        <UWP_CppLogo150>..\Grafica\WebRenamer_150x150.png</UWP_CppLogo150>
+        <UWP_CppLogo44>Graphics\WebRenamer_44x44.png</UWP_CppLogo44>
+        <UWP_CppLogo150>Graphics\WebRenamer_150x150.png</UWP_CppLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -180,8 +184,12 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <UsePackages>false</UsePackages>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Locale>1040</VerInfo_Locale>
         <LinkPackageStatics>rtl.lib;fmx.lib;xmlrtl.lib</LinkPackageStatics>
+        <VerInfo_PreRelease>true</VerInfo_PreRelease>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=WebRenamer;LegalCopyright=GNU GPL v 3.0;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Icon_MainIcon>Graphics\WebRenamer_44x44.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -366,33 +374,40 @@
             <DependentOn>ShowSearch.h</DependentOn>
             <BuildOrder>30</BuildOrder>
         </CppCompile>
+        <CppCompile Include="SysDialog.cpp">
+            <Form>MyDialog</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>SysDialog.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
         <PCHCompile Include="WebRenamer.h">
             <BuildOrder>2</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="WebRenamer_03.cpp">
-            <BuildOrder>0</BuildOrder>
+        <CppCompile Include="WebRenamer_app.cpp">
+            <BuildOrder>35</BuildOrder>
         </CppCompile>
-        <FormResources Include="MainForm.fmx"/>
-        <FormResources Include="MainForm.Surface.fmx"/>
         <FormResources Include="MovieSearch.fmx"/>
         <FormResources Include="RenameMovie.fmx"/>
         <FormResources Include="RenameShow.fmx"/>
-        <FormResources Include="Credits.fmx"/>
-        <FormResources Include="Configuration\Config_OutputName.fmx"/>
+        <FormResources Include="MainForm.fmx"/>
+        <FormResources Include="MainForm.Surface.fmx"/>
         <FormResources Include="Configuration\Config_ShowSrcPref.fmx"/>
         <FormResources Include="Configuration\OperationFrameInfo.fmx"/>
         <FormResources Include="Configuration\TestForm.fmx"/>
+        <FormResources Include="Credits.fmx"/>
         <FormResources Include="ShowSearch.fmx"/>
+        <FormResources Include="SysDialog.fmx"/>
         <FormResources Include="CandidateForm.fmx"/>
         <FormResources Include="CandidateFrame.fmx"/>
-        <FormResources Include="Configuration\Config_Frame.fmx"/>
         <FormResources Include="Configuration\Config_General.fmx"/>
         <FormResources Include="Configuration\Config_History.fmx"/>
         <FormResources Include="Configuration\Config_NameManager.fmx"/>
-        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
+        <FormResources Include="Configuration\Config_OutputName.fmx"/>
+        <FormResources Include="Configuration\Config_Frame.fmx"/>
         <FormResources Include="Configuration\Configuration_Dialog.fmx"/>
         <FormResources Include="Configuration\Config_DataSource.fmx"/>
+        <FormResources Include="Configuration\Config_DataSourceInfo.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -442,6 +457,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Graphics\WebRenamer_150x150.png" Configuration="Debug" Class="UWP_CppLogo150">
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\WebRenamer_Prj.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>WebRenamer_Prj.tds</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32260.dll" Class="DependencyModule">
                     <Platform Name="Win32">
                         <Overwrite>true</Overwrite>
@@ -464,16 +492,16 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Grafica\WebRenamer_44x44.png" Configuration="Debug" Class="UWP_CppLogo44">
-                    <Platform Name="Win32">
-                        <RemoteDir>Assets\</RemoteDir>
-                        <RemoteName>Logo44x44.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Resource\Movie_128.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Graphics\WebRenamer_44x44.png" Configuration="Debug" Class="UWP_CppLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -517,16 +545,17 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\WebRenamer_Prj.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>WebRenamer_Prj.tds</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\Grafica\WebRenamer_150x150.png" Configuration="Debug" Class="UWP_CppLogo150">
+                <DeployFile LocalName="Graphics\WebRenamer_150x150.png" Configuration="Debug" Class="UWP_CppLogo150">
                     <Platform Name="Win32">
                         <RemoteDir>Assets\</RemoteDir>
                         <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Graphics\WebRenamer_44x44.png" Configuration="Debug" Class="UWP_CppLogo44">
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
