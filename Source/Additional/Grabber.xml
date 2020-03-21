@@ -51,7 +51,7 @@
     <Commands>
       <Command Name="Query candidate" Desc="No_Description" Type="2560" ID="0" Tag="0">
         <Operations>
-          <Operation Url="https://api.themoviedb.org/3/search/movie?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1&amp;include_adult=false" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_MOVIE_NAME=title;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_RELEASE_ID=release_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
+          <Operation Url="https://api.themoviedb.org/3/search/movie?api_key=&lt;&lt;api_key&gt;&gt;&amp;language=&lt;&lt;Preflanguage&gt;&gt;&amp;query=&lt;&lt;candidate&gt;&gt;&amp;page=1&amp;include_adult=false" Data="" ExpAnswer="200" Method="65" AnswerManager="ARRAY_ID=results;ARRAY_MOVIE_NAME_ID=title;ARRAY_SUMMARY_ID=overview;ARRAY_TTILE_ID=id;ARRAY_RELEASE_ID=release_date;ARRAY_POSTER_ID=poster_path;ROOT_POSTER=https://image.tmdb.org/t/p/w500">Operation 0</Operation>
         </Operations>
       </Command>
     </Commands>
